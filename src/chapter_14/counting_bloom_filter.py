@@ -167,15 +167,16 @@ class CountingBloomFilter:
         if not all(self.counter_array[pos] > 0 for pos in positions):
             return False
         
-        # Check if this will completely remove the item
-        will_remove_completely = all(self.counter_array[pos] == 1 for pos in positions)
-        
         # Decrement counters
         for pos in positions:
             self.counter_array[pos] -= 1
         
+        # Check if this completely removed the item (all counters for this item are now 0)
+        # Note: We need to check after decrementing, not before
+        is_completely_removed = all(self.counter_array[pos] == 0 for pos in positions)
+        
         # Only decrement element count if this completely removes the item
-        if will_remove_completely:
+        if is_completely_removed:
             self.element_count = max(0, self.element_count - 1)
         
         return True

@@ -202,7 +202,8 @@ class MemoryProfiler:
     def _get_memory_usage(self) -> int:
         """Get current memory usage of the process."""
         try:
-            if PSUTIL_AVAILABLE:
+            # Check if psutil is available at runtime
+            if 'psutil' in globals() and psutil is not None:
                 process = psutil.Process()
                 return process.memory_info().rss
             else:

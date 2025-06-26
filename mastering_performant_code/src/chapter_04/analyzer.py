@@ -5,7 +5,6 @@ This module provides tools to analyze the memory usage and performance
 characteristics of linked list implementations.
 """
 
-import sys
 import timeit
 from typing import TypeVar, Generic, Optional, Iterator, List, Dict, Any
 from dataclasses import dataclass
@@ -135,25 +134,25 @@ class LinkedListAnalyzer:
         
         for operation in operations:
             if operation == "append":
-                setup = f"from src.chapter_04 import {type(linked_list).__name__}; ds = {type(linked_list).__name__}()"
+                setup = f"from chapter_04 import {type(linked_list).__name__}; ds = {type(linked_list).__name__}()"
                 stmt = "ds.append(42)"
             elif operation == "prepend":
-                setup = f"from src.chapter_04 import {type(linked_list).__name__}; ds = {type(linked_list).__name__}()"
+                setup = f"from chapter_04 import {type(linked_list).__name__}; ds = {type(linked_list).__name__}()"
                 stmt = "ds.prepend(42)"
             elif operation == "get_first":
-                setup = f"from src.chapter_04 import {type(linked_list).__name__}; ds = {type(linked_list).__name__}(); [ds.append(i) for i in range(1000)]"
+                setup = f"from chapter_04 import {type(linked_list).__name__}; ds = {type(linked_list).__name__}(); [ds.append(i) for i in range(1000)]"
                 stmt = "ds.get_at_index(0)"
             elif operation == "get_last":
-                setup = f"from src.chapter_04 import {type(linked_list).__name__}; ds = {type(linked_list).__name__}(); [ds.append(i) for i in range(1000)]"
+                setup = f"from chapter_04 import {type(linked_list).__name__}; ds = {type(linked_list).__name__}(); [ds.append(i) for i in range(1000)]"
                 stmt = "ds.get_at_index(999)"
             elif operation == "get_middle":
-                setup = f"from src.chapter_04 import {type(linked_list).__name__}; ds = {type(linked_list).__name__}(); [ds.append(i) for i in range(1000)]"
+                setup = f"from chapter_04 import {type(linked_list).__name__}; ds = {type(linked_list).__name__}(); [ds.append(i) for i in range(1000)]"
                 stmt = "ds.get_at_index(500)"
             elif operation == "delete_first":
-                setup = f"from src.chapter_04 import {type(linked_list).__name__}; ds = {type(linked_list).__name__}(); [ds.append(i) for i in range(1000)]"
+                setup = f"from chapter_04 import {type(linked_list).__name__}; ds = {type(linked_list).__name__}(); [ds.append(i) for i in range(1000)]"
                 stmt = "ds.delete_first(500)"
             elif operation == "iteration":
-                setup = f"from src.chapter_04 import {type(linked_list).__name__}; ds = {type(linked_list).__name__}(); [ds.append(i) for i in range(1000)]"
+                setup = f"from chapter_04 import {type(linked_list).__name__}; ds = {type(linked_list).__name__}(); [ds.append(i) for i in range(1000)]"
                 stmt = "list(ds)"
             else:
                 continue
@@ -190,7 +189,7 @@ class LinkedListAnalyzer:
         # Linked list append
         linked_list_append = timeit.timeit(
             f"lst.append(i) for i in range({size})",
-            setup=f"from src.chapter_04 import {type(linked_list).__name__}; lst = {type(linked_list).__name__}()",
+            setup=f"from chapter_04 import {type(linked_list).__name__}; lst = {type(linked_list).__name__}()",
             number=1
         )
         
@@ -213,7 +212,7 @@ class LinkedListAnalyzer:
         # Linked list prepend
         linked_list_prepend = timeit.timeit(
             f"lst.prepend(i) for i in range({size})",
-            setup=f"from src.chapter_04 import {type(linked_list).__name__}; lst = {type(linked_list).__name__}()",
+            setup=f"from chapter_04 import {type(linked_list).__name__}; lst = {type(linked_list).__name__}()",
             number=1
         )
         
@@ -236,7 +235,7 @@ class LinkedListAnalyzer:
         # Linked list access
         linked_list_access = timeit.timeit(
             "lst.get_at_index(500)",
-            setup=f"from src.chapter_04 import {type(linked_list).__name__}; lst = {type(linked_list).__name__}(); [lst.append(i) for i in range({size})]",
+            setup=f"from chapter_04 import {type(linked_list).__name__}; lst = {type(linked_list).__name__}(); [lst.append(i) for i in range({size})]",
             number=10000
         )
         
@@ -259,7 +258,7 @@ class LinkedListAnalyzer:
         # Linked list iteration
         linked_list_iteration = timeit.timeit(
             "list(lst)",
-            setup=f"from src.chapter_04 import {type(linked_list).__name__}; lst = {type(linked_list).__name__}(); [lst.append(i) for i in range({size})]",
+            setup=f"from chapter_04 import {type(linked_list).__name__}; lst = {type(linked_list).__name__}(); [lst.append(i) for i in range({size})]",
             number=1000
         )
         

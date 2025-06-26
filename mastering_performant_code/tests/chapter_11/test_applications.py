@@ -8,7 +8,7 @@ using heaps and priority queues.
 import pytest
 import random
 from typing import List
-from src.chapter_11.applications import (
+from chapter_11.applications import (
     TaskScheduler, Task, TopKElements, MedianFinder, 
     SlidingWindowMax, EventSimulator
 )

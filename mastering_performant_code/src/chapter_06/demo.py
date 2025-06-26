@@ -5,7 +5,6 @@ This script demonstrates the functionality of both recursive and iterative
 BST implementations with performance comparisons and real-world examples.
 """
 
-import sys
 import timeit
 from typing import List, Dict, Any
 

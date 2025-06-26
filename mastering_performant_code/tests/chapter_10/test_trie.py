@@ -6,14 +6,11 @@ including edge cases, performance tests, and memory analysis.
 """
 
 import unittest
-import sys
 import timeit
 from typing import List
 
 # Add the project root to the path for imports
-sys.path.insert(0, '../../')
-
-from src.chapter_10.trie import Trie, TrieNode
+from chapter_10.trie import Trie, TrieNode
 
 class TestTrieNode(unittest.TestCase):
     """Test cases for TrieNode implementation."""

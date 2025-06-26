@@ -7,7 +7,6 @@ and algorithmic complexity of Python functions and algorithms.
 
 import time
 import timeit
-import sys
 import cProfile
 import pstats
 import io

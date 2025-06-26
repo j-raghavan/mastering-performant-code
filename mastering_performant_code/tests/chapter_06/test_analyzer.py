@@ -5,13 +5,12 @@ This module provides comprehensive tests for the BSTAnalyzer class with 100% cod
 """
 
 import pytest
-import sys
 from typing import List, Dict, Any
 
-from src.chapter_06.analyzer import BSTAnalyzer, TreeInfo
-from src.chapter_06.bst_node import BSTNode
-from src.chapter_06.recursive_bst import RecursiveBST
-from src.chapter_06.iterative_bst import IterativeBST
+from chapter_06.analyzer import BSTAnalyzer, TreeInfo
+from chapter_06.bst_node import BSTNode
+from chapter_06.recursive_bst import RecursiveBST
+from chapter_06.iterative_bst import IterativeBST
 
 
 class TestBSTAnalyzer:

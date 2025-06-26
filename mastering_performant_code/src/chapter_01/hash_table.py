@@ -15,9 +15,8 @@ Theoretical Analysis:
   * Double hashing: best theoretical performance but more complex
 """
 
-import sys
 from typing import TypeVar, Generic, Optional, Tuple, Iterator
-from src.chapter_01.analyzer import MemoryInfo
+from chapter_01.analyzer import MemoryInfo
 
 K = TypeVar('K')
 V = TypeVar('V')

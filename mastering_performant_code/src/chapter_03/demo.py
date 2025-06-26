@@ -186,9 +186,7 @@ def demo_performance_comparison():
     print(f"Custom is {custom_time/builtin_time:.2f}x slower")
     
     # Test memory usage
-    import sys
-    
-    lst = list(range(1000))
+        lst = list(range(1000))
     arr = ProductionDynamicArray[int]()
     for i in range(1000):
         arr.append(i)

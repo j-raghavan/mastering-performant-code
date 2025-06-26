@@ -14,7 +14,6 @@ AGGRESSIVELY OPTIMIZED VERSION: Reduced memory usage by ~60% for stability
 Memory limit: ~40% of original usage
 """
 
-import sys
 import time
 import json
 import os
@@ -23,11 +22,11 @@ import psutil
 from typing import Dict, List, Any
 
 # Import our implementations
-from src.chapter_01.dynamic_array import DynamicArray, MemoryTrackedDynamicArray
-from src.chapter_01.hash_table import HashTable, MemoryTrackedHashTable
-from src.chapter_01.simple_set import SimpleSet
-from src.chapter_01.config_manager import ConfigurationManager, LoggingConfigObserver, ValidationConfigObserver
-from src.chapter_01.analyzer import BuiltinAnalyzer, MemoryInfo, PerformanceInfo
+from chapter_01.dynamic_array import DynamicArray, MemoryTrackedDynamicArray
+from chapter_01.hash_table import HashTable, MemoryTrackedHashTable
+from chapter_01.simple_set import SimpleSet
+from chapter_01.config_manager import ConfigurationManager, LoggingConfigObserver, ValidationConfigObserver
+from chapter_01.analyzer import BuiltinAnalyzer, MemoryInfo, PerformanceInfo
 
 def get_memory_usage():
     """Get current memory usage in MB."""

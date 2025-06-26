@@ -5,7 +5,6 @@ This module provides tools for analyzing the performance characteristics
 and accuracy of Bloom filter implementations.
 """
 
-import sys
 import timeit
 from typing import Any, List, Optional, Tuple, Dict
 from dataclasses import dataclass

@@ -5,7 +5,6 @@ This module provides tools for analyzing memory usage and identifying
 optimization opportunities using only built-in Python modules.
 """
 
-import sys
 import tracemalloc
 import gc
 import timeit

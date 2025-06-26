@@ -6,11 +6,10 @@ memory analysis, leak detection, and performance comparisons.
 """
 
 import unittest
-import sys
 import gc
 import time
 from unittest.mock import patch, MagicMock
-from src.chapter_16.memory_profiler import (
+from chapter_16.memory_profiler import (
     MemoryProfiler, MemorySnapshot, MemoryComparison, 
     memory_context, demonstrate_memory_optimization
 )

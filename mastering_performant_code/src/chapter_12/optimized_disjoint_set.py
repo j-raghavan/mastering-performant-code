@@ -6,9 +6,6 @@ with path compression and union by rank optimizations.
 """
 
 from typing import Dict, List, Optional, Tuple
-import sys
-
-
 class OptimizedDisjointSet:
     """
     An optimized implementation of Union-Find with path compression and union by rank.

@@ -6,7 +6,6 @@ of different Python data structures and operations using timeit.
 """
 
 import timeit
-import sys
 import random
 from typing import Dict, List, Any, Callable, Tuple
 from .algorithms import (

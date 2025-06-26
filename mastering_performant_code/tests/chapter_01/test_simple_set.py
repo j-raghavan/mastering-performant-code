@@ -6,14 +6,10 @@ including set operations, edge cases, and performance tests.
 """
 
 import unittest
-import sys
 import timeit
 from typing import Set
 
-# Add the code directory to the path for imports
-sys.path.insert(0, '../../src')
-
-from src.chapter_01.simple_set import SimpleSet
+from chapter_01.simple_set import SimpleSet
 
 class TestSimpleSet(unittest.TestCase):
     """Test cases for SimpleSet implementation."""

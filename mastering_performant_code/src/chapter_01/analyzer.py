@@ -18,7 +18,6 @@ The performance differences between built-ins and our implementations are expect
 - Key insight: Understanding the tradeoffs between readability and performance
 """
 
-import sys
 import timeit
 import cProfile
 import pstats

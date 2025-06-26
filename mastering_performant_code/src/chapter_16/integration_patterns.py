@@ -13,7 +13,6 @@ before using this in production systems.
 import importlib
 import importlib.util
 import subprocess
-import sys
 import time
 import threading
 import queue
@@ -272,7 +271,6 @@ class SubprocessOptimizer:
         """Run a task in a separate subprocess."""
         # Create a temporary script
         script = f"""
-import sys
 import json
 import pickle
 

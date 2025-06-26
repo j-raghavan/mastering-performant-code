@@ -7,9 +7,8 @@ ensuring 100% code coverage and testing all edge cases.
 
 import pytest
 import math
-import sys
 from typing import List, Any
-from src.chapter_14.bloom_filter import BloomFilter
+from chapter_14.bloom_filter import BloomFilter
 
 
 class TestBloomFilter:

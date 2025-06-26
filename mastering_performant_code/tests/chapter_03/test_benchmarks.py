@@ -7,7 +7,7 @@ return expected data structures and handle edge cases correctly.
 
 import pytest
 from typing import Dict, Any
-from src.chapter_03.benchmarks import (
+from chapter_03.benchmarks import (
     benchmark_growth_strategies,
     compare_with_builtin_list,
     analyze_amortized_complexity,

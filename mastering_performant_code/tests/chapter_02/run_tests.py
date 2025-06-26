@@ -4,14 +4,10 @@ Test runner for Chapter 2: Algorithmic Complexity & Profiling Techniques.
 This script runs all tests for Chapter 2 and provides coverage information.
 """
 
-import sys
 import os
 import subprocess
 import pytest
 from pathlib import Path
-
-# Add the src directory to the Python path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / 'src'))
 
 
 def run_tests_with_coverage():
@@ -108,7 +104,7 @@ def run_demo_tests():
     
     try:
         # Import and run demo
-        from src.chapter_02.demo import run_comprehensive_demo
+        from chapter_02.demo import run_comprehensive_demo
         
         print("Running comprehensive demo...")
         run_comprehensive_demo()

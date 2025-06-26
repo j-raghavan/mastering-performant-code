@@ -8,7 +8,7 @@ including edge cases, property validation, and performance benchmarks.
 import pytest
 import timeit
 from typing import List, Optional
-from src.chapter_08.red_black_tree import (
+from chapter_08.red_black_tree import (
     RedBlackTree, RedBlackNode, Color, 
     red_black_height_analysis, benchmark_red_black_tree_operations,
     analyze_red_black_properties
@@ -444,7 +444,7 @@ class TestRedBlackTreeApplications:
     
     def test_database_index(self):
         """Test database index application."""
-        from src.chapter_08.applications import DatabaseIndex
+        from chapter_08.applications import DatabaseIndex
         
         index = DatabaseIndex()
         
@@ -472,7 +472,7 @@ class TestRedBlackTreeApplications:
     
     def test_priority_queue(self):
         """Test priority queue application."""
-        from src.chapter_08.applications import PriorityQueue
+        from chapter_08.applications import PriorityQueue
         
         pq = PriorityQueue()
         
@@ -501,7 +501,7 @@ class TestRedBlackTreeApplications:
     
     def test_symbol_table(self):
         """Test symbol table application."""
-        from src.chapter_08.applications import SymbolTable
+        from chapter_08.applications import SymbolTable
         
         st = SymbolTable()
         

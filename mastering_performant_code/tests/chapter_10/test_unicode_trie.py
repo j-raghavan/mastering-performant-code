@@ -6,13 +6,9 @@ including Unicode normalization, case folding, and international text handling.
 """
 
 import unittest
-import sys
 import unicodedata
 
-# Add the code directory to the path for imports
-sys.path.insert(0, '../../')
-
-from src.chapter_10.unicode_trie import UnicodeTrie
+from chapter_10.unicode_trie import UnicodeTrie
 
 class TestUnicodeTrie(unittest.TestCase):
     """Test cases for UnicodeTrie implementation."""

@@ -1,8 +1,6 @@
 from collections import OrderedDict
 from typing import Optional, Any, Dict
 import timeit
-import sys
-
 class LRUCacheOrderedDict:
     """
     Production-quality LRU Cache implementation using collections.OrderedDict.

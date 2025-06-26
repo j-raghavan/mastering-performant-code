@@ -7,11 +7,10 @@ and BenchmarkSuite classes, as well as utility functions.
 
 import pytest
 import time
-import sys
 from unittest.mock import patch, MagicMock
 from typing import Dict, List, Any
 
-from src.chapter_02.profiler import (
+from chapter_02.profiler import (
     PerformanceProfiler,
     MemoryProfiler,
     ComplexityAnalyzer,

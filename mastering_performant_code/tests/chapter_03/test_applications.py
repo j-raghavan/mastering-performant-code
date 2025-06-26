@@ -7,7 +7,7 @@ and CircularBuffer to ensure correct functionality.
 
 import pytest
 from typing import List
-from src.chapter_03.applications import (
+from chapter_03.applications import (
     TextBuffer,
     DatabaseRecord,
     SimpleDatabase,

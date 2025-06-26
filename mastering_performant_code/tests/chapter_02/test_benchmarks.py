@@ -5,10 +5,9 @@ This module tests all benchmarking functions for data structures and operations.
 """
 
 import pytest
-import sys
 from typing import Dict, List, Any
 
-from src.chapter_02.benchmarks import (
+from chapter_02.benchmarks import (
     benchmark_sum_functions,
     benchmark_fibonacci_functions,
     benchmark_list_operations,
@@ -22,7 +21,7 @@ from src.chapter_02.benchmarks import (
     run_all_benchmarks
 )
 
-from src.chapter_02.algorithms import (
+from chapter_02.algorithms import (
     sum_builtin, sum_loop, sum_comprehension, sum_generator, sum_formula,
     fibonacci_iterative, fibonacci_memoized, fibonacci_dynamic,
     bubble_sort, quick_sort, linear_search, binary_search

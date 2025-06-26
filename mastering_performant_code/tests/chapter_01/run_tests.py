@@ -7,7 +7,6 @@ coverage reporting and performance benchmarks.
 """
 
 import unittest
-import sys
 import os
 import timeit
 from typing import List, Dict, Any
@@ -19,9 +18,6 @@ try:
 except ImportError:
     COVERAGE_AVAILABLE = False
     print("Note: coverage package not available. Coverage analysis will be skipped.")
-
-# Add the code directory to the path for imports
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
 
 def run_unit_tests() -> bool:
     """Run all unit tests for Chapter 1."""
@@ -109,9 +105,9 @@ def run_performance_benchmarks() -> Dict[str, Any]:
     print("Running Performance Benchmarks")
     print("=" * 60)
     
-    from src.chapter_01.dynamic_array import DynamicArray
-    from src.chapter_01.hash_table import HashTable
-    from src.chapter_01.simple_set import SimpleSet
+    from chapter_01.dynamic_array import DynamicArray
+    from chapter_01.hash_table import HashTable
+    from chapter_01.simple_set import SimpleSet
     
     results = {}
     
@@ -128,7 +124,7 @@ def run_performance_benchmarks() -> Dict[str, Any]:
     
     array_append_time = timeit.timeit(
         "arr.append(i) for i in range(1000)",
-        setup="from src.chapter_01.dynamic_array import DynamicArray; arr = DynamicArray()",
+        setup="from chapter_01.dynamic_array import DynamicArray; arr = DynamicArray()",
         number=1
     )
     
@@ -152,7 +148,7 @@ def run_performance_benchmarks() -> Dict[str, Any]:
     
     array_access_time = timeit.timeit(
         "arr[i] for i in range(1000)",
-        setup="from src.chapter_01.dynamic_array import DynamicArray; arr = DynamicArray(); [arr.append(i) for i in range(1000)]",
+        setup="from chapter_01.dynamic_array import DynamicArray; arr = DynamicArray(); [arr.append(i) for i in range(1000)]",
         number=100
     )
     
@@ -180,7 +176,7 @@ def run_performance_benchmarks() -> Dict[str, Any]:
     
     hash_set_time = timeit.timeit(
         "ht[f'key{i}'] = i for i in range(1000)",
-        setup="from src.chapter_01.hash_table import HashTable; ht = HashTable()",
+        setup="from chapter_01.hash_table import HashTable; ht = HashTable()",
         number=1
     )
     
@@ -204,7 +200,7 @@ def run_performance_benchmarks() -> Dict[str, Any]:
     
     hash_get_time = timeit.timeit(
         "ht[f'key{i}'] for i in range(1000)",
-        setup="from src.chapter_01.hash_table import HashTable; ht = HashTable(); [ht.__setitem__(f'key{i}', i) for i in range(1000)]",
+        setup="from chapter_01.hash_table import HashTable; ht = HashTable(); [ht.__setitem__(f'key{i}', i) for i in range(1000)]",
         number=100
     )
     
@@ -232,7 +228,7 @@ def run_performance_benchmarks() -> Dict[str, Any]:
     
     simple_add_time = timeit.timeit(
         "ss.add(i) for i in range(1000)",
-        setup="from src.chapter_01.simple_set import SimpleSet; ss = SimpleSet()",
+        setup="from chapter_01.simple_set import SimpleSet; ss = SimpleSet()",
         number=1
     )
     
@@ -256,7 +252,7 @@ def run_performance_benchmarks() -> Dict[str, Any]:
     
     simple_contains_time = timeit.timeit(
         "i in ss for i in range(1000)",
-        setup="from src.chapter_01.simple_set import SimpleSet; ss = SimpleSet(); [ss.add(i) for i in range(1000)]",
+        setup="from chapter_01.simple_set import SimpleSet; ss = SimpleSet(); [ss.add(i) for i in range(1000)]",
         number=100
     )
     
@@ -279,11 +275,10 @@ def run_memory_analysis() -> Dict[str, Any]:
     print("Running Memory Analysis")
     print("=" * 60)
     
-    import sys
-    from src.chapter_01.dynamic_array import MemoryTrackedDynamicArray
-    from src.chapter_01.hash_table import MemoryTrackedHashTable
-    from src.chapter_01.simple_set import SimpleSet
-    from src.chapter_01.analyzer import BuiltinAnalyzer
+    from chapter_01.dynamic_array import MemoryTrackedDynamicArray
+    from chapter_01.hash_table import MemoryTrackedHashTable
+    from chapter_01.simple_set import SimpleSet
+    from chapter_01.analyzer import BuiltinAnalyzer
     
     results = {}
     

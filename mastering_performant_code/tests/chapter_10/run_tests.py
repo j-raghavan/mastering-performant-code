@@ -6,14 +6,11 @@ a summary of test results and performance metrics.
 """
 
 import unittest
-import sys
 import os
 import time
 from typing import List, Dict, Any
 
 # Add the project root to the path for imports
-sys.path.insert(0, '../../')
-
 def run_all_tests() -> Dict[str, Any]:
     """Run all tests and return results."""
     # Import all test modules
@@ -85,12 +82,12 @@ def run_demo_tests() -> None:
     print("="*60)
     
     try:
-        from src.chapter_10.trie import Trie
-        from src.chapter_10.compressed_trie import CompressedTrie
-        from src.chapter_10.unicode_trie import UnicodeTrie
-        from src.chapter_10.autocomplete import AutocompleteSystem
-        from src.chapter_10.spell_checker import SpellChecker
-        from src.chapter_10.analyzer import TrieAnalyzer
+        from chapter_10.trie import Trie
+        from chapter_10.compressed_trie import CompressedTrie
+        from chapter_10.unicode_trie import UnicodeTrie
+        from chapter_10.autocomplete import AutocompleteSystem
+        from chapter_10.spell_checker import SpellChecker
+        from chapter_10.analyzer import TrieAnalyzer
         
         # Test basic trie functionality
         print("\n1. Testing Standard Trie:")

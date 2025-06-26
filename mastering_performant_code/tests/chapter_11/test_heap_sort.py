@@ -8,7 +8,7 @@ ensuring 100% code coverage and correct behavior.
 import pytest
 import random
 from typing import List
-from src.chapter_11.heap_sort import (
+from chapter_11.heap_sort import (
     heap_sort, 
     heap_sort_inplace, 
     heap_sort_generic_inplace,
@@ -365,7 +365,7 @@ class TestHeapSortOptimized:
     
     def test_heap_sort_optimized(self):
         """Test optimized heap sort implementation."""
-        from src.chapter_11.heap_sort import heap_sort_optimized
+        from chapter_11.heap_sort import heap_sort_optimized
         
         # Test basic functionality
         data = [64, 34, 25, 12, 22, 11, 90]
@@ -393,7 +393,7 @@ class TestHeapSortOptimized:
         """Test performance comparison between standard and optimized heap sort."""
         import time
         import random
-        from src.chapter_11.heap_sort import heap_sort, heap_sort_optimized
+        from chapter_11.heap_sort import heap_sort, heap_sort_optimized
         
         # Generate test data
         data = [random.randint(1, 1000) for _ in range(1000)]
@@ -420,7 +420,7 @@ class TestHeapSortOptimized:
         """Test that heap sort maintains claimed complexity."""
         import time
         import random
-        from src.chapter_11.heap_sort import heap_sort_optimized
+        from chapter_11.heap_sort import heap_sort_optimized
         
         sizes = [100, 1000, 10000]
         sort_times = []

@@ -6,15 +6,11 @@ including fuzzy matching, learning capabilities, and property-based testing.
 """
 
 import unittest
-import sys
 import time
 from typing import List, Set
 from unittest.mock import patch
 
-# Add the code directory to the path for imports
-sys.path.insert(0, '../../')
-
-from src.chapter_10.autocomplete import ProductionAutocomplete, FuzzyMatcher, Suggestion
+from chapter_10.autocomplete import ProductionAutocomplete, FuzzyMatcher, Suggestion
 
 class TestFuzzyMatcher(unittest.TestCase):
     """Test cases for the FuzzyMatcher class."""

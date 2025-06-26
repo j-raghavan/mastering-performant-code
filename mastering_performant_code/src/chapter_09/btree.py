@@ -7,7 +7,6 @@ efficient external storage with guaranteed O(log n) performance.
 """
 
 from typing import TypeVar, Generic, Optional, List, Iterator, Callable
-import sys
 from .btree_node import BTreeNode
 
 T = TypeVar('T')

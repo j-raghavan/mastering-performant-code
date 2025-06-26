@@ -11,10 +11,9 @@ import shutil
 import time
 import threading
 import subprocess
-import sys
 from pathlib import Path
 from unittest.mock import patch, MagicMock, mock_open
-from src.chapter_16.integration_patterns import (
+from chapter_16.integration_patterns import (
     PluginManager, PluginInfo, SubprocessOptimizer, 
     ThreadSafeCache, PerformanceMonitor, demonstrate_integration_patterns
 )

@@ -6,14 +6,9 @@ ensuring all methods work correctly and handle edge cases properly.
 """
 
 import pytest
-import sys
 from typing import List, Optional
 
-# Add the parent directory to the path to import the chapter modules
-import sys
-sys.path.append('.')
-
-from src.chapter_09.btree_node import BTreeNode
+from chapter_09.btree_node import BTreeNode
 
 
 class TestBTreeNode:

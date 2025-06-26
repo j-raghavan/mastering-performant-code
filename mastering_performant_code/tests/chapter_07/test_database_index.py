@@ -6,11 +6,9 @@ ensuring all database operations work correctly with AVL tree indexing.
 """
 
 import pytest
-import sys
 import os
 import tempfile
 import json
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src')))
 
 from chapter_07.database_index import DatabaseIndex
 

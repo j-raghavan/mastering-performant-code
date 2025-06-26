@@ -6,10 +6,9 @@ and union by rank optimizations.
 """
 
 import pytest
-import sys
 from typing import List, Tuple
 
-from src.chapter_12.optimized_disjoint_set import OptimizedDisjointSet
+from chapter_12.optimized_disjoint_set import OptimizedDisjointSet
 
 
 class TestOptimizedDisjointSet:

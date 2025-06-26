@@ -6,11 +6,10 @@ ensuring 100% code coverage and testing all edge cases.
 """
 
 import pytest
-import sys
 from typing import List
 
-from src.chapter_04.singly_linked_list import SinglyLinkedList
-from src.chapter_04.nodes import SinglyNode
+from chapter_04.singly_linked_list import SinglyLinkedList
+from chapter_04.nodes import SinglyNode
 
 
 class TestSinglyLinkedList:

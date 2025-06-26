@@ -6,16 +6,13 @@ including memory analysis, performance benchmarking, and statistics generation.
 """
 
 import unittest
-import sys
 import timeit
 from typing import List
 
 # Add the project root to the path for imports
-sys.path.insert(0, '../../')
-
-from src.chapter_10.analyzer import TrieAnalyzer, TrieStats
-from src.chapter_10.trie import Trie
-from src.chapter_10.compressed_trie import CompressedTrie
+from chapter_10.analyzer import TrieAnalyzer, TrieStats
+from chapter_10.trie import Trie
+from chapter_10.compressed_trie import CompressedTrie
 
 class TestTrieStats(unittest.TestCase):
     """Test cases for TrieStats dataclass."""

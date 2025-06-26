@@ -6,13 +6,9 @@ including dictionary lookup, suggestion generation, and text checking.
 """
 
 import unittest
-import sys
 from typing import List
 
-# Add the code directory to the path for imports
-sys.path.insert(0, '../../')
-
-from src.chapter_10.spell_checker import SpellChecker
+from chapter_10.spell_checker import SpellChecker
 
 class TestSpellChecker(unittest.TestCase):
     """Test cases for SpellChecker implementation."""

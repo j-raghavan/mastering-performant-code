@@ -6,9 +6,8 @@ to ensure 100% code coverage and correct functionality.
 """
 
 import pytest
-import sys
 from typing import List
-from src.chapter_03.dynamic_array import (
+from chapter_03.dynamic_array import (
     DynamicArray,
     AdvancedDynamicArray,
     ProductionDynamicArray,

@@ -5,10 +5,9 @@ This module provides comprehensive tests for the BSTNode class with 100% code co
 """
 
 import pytest
-import sys
 from typing import Optional
 
-from src.chapter_06.bst_node import BSTNode
+from chapter_06.bst_node import BSTNode
 
 
 class TestBSTNode:

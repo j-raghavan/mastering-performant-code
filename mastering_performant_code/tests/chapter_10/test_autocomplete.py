@@ -6,13 +6,9 @@ including frequency tracking, ranking, and suggestion generation.
 """
 
 import unittest
-import sys
 from typing import List
 
-# Add the code directory to the path for imports
-sys.path.insert(0, '../../')
-
-from src.chapter_10.autocomplete import AutocompleteSystem
+from chapter_10.autocomplete import AutocompleteSystem
 
 class TestAutocompleteSystem(unittest.TestCase):
     """Test cases for AutocompleteSystem implementation."""

@@ -6,16 +6,12 @@ including configuration operations, validation, and memory analysis.
 """
 
 import unittest
-import sys
 import tempfile
 import os
 import json
 from typing import Dict, Any
 
-# Add the code directory to the path for imports
-sys.path.insert(0, '../../src')
-
-from src.chapter_01.config_manager import ConfigurationManager, ConfigItem
+from chapter_01.config_manager import ConfigurationManager, ConfigItem
 
 class TestConfigurationManager(unittest.TestCase):
     """Test cases for ConfigurationManager implementation."""
@@ -277,7 +273,7 @@ class TestConfigurationManagerEdgeCases(unittest.TestCase):
     """Edge case tests for ConfigurationManager."""
     
     def setUp(self):
-        from src.chapter_01.config_manager import ConfigurationManager
+        from chapter_01.config_manager import ConfigurationManager
         self.config_mgr = ConfigurationManager()
     
     def test_empty_config_manager(self):

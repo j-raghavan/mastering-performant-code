@@ -5,7 +5,6 @@ This module provides tools to analyze the memory usage, performance,
 and structural characteristics of skip lists.
 """
 
-import sys
 import timeit
 import random
 from typing import TypeVar, Generic, Optional, List, Iterator, Dict, Any
@@ -76,16 +75,16 @@ class SkipListAnalyzer:
         
         for operation in operations:
             if operation == "insert":
-                setup = f"from src.chapter_05 import SkipList; sl = SkipList()"
+                setup = f"from chapter_05 import SkipList; sl = SkipList()"
                 stmt = "[sl.insert(i) for i in range(100)]"
             elif operation == "search":
-                setup = f"from src.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in range(1000)]"
+                setup = f"from chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in range(1000)]"
                 stmt = "[sl.search(i) for i in range(100)]"
             elif operation == "delete":
-                setup = f"from src.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in range(1000)]"
+                setup = f"from chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in range(1000)]"
                 stmt = "[sl.delete(i) for i in range(100)]"
             elif operation == "range_query":
-                setup = f"from src.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in range(1000)]"
+                setup = f"from chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in range(1000)]"
                 stmt = "list(sl.range_query(100, 200))"
             else:
                 continue
@@ -127,19 +126,19 @@ class SkipListAnalyzer:
         # Skip list operations
         skip_insert = timeit.timeit(
             "[sl.insert(i) for i in test_data]",
-            setup=f"from src.chapter_05 import SkipList; sl = SkipList(); test_data = {test_data}",
+            setup=f"from chapter_05 import SkipList; sl = SkipList(); test_data = {test_data}",
             number=1
         )
         
         skip_search = timeit.timeit(
             "[sl.search(i) for i in search_data]",
-            setup=f"from src.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in {test_data}]; search_data = {search_data}",
+            setup=f"from chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in {test_data}]; search_data = {search_data}",
             number=100
         )
         
         skip_delete = timeit.timeit(
             "[sl.delete(i) for i in search_data]",
-            setup=f"from src.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in {test_data}]; search_data = {search_data}",
+            setup=f"from chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in {test_data}]; search_data = {search_data}",
             number=1
         )
         

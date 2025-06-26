@@ -1,6 +1,4 @@
 from typing import Any, Optional, Dict, Set
-import sys
-
 class LFUNode:
     """
     Node for LFU cache doubly-linked list.

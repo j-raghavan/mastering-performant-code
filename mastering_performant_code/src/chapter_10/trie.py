@@ -5,7 +5,6 @@ This module provides a production-quality trie implementation for string storage
 and retrieval with comprehensive functionality and error handling.
 """
 
-import sys
 from typing import TypeVar, Generic, Optional, Iterator, List, Dict, Set, Tuple
 from dataclasses import dataclass, field
 from collections import defaultdict

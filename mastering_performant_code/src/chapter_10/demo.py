@@ -5,7 +5,6 @@ This module provides demonstrations and benchmarking tools for trie implementati
 including performance comparisons and real-world application examples.
 """
 
-import sys
 import timeit
 import random
 import string
@@ -13,22 +12,22 @@ from typing import List, Dict, Any
 
 # Try relative imports for local execution
 try:
-    from trie import Trie
-    from compressed_trie import CompressedTrie
-    from unicode_trie import UnicodeTrie
-    from autocomplete import AutocompleteSystem
-    from spell_checker import SpellChecker
-    from analyzer import TrieAnalyzer
+    from .trie import Trie
+    from .compressed_trie import CompressedTrie
+    from .unicode_trie import UnicodeTrie
+    from .autocomplete import AutocompleteSystem
+    from .spell_checker import SpellChecker
+    from .analyzer import TrieAnalyzer
 except ImportError:
     # Fallback for running from project root
     import os
     sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-    from src.chapter_10.trie import Trie
-    from src.chapter_10.compressed_trie import CompressedTrie
-    from src.chapter_10.unicode_trie import UnicodeTrie
-    from src.chapter_10.autocomplete import AutocompleteSystem
-    from src.chapter_10.spell_checker import SpellChecker
-    from src.chapter_10.analyzer import TrieAnalyzer
+    from chapter_10.trie import Trie
+    from chapter_10.compressed_trie import CompressedTrie
+    from chapter_10.unicode_trie import UnicodeTrie
+    from chapter_10.autocomplete import AutocompleteSystem
+    from chapter_10.spell_checker import SpellChecker
+    from chapter_10.analyzer import TrieAnalyzer
 
 def generate_words(num_words: int, min_length: int = 3, max_length: int = 10) -> List[str]:
     """Generate random words for testing."""

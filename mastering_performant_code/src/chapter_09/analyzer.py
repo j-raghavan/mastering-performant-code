@@ -5,7 +5,6 @@ This module provides tools for analyzing B-Tree performance, memory usage,
 and comparing with other data structures.
 """
 
-import sys
 import timeit
 import math
 import random

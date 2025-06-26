@@ -5,7 +5,6 @@ This module provides tools to analyze the performance characteristics
 of binary heaps and compare with Python's heapq module.
 """
 
-import sys
 import timeit
 import random
 from typing import TypeVar, Generic, Optional, List, Callable, Any, Dict, Tuple

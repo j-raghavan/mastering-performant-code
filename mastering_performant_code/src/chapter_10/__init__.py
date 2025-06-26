@@ -6,13 +6,13 @@ string storage and retrieval, including standard tries, compressed tries,
 and Unicode-aware variants.
 """
 
-from src.chapter_10.trie import Trie, TrieNode
-from src.chapter_10.compressed_trie import CompressedTrie, CompressedTrieNode
-from src.chapter_10.unicode_trie import UnicodeTrie
-from src.chapter_10.autocomplete import AutocompleteSystem
-from src.chapter_10.spell_checker import SpellChecker
-from src.chapter_10.analyzer import TrieAnalyzer, TrieStats
-from src.chapter_10.demo import benchmark_trie_performance, demonstrate_real_world_applications
+from chapter_10.trie import Trie, TrieNode
+from chapter_10.compressed_trie import CompressedTrie, CompressedTrieNode
+from chapter_10.unicode_trie import UnicodeTrie
+from chapter_10.autocomplete import AutocompleteSystem
+from chapter_10.spell_checker import SpellChecker
+from chapter_10.analyzer import TrieAnalyzer, TrieStats
+from chapter_10.demo import benchmark_trie_performance, demonstrate_real_world_applications
 
 __all__ = [
     'Trie',

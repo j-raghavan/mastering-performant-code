@@ -18,8 +18,6 @@ Functions:
 from typing import TypeVar, Generic, Optional, Iterator, Dict
 from enum import Enum
 import timeit
-import sys
-
 T = TypeVar('T')
 
 class Color(Enum):
@@ -718,9 +716,7 @@ def benchmark_red_black_tree_operations():
         """Benchmark memory usage."""
         print("\n=== Memory Usage Benchmark ===")
         
-        import sys
-        
-        # Test different data structures
+                # Test different data structures
         test_size = 10000
         
         # Red-Black tree

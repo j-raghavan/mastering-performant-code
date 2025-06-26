@@ -29,9 +29,8 @@ Memory Layout:
 └─────────────────────────────────────────┘
 """
 
-import sys
 from typing import TypeVar, Generic, Optional, Iterator
-from src.chapter_01.analyzer import MemoryInfo
+from chapter_01.analyzer import MemoryInfo
 
 T = TypeVar('T')
 

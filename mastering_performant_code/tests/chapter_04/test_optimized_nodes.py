@@ -6,10 +6,9 @@ and the node pool functionality for memory efficiency.
 """
 
 import pytest
-import sys
 from typing import List
 
-from src.chapter_04.nodes import (
+from chapter_04.nodes import (
     OptimizedSinglyNode, 
     OptimizedDoublyNode, 
     NodePool,

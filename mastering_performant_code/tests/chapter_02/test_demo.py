@@ -6,11 +6,10 @@ and benchmarking capabilities of Chapter 2.
 """
 
 import pytest
-import sys
 from unittest.mock import patch, MagicMock
 from typing import Dict, List, Any
 
-from src.chapter_02.demo import (
+from chapter_02.demo import (
     demo_timeit_basics,
     demo_cprofile,
     demo_memory_analysis,

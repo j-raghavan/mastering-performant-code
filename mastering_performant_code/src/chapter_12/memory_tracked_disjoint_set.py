@@ -6,10 +6,9 @@ for performance profiling and optimization analysis.
 """
 
 from typing import Dict, List, Optional, Tuple
-import sys
 from dataclasses import dataclass
 
-from src.chapter_12.optimized_disjoint_set import OptimizedDisjointSet
+from chapter_12.optimized_disjoint_set import OptimizedDisjointSet
 
 
 @dataclass

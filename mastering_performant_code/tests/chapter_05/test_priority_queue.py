@@ -6,7 +6,7 @@ class, ensuring correct behavior and edge cases.
 """
 
 import pytest
-from src.chapter_05.priority_queue import SkipListPriorityQueue, PriorityItem
+from chapter_05.priority_queue import SkipListPriorityQueue, PriorityItem
 
 
 class TestPriorityItem:

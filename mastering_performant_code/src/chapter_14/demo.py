@@ -6,7 +6,6 @@ implementations and real-world applications.
 """
 
 import timeit
-import sys
 from typing import List, Dict, Any
 from .bloom_filter import BloomFilter
 from .counting_bloom_filter import CountingBloomFilter

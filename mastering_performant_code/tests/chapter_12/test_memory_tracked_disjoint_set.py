@@ -6,10 +6,9 @@ capabilities.
 """
 
 import pytest
-import sys
 from typing import List, Tuple
 
-from src.chapter_12.memory_tracked_disjoint_set import MemoryTrackedDisjointSet, MemoryInfo
+from chapter_12.memory_tracked_disjoint_set import MemoryTrackedDisjointSet, MemoryInfo
 
 
 class TestMemoryInfo:

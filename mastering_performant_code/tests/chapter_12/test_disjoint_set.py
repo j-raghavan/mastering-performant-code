@@ -6,10 +6,9 @@ without optimizations.
 """
 
 import pytest
-import sys
 from typing import List, Tuple
 
-from src.chapter_12.disjoint_set import DisjointSet, UnionFindNode
+from chapter_12.disjoint_set import DisjointSet, UnionFindNode
 
 
 class TestUnionFindNode:

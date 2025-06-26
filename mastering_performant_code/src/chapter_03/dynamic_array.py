@@ -5,7 +5,6 @@ This module contains implementations of dynamic arrays with different growth str
 from basic to production-quality versions.
 """
 
-import sys
 import timeit
 from typing import TypeVar, Generic, Optional, Iterator, List, Any
 from enum import Enum

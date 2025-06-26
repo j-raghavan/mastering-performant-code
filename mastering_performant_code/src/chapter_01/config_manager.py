@@ -19,9 +19,9 @@ import json
 import time
 import os
 from pathlib import Path
-from src.chapter_01.simple_set import SimpleSet
-from src.chapter_01.hash_table import MemoryTrackedHashTable, HashTable
-from src.chapter_01.dynamic_array import DynamicArray, MemoryTrackedDynamicArray
+from chapter_01.simple_set import SimpleSet
+from chapter_01.hash_table import MemoryTrackedHashTable, HashTable
+from chapter_01.dynamic_array import DynamicArray, MemoryTrackedDynamicArray
 
 @dataclass
 class ConfigItem:
@@ -91,8 +91,8 @@ class ConfigurationManager:
     """
     
     def __init__(self, config_file: Optional[str] = None):
-        from src.chapter_01.hash_table import HashTable
-        from src.chapter_01.dynamic_array import DynamicArray, MemoryTrackedDynamicArray
+        from chapter_01.hash_table import HashTable
+        from chapter_01.dynamic_array import DynamicArray, MemoryTrackedDynamicArray
         
         self._configs = MemoryTrackedHashTable[str, ConfigItem]()
         self._tags = MemoryTrackedHashTable[str, SimpleSet[str]]()

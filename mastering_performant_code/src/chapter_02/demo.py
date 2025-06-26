@@ -5,7 +5,6 @@ This script demonstrates the profiling and benchmarking tools
 introduced in Chapter 2, showing how to analyze Python code performance.
 """
 
-import sys
 import timeit
 import cProfile
 import pstats

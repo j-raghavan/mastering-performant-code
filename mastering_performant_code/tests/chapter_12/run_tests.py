@@ -5,13 +5,9 @@ This script runs all tests for Chapter 12 and generates coverage reports.
 """
 
 import pytest
-import sys
 import os
 import subprocess
 from pathlib import Path
-
-# Add the src directory to the Python path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 
 def run_tests_with_coverage():
@@ -93,7 +89,7 @@ def run_demo_tests():
     
     try:
         # Import and run demo functions
-        from src.chapter_12.demo import (
+        from chapter_12.demo import (
             benchmark_comparison,
             memory_usage_comparison,
             real_world_application_demo,
@@ -139,9 +135,9 @@ def run_performance_tests():
     print("=" * 60)
     
     try:
-        from src.chapter_12.analyzer import UnionFindAnalyzer
-        from src.chapter_12.disjoint_set import DisjointSet
-        from src.chapter_12.optimized_disjoint_set import OptimizedDisjointSet
+        from chapter_12.analyzer import UnionFindAnalyzer
+        from chapter_12.disjoint_set import DisjointSet
+        from chapter_12.optimized_disjoint_set import OptimizedDisjointSet
         
         # Test basic operations
         print("Testing basic operations...")
@@ -183,7 +179,7 @@ def run_memory_tests():
     print("=" * 60)
     
     try:
-        from src.chapter_12.memory_tracked_disjoint_set import MemoryTrackedDisjointSet
+        from chapter_12.memory_tracked_disjoint_set import MemoryTrackedDisjointSet
         
         # Test memory tracking
         print("Testing memory tracking...")
@@ -223,8 +219,8 @@ def run_application_tests():
     print("=" * 60)
     
     try:
-        from src.chapter_12.network_connectivity import NetworkConnectivity
-        from src.chapter_12.image_segmentation import ImageSegmentation
+        from chapter_12.network_connectivity import NetworkConnectivity
+        from chapter_12.image_segmentation import ImageSegmentation
         
         # Test network connectivity
         print("Testing network connectivity...")
@@ -306,4 +302,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main()) 
+    main() 

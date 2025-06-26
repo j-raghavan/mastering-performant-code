@@ -6,14 +6,10 @@ including edge cases, resizing behavior, and performance tests.
 """
 
 import unittest
-import sys
 import timeit
 from typing import List
 
-# Add the code directory to the path for imports
-sys.path.insert(0, '../../src')
-
-from src.chapter_01.dynamic_array import DynamicArray, MemoryTrackedDynamicArray
+from chapter_01.dynamic_array import DynamicArray, MemoryTrackedDynamicArray
 
 class TestDynamicArray(unittest.TestCase):
     """Test cases for DynamicArray implementation."""

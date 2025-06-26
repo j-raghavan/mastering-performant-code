@@ -8,7 +8,7 @@ symbol tables, file systems, and network routing.
 
 import pytest
 from typing import List, Tuple, Optional, Dict
-from src.chapter_08.applications import (
+from chapter_08.applications import (
     DatabaseIndex, PriorityQueue, SymbolTable, 
     FileSystemTree, NetworkRoutingTable
 )

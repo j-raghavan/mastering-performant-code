@@ -6,11 +6,10 @@ ensuring 100% code coverage and testing all edge cases.
 """
 
 import pytest
-import sys
 from typing import List
 
-from src.chapter_04.doubly_linked_list import DoublyLinkedList
-from src.chapter_04.nodes import DoublyNode
+from chapter_04.doubly_linked_list import DoublyLinkedList
+from chapter_04.nodes import DoublyNode
 
 
 class TestDoublyLinkedList:

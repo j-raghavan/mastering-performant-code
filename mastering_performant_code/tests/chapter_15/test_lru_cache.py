@@ -1,8 +1,7 @@
 import unittest
 import timeit
-import sys
 import random
-from src.chapter_15.lru_cache import LRUCacheOrderedDict, LRUCacheDLL
+from chapter_15.lru_cache import LRUCacheOrderedDict, LRUCacheDLL
 
 class TestLRUCacheOrderedDict(unittest.TestCase):
     """Comprehensive test suite for LRU cache using OrderedDict."""

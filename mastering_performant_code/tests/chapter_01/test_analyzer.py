@@ -6,14 +6,10 @@ including memory analysis, performance benchmarking, and comparison tests.
 """
 
 import unittest
-import sys
 import timeit
 from typing import List, Dict, Set
 
-# Add the code directory to the path for imports
-sys.path.insert(0, '../../src')
-
-from src.chapter_01.analyzer import BuiltinAnalyzer, MemoryInfo
+from chapter_01.analyzer import BuiltinAnalyzer, MemoryInfo
 
 class TestBuiltinAnalyzer(unittest.TestCase):
     """Test cases for BuiltinAnalyzer implementation."""

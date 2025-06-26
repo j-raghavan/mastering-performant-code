@@ -8,7 +8,6 @@ with other data structures and analyze their performance characteristics.
 import timeit
 import random
 from typing import List, Dict, Any
-import sys
 from .avl_tree import AVLTree
 
 class AVLTreeAnalyzer:

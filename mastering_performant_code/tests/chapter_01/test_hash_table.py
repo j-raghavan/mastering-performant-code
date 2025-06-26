@@ -12,16 +12,12 @@ Enhanced test coverage includes:
 """
 
 import unittest
-import sys
 import timeit
 import gc
 import os
 from typing import Dict
 
-# Add the code directory to the path for imports
-sys.path.insert(0, '../../src')
-
-from src.chapter_01.hash_table import HashTable, MemoryTrackedHashTable
+from chapter_01.hash_table import HashTable, MemoryTrackedHashTable
 
 class TestHashTable(unittest.TestCase):
     """Test cases for HashTable implementation."""

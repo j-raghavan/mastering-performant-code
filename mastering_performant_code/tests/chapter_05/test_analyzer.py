@@ -6,9 +6,8 @@ ensuring correct analysis and benchmarking functionality.
 """
 
 import pytest
-import sys
-from src.chapter_05.analyzer import SkipListAnalyzer, SkipListMemoryInfo
-from src.chapter_05.skip_list import SkipList
+from chapter_05.analyzer import SkipListAnalyzer, SkipListMemoryInfo
+from chapter_05.skip_list import SkipList
 
 
 class TestSkipListMemoryInfo:

@@ -7,7 +7,7 @@ Unicode normalization, case folding, and proper character comparison.
 
 import unicodedata
 from typing import TypeVar, Generic, Optional, List, Tuple
-from src.chapter_10.trie import Trie, TrieNode
+from chapter_10.trie import Trie, TrieNode
 
 T = TypeVar('T')
 

@@ -5,7 +5,6 @@ This module provides tools to analyze the performance and memory
 characteristics of BST implementations.
 """
 
-import sys
 import timeit
 from typing import TypeVar, Generic, Optional, Iterator, List, Dict, Any
 from dataclasses import dataclass
@@ -176,19 +175,19 @@ class BSTAnalyzer:
             
             for size in data_sizes:
                 if operation == "insert":
-                    setup = f"from src.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}()"
+                    setup = f"from chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}()"
                     stmt = f"[bst.insert(i) for i in range({size})]"
                 elif operation == "search":
-                    setup = f"from src.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
+                    setup = f"from chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
                     stmt = f"[bst.search(i) for i in range({size})]"
                 elif operation == "delete":
-                    setup = f"from src.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
+                    setup = f"from chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
                     stmt = f"[bst.delete(i) for i in range({size})]"
                 elif operation == "traversal":
-                    setup = f"from src.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
+                    setup = f"from chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
                     stmt = "list(bst.inorder_traversal())"
                 elif operation == "range_search":
-                    setup = f"from src.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
+                    setup = f"from chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
                     stmt = f"bst.range_search({size//4}, {3*size//4})"
                 else:
                     continue
@@ -209,7 +208,7 @@ class BSTAnalyzer:
             
             for size in data_sizes:
                 # Benchmark recursive implementation
-                recursive_setup = f"from src.chapter_06 import {recursive_bst_class.__name__}; bst = {recursive_bst_class.__name__}()"
+                recursive_setup = f"from chapter_06 import {recursive_bst_class.__name__}; bst = {recursive_bst_class.__name__}()"
                 if operation in ["search", "delete", "traversal", "range_search"]:
                     recursive_setup += f"; [bst.insert(i) for i in range({size})]"
                 
@@ -217,7 +216,7 @@ class BSTAnalyzer:
                 recursive_time = timeit.timeit(recursive_stmt, setup=recursive_setup, number=1)
                 
                 # Benchmark iterative implementation
-                iterative_setup = f"from src.chapter_06 import {iterative_bst_class.__name__}; bst = {iterative_bst_class.__name__}()"
+                iterative_setup = f"from chapter_06 import {iterative_bst_class.__name__}; bst = {iterative_bst_class.__name__}()"
                 if operation in ["search", "delete", "traversal", "range_search"]:
                     iterative_setup += f"; [bst.insert(i) for i in range({size})]"
                 

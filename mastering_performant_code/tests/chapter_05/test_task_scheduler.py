@@ -6,7 +6,7 @@ ensuring correct behavior and edge cases.
 """
 
 import pytest
-from src.chapter_05.task_scheduler import TaskScheduler
+from chapter_05.task_scheduler import TaskScheduler
 
 
 class TestTaskScheduler:

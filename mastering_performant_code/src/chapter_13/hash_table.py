@@ -1,7 +1,5 @@
 from abc import ABC, abstractmethod
 from typing import TypeVar, Generic, Optional, Iterator, Tuple, List, Dict, Any
-import sys
-
 K = TypeVar('K')
 V = TypeVar('V')
 

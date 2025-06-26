@@ -6,14 +6,10 @@ including edge cases, performance tests, and compression analysis.
 """
 
 import unittest
-import sys
 import timeit
 from typing import List
 
-# Add the code directory to the path for imports
-sys.path.insert(0, '../../')
-
-from src.chapter_10.compressed_trie import CompressedTrie, CompressedTrieNode
+from chapter_10.compressed_trie import CompressedTrie, CompressedTrieNode
 
 class TestCompressedTrieNode(unittest.TestCase):
     """Test cases for CompressedTrieNode implementation."""

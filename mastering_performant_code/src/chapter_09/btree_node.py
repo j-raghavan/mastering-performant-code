@@ -8,8 +8,6 @@ metadata about its structure.
 
 from typing import TypeVar, Generic, Optional, List
 from dataclasses import dataclass
-import sys
-
 T = TypeVar('T')
 
 @dataclass

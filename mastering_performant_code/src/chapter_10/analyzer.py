@@ -5,12 +5,11 @@ This module provides tools to analyze the memory usage, performance,
 and characteristics of trie implementations.
 """
 
-import sys
 import timeit
 from typing import List, Dict, Any
 from dataclasses import dataclass
-from src.chapter_10.trie import Trie, TrieNode
-from src.chapter_10.compressed_trie import CompressedTrie, CompressedTrieNode
+from chapter_10.trie import Trie, TrieNode
+from chapter_10.compressed_trie import CompressedTrie, CompressedTrieNode
 
 @dataclass
 class TrieStats:

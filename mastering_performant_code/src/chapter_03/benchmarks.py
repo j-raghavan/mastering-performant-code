@@ -262,8 +262,6 @@ def benchmark_memory_usage() -> Dict[str, Dict[str, Any]]:
     Returns:
         Dictionary with memory usage metrics
     """
-    import sys
-    
     results = {}
     
     # Test different data types

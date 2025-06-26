@@ -242,9 +242,7 @@ class SinglyLinkedList(Generic[T]):
         Returns:
             Total memory usage in bytes
         """
-        import sys
-        
-        # Base object size
+                # Base object size
         total_size = sys.getsizeof(self)
         
         # Add size of sentinel nodes

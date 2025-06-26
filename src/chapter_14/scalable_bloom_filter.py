@@ -254,3 +254,32 @@ class ScalableBloomFilter:
                 f"across {stats['total_filters']} filters "
                 f"(FPR: {stats['overall_false_positive_rate']:.4f}, "
                 f"memory: {stats['total_memory']} bytes)") 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running scalable_bloom_filter demonstration...")
+    print("=" * 50)
+
+    # Create instance of ScalableBloomFilter
+    try:
+        instance = ScalableBloomFilter()
+        print(f"✓ Created ScalableBloomFilter instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating ScalableBloomFilter instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

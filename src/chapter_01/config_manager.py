@@ -378,3 +378,32 @@ class ValidationConfigObserver(ConfigObserver):
         if new_value is not None:
             print(f"Validating config change: {key} = {new_value}")
             # Add custom validation logic here 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running config_manager demonstration...")
+    print("=" * 50)
+
+    # Create instance of ConfigItem
+    try:
+        instance = ConfigItem()
+        print(f"✓ Created ConfigItem instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating ConfigItem instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

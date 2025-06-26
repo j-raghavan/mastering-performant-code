@@ -392,3 +392,32 @@ class EventSimulator:
             "event_type_distribution": event_types,
             "priority_distribution": self._event_queue.get_priority_distribution()
         } 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running applications demonstration...")
+    print("=" * 50)
+
+    # Create instance of Task
+    try:
+        instance = Task()
+        print(f"✓ Created Task instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating Task instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

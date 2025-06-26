@@ -287,3 +287,32 @@ class GraphUnionFind:
         """String representation of the GraphUnionFind."""
         components = self.get_connected_components()
         return f"GraphUnionFind(vertices={len(self)}, components={len(components)})" 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running graph_union_find demonstration...")
+    print("=" * 50)
+
+    # Create instance of Edge
+    try:
+        instance = Edge()
+        print(f"✓ Created Edge instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating Edge instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

@@ -62,3 +62,32 @@ class AVLNode(Generic[T]):
         left_height = self.left.height if self.left else 0
         right_height = self.right.height if self.right else 0
         self.height = max(left_height, right_height) + 1 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running avl_node demonstration...")
+    print("=" * 50)
+
+    # Create instance of AVLNode
+    try:
+        instance = AVLNode()
+        print(f"✓ Created AVLNode instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating AVLNode instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

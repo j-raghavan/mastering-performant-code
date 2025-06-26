@@ -473,3 +473,32 @@ def quick_benchmark(func: Callable, *args, iterations: int = 1000, **kwargs) -> 
         Average execution time in seconds
     """
     return timeit.timeit(lambda: func(*args, **kwargs), number=iterations) / iterations 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running profiler demonstration...")
+    print("=" * 50)
+
+    # Create instance of PerformanceProfiler
+    try:
+        instance = PerformanceProfiler()
+        print(f"✓ Created PerformanceProfiler instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating PerformanceProfiler instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

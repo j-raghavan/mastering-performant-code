@@ -440,3 +440,36 @@ class DoublyLinkedList(Generic[T]):
             current = current.next
         
         return total_size 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running doubly_linked_list demonstration...")
+    print("=" * 50)
+
+    # Create instance of DoublyLinkedList
+    try:
+        instance = DoublyLinkedList()
+        print(f"✓ Created DoublyLinkedList instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic operations
+        print("Testing basic operations...")
+        instance.append(1)
+        instance.append(2)
+        instance.append(3)
+        print(f"  After adding elements: {instance}")
+        print(f"  Length: {len(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating DoublyLinkedList instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

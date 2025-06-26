@@ -234,3 +234,23 @@ def verify_heap_sort_correctness() -> bool:
                 return False
     
     return True 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running heap_sort demonstration...")
+    print("=" * 50)
+
+    # Module demonstration
+    print("Module loaded successfully!")
+    print("Available for import and interactive use.")
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

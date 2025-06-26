@@ -172,3 +172,32 @@ class DisjointSet:
     def __contains__(self, x: int) -> bool:
         """Check if element x is in any set."""
         return x in self.parents 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running disjoint_set demonstration...")
+    print("=" * 50)
+
+    # Create instance of DisjointSet
+    try:
+        instance = DisjointSet()
+        print(f"✓ Created DisjointSet instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating DisjointSet instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

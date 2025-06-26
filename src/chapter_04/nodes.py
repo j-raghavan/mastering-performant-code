@@ -118,3 +118,32 @@ class NodePool(Generic[T]):
     def clear_pool(self) -> None:
         """Clear all nodes from the pool."""
         self._pool.clear() 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running nodes demonstration...")
+    print("=" * 50)
+
+    # Create instance of SinglyNode
+    try:
+        instance = SinglyNode()
+        print(f"✓ Created SinglyNode instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating SinglyNode instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

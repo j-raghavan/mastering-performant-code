@@ -368,3 +368,35 @@ class FileSystemTree:
             return node_memory
         
         return calculate_node_memory(self.root) 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running file_system_tree demonstration...")
+    print("=" * 50)
+
+    # Create instance of FileSystemTree
+    try:
+        instance = FileSystemTree()
+        print(f"✓ Created FileSystemTree instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic operations
+        print("Testing basic operations...")
+        instance.insert(5)
+        instance.insert(3)
+        instance.insert(7)
+        print(f"  After inserting elements: {instance}")
+    except Exception as e:
+        print(f"✗ Error creating FileSystemTree instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

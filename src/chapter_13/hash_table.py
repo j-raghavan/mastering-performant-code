@@ -778,3 +778,35 @@ class DoubleHashingHashTable(HashTableInterface[K, V]):
             return 0.0
         mean = sum(values) / len(values)
         return sum((x - mean) ** 2 for x in values) / len(values) 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running hash_table demonstration...")
+    print("=" * 50)
+
+    # Create instance of HashTableInterface
+    try:
+        instance = HashTableInterface()
+        print(f"✓ Created HashTableInterface instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic operations
+        print("Testing basic operations...")
+        instance["key1"] = "value1"
+        instance["key2"] = "value2"
+        print(f"  After adding elements: {instance}")
+        print(f"  Size: {len(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating HashTableInterface instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

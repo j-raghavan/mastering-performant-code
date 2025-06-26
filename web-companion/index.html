@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering Performant Code - Interactive Companion</title>
+    <meta name="description"
+        content="Interactive Python companion for Mastering Performant Code - Run, modify, and experiment with all code examples directly in your browser">
+    <meta name="keywords" content="python, algorithms, data structures, performance, interactive, education, pyodide">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/generated/chapters.json" as="fetch" crossorigin>
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#2563eb">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Mastering Performant Code - Interactive Companion">
+    <meta property="og:description" content="Interactive Python companion for Mastering Performant Code">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mastering Performant Code - Interactive Companion">
+    <meta name="twitter:description" content="Interactive Python companion for Mastering Performant Code">
+
+    <style>
+        /* Critical CSS for initial load */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #6b7280;
+        }
+
+        /* Status Section */
+        .status-section {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .status-section h2 {
+            margin-bottom: 15px;
+            color: #374151;
+        }
+
+        .status {
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .status.loading {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status.ready {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .metric {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .metric-label {
+            display: block;
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 5px;
+        }
+
+        .metric-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        /* File Explorer */
+        .file-explorer-section {
+            margin-bottom: 30px;
+        }
+
+        .file-explorer-section h2 {
+            margin-bottom: 15px;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .refresh-icon {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .refresh-icon:hover {
+            background: #f3f4f6;
+        }
+
+        .file-explorer {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 200px;
+        }
+
+        .file-category {
+            margin-bottom: 20px;
+        }
+
+        .file-category h4 {
+            color: #374151;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .file-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+        }
+
+        .file-item {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file-item:hover {
+            background: #f3f4f6;
+            border-color: #d1d5db;
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .file-size {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        /* Editor Section */
+        .editor-section {
+            margin-bottom: 30px;
+        }
+
+        .editor-section h2 {
+            margin-bottom: 15px;
+            color: #374151;
+        }
+
+        .editor-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .editor-controls select,
+        .editor-controls button {
+            padding: 10px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .editor-controls select:hover,
+        .editor-controls button:hover {
+            border-color: #9ca3af;
+        }
+
+        .editor-controls button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .code-area {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            min-height: 400px;
+        }
+
+        .editor-panel,
+        .output-panel {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .editor-panel h3,
+        .output-panel h3 {
+            margin-bottom: 15px;
+            color: #374151;
+            font-size: 1rem;
+        }
+
+        #codeEditor {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            resize: vertical;
+            background: #f9fafb;
+        }
+
+        .output {
+            background: #f9fafb;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 15px;
+            min-height: 300px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            overflow-y: auto;
+        }
+
+        .execution-success {
+            color: #065f46;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .execution-error {
+            color: #991b1b;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .output-content,
+        .error-content {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            font-size: 0.8rem;
+        }
+
+        .execution-time {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-top: 10px;
+        }
+
+        /* Log Section */
+        .log-section {
+            margin-bottom: 30px;
+        }
+
+        .log-section h2 {
+            margin-bottom: 15px;
+            color: #374151;
+        }
+
+        .execution-log {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 15px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 2px 0;
+        }
+
+        .log-entry.info {
+            color: #1f2937;
+        }
+
+        .log-entry.success {
+            color: #065f46;
+        }
+
+        .log-entry.error {
+            color: #991b1b;
+        }
+
+        .log-entry.warning {
+            color: #92400e;
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .notification.info {
+            background: #2563eb;
+        }
+
+        .notification.success {
+            background: #059669;
+        }
+
+        .notification.error {
+            background: #dc2626;
+        }
+
+        .notification.warning {
+            background: #d97706;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Loading states */
+        .loading-placeholder {
+            text-align: center;
+            color: #6b7280;
+            padding: 40px;
+        }
+
+        .no-files {
+            text-align: center;
+            color: #6b7280;
+            padding: 40px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .code-area {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .file-list {
+                grid-template-columns: 1fr;
+            }
+
+            .editor-controls {
+                flex-direction: column;
+            }
+        }
+
+        /* Dark theme support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #111827;
+                color: #f9fafb;
+            }
+
+            .status-section,
+            .file-explorer,
+            .editor-panel,
+            .output-panel {
+                background: #1f2937;
+                border-color: #374151;
+            }
+
+            .metric {
+                background: #374151;
+                border-color: #4b5563;
+            }
+
+            .file-item {
+                background: #374151;
+                border-color: #4b5563;
+            }
+
+            .file-item:hover {
+                background: #4b5563;
+            }
+
+            #codeEditor,
+            .output,
+            .execution-log {
+                background: #374151;
+                border-color: #4b5563;
+                color: #f9fafb;
+            }
+
+            .output-content,
+            .error-content {
+                background: #1f2937;
+                border-color: #4b5563;
+            }
+        }
+    </style>
+
+    <!-- Component Styles -->
+    <!-- <link rel="stylesheet" href="/src/styles/components.css"> -->
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Mastering Performant Code - Interactive Companion</h1>
+            <p>Run, modify, and experiment with all code examples directly in your browser</p>
+        </header>
+
+        <!-- Status Section -->
+        <section class="status-section">
+            <h2>📊 System Status</h2>
+            <div id="status" class="status loading">Initializing...</div>
+            <div class="metrics">
+                <div class="metric">
+                    <span class="metric-label">Load Time</span>
+                    <span class="metric-value" id="loadTime">--</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Files Loaded</span>
+                    <span class="metric-value" id="filesLoaded">--</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Memory Usage</span>
+                    <span class="metric-value" id="memoryUsage">--</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- File Explorer -->
+        <section class="file-explorer-section">
+            <h2>📁 Python Files <button onclick="window.app?.fileLoader?.refreshDiscovery()" class="refresh-icon"
+                    title="Refresh file discovery">🔄</button></h2>
+            <div id="fileExplorer" class="file-explorer">
+                <div class="loading-placeholder">Loading files...</div>
+            </div>
+        </section>
+
+        <!-- Code Editor -->
+        <section class="editor-section">
+            <h2>💻 Code Editor</h2>
+            <div class="editor-controls">
+                <select id="fileSelector" disabled>
+                    <option value="">Select a Python file...</option>
+                </select>
+                <button id="runBtn" disabled>Run Selected File</button>
+                <button id="runAllBtn" disabled>Run All Examples</button>
+                <button id="runTestsBtn" disabled>Run Tests</button>
+            </div>
+
+            <div class="code-area">
+                <div class="editor-panel">
+                    <h3>Current File: <span id="currentFile">None</span></h3>
+                    <textarea id="codeEditor" readonly placeholder="Select a file to view its content..."></textarea>
+                </div>
+                <div class="output-panel">
+                    <h3>Output:</h3>
+                    <div id="output" class="output">Ready to run Python files...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Execution Log -->
+        <section class="log-section">
+            <h2>📝 Execution Log</h2>
+            <div id="executionLog" class="execution-log">
+                <div class="log-entry info">System ready. Waiting for file operations...</div>
+            </div>
+            <button onclick="window.app?.uiManager?.clearLog()">Clear Log</button>
+        </section>
+    </div>
+
+    <!-- Pyodide CDN -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+
+    <!-- Application entry point -->
+    <script type="module" src="/src/main.js"></script>
+
+    <!-- Service Worker for offline support -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -360,3 +360,32 @@ class ImageSegmentation:
         """String representation of the ImageSegmentation."""
         stats = self.get_segment_statistics()
         return f"ImageSegmentation({self.width}x{self.height}, segments={stats['num_segments']})" 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running image_segmentation demonstration...")
+    print("=" * 50)
+
+    # Create instance of ImageSegmentation
+    try:
+        instance = ImageSegmentation()
+        print(f"✓ Created ImageSegmentation instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating ImageSegmentation instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

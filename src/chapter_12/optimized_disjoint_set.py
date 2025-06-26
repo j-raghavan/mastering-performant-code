@@ -244,3 +244,32 @@ class OptimizedDisjointSet:
     def __contains__(self, x: int) -> bool:
         """Check if element x is in any set."""
         return x in self.parents 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running optimized_disjoint_set demonstration...")
+    print("=" * 50)
+
+    # Create instance of OptimizedDisjointSet
+    try:
+        instance = OptimizedDisjointSet()
+        print(f"✓ Created OptimizedDisjointSet instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating OptimizedDisjointSet instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

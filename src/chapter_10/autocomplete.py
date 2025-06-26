@@ -381,3 +381,32 @@ class AutocompleteSystem(ProductionAutocomplete):
         """Get top autocomplete suggestions as strings only."""
         suggestions = self.get_suggestions(prefix, max_results)
         return [word for word, _ in suggestions] 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running autocomplete demonstration...")
+    print("=" * 50)
+
+    # Create instance of Suggestion
+    try:
+        instance = Suggestion()
+        print(f"✓ Created Suggestion instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating Suggestion instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

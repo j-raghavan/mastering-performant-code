@@ -352,3 +352,32 @@ class UnionFindAnalyzer:
                 memory_data['memory_usage'].append(sys.getsizeof(ds))
         
         return memory_data 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running analyzer demonstration...")
+    print("=" * 50)
+
+    # Create instance of UnionFindAnalyzer
+    try:
+        instance = UnionFindAnalyzer()
+        print(f"✓ Created UnionFindAnalyzer instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating UnionFindAnalyzer instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

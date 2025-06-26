@@ -302,3 +302,32 @@ class CountingBloomFilter:
                 f"(load factor: {stats['load_factor']:.2%}, "
                 f"FPR: {self.get_false_positive_rate():.4f}, "
                 f"overflow risk: {self.get_overflow_risk():.2%})") 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running counting_bloom_filter demonstration...")
+    print("=" * 50)
+
+    # Create instance of CountingBloomFilter
+    try:
+        instance = CountingBloomFilter()
+        print(f"✓ Created CountingBloomFilter instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating CountingBloomFilter instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

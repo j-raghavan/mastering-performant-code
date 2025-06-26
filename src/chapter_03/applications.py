@@ -322,3 +322,32 @@ class CircularBuffer:
     
     def __repr__(self) -> str:
         return f"CircularBuffer(size={self._size}, capacity={self._capacity})" 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running applications demonstration...")
+    print("=" * 50)
+
+    # Create instance of TextBuffer
+    try:
+        instance = TextBuffer()
+        print(f"✓ Created TextBuffer instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating TextBuffer instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

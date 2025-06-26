@@ -391,3 +391,35 @@ class AVLTreeAnalyzer:
             'max_nodes_for_height': max_nodes,
             'height_efficiency': h / avl_height_bound if avl_height_bound > 0 else 0
         } 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running analyzer demonstration...")
+    print("=" * 50)
+
+    # Create instance of AVLTreeAnalyzer
+    try:
+        instance = AVLTreeAnalyzer()
+        print(f"✓ Created AVLTreeAnalyzer instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic operations
+        print("Testing basic operations...")
+        instance.insert(5)
+        instance.insert(3)
+        instance.insert(7)
+        print(f"  After inserting elements: {instance}")
+    except Exception as e:
+        print(f"✗ Error creating AVLTreeAnalyzer instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

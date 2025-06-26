@@ -1,0 +1,26 @@
+# Include source code
+recursive-include src *.py
+recursive-include tests *.py
+
+# Include documentation
+include README.md
+include LICENSE
+include pytest.ini
+include pyproject.toml
+include MANIFEST.in
+
+# Include any additional data files
+recursive-include src *.md
+recursive-include tests *.md
+
+# Exclude unnecessary files
+global-exclude *.pyc
+global-exclude __pycache__
+global-exclude *.pyo
+global-exclude *.pyd
+global-exclude .git*
+global-exclude .pytest_cache*
+global-exclude temp*
+global-exclude web-companion*
+global-exclude pyodide-demo*
+global-exclude .github* 

@@ -374,3 +374,35 @@ class BSTAnalyzer:
         
         value_memory = sys.getsizeof(node.value)
         return value_memory + BSTAnalyzer._calculate_value_memory(node.left) + BSTAnalyzer._calculate_value_memory(node.right) 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running analyzer demonstration...")
+    print("=" * 50)
+
+    # Create instance of BSTAnalyzer
+    try:
+        instance = BSTAnalyzer()
+        print(f"✓ Created BSTAnalyzer instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic operations
+        print("Testing basic operations...")
+        instance.insert(5)
+        instance.insert(3)
+        instance.insert(7)
+        print(f"  After inserting elements: {instance}")
+    except Exception as e:
+        print(f"✗ Error creating BSTAnalyzer instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

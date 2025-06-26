@@ -176,8 +176,12 @@ class CountingBloomFilter:
         is_completely_removed = all(self.counter_array[pos] == 0 for pos in positions)
         
         # Only decrement element count if this completely removes the item
+        # However, due to hash collisions, we need to be more careful
+        # We'll use a heuristic: if the item is no longer detectable, we assume it's removed
         if is_completely_removed:
-            self.element_count = max(0, self.element_count - 1)
+            # Double-check that the item is actually not detectable anymore
+            if not self.contains(item):
+                self.element_count = max(0, self.element_count - 1)
         
         return True
     

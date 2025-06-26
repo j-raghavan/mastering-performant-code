@@ -302,16 +302,19 @@ class TestThreadSafeCache(unittest.TestCase):
     
     def test_thread_safety(self):
         """Test thread safety of the cache."""
+        # Use a larger cache size to avoid eviction during the test
+        cache = ThreadSafeCache(max_size=10000)
+        
         def worker(worker_id):
             for i in range(100):
                 key = f"worker_{worker_id}_key_{i}"
                 value = f"value_{worker_id}_{i}"
-                self.cache.set(key, value)
+                cache.set(key, value)
                 
                 # Small delay to increase chance of race conditions
                 time.sleep(0.001)
                 
-                retrieved = self.cache.get(key)
+                retrieved = cache.get(key)
                 if retrieved != value:
                     raise ValueError(f"Cache inconsistency: {retrieved} != {value}")
         

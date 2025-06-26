@@ -3,13 +3,13 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mastering-performant-code"
+name = "mastering_performant_code"
 version = "1.0.0"
 description = "A comprehensive companion repository for the book 'Mastering Performant Code' - your journey into Python performance optimization, data structures, and algorithmic efficiency."
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Your Name", email = "your.email@example.com"}
+    {name = "Jayasimha Raghavan", email = "mr.jayasimha@gmail.com"}
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -35,20 +35,20 @@ Documentation = "https://github.com/yourusername/mastering-performant-code#readm
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["src*", "tests*"]
+include = ["mastering_performant_code*"]
 
 [tool.setuptools.package-data]
 "*" = ["*.py", "*.md", "*.txt", "*.ini"]
 
 [tool.setuptools.data-files]
-"mastering-performant-code" = [
+"mastering_performant_code" = [
     "README.md",
     "LICENSE",
     "pytest.ini",
 ]
 
 [tool.setuptools.dynamic]
-version = {attr = "src.__version__"}
+version = {attr = "mastering_performant_code.__version__"}
 
 [tool.setuptools.exclude-package-data]
 "*" = ["*.pyc", "__pycache__", "*.pyo", "*.pyd", ".git*", ".pytest_cache*", "temp*", "web-companion*", "pyodide-demo*"]

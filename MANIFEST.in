@@ -1,6 +1,9 @@
+# Include the main package
+recursive-include mastering_performant_code *.py
+
 # Include source code
-recursive-include src *.py
-recursive-include tests *.py
+recursive-include mastering_performant_code/src *.py
+recursive-include mastering_performant_code/tests *.py
 
 # Include documentation
 include README.md
@@ -10,8 +13,8 @@ include pyproject.toml
 include MANIFEST.in
 
 # Include any additional data files
-recursive-include src *.md
-recursive-include tests *.md
+recursive-include mastering_performant_code/src *.md
+recursive-include mastering_performant_code/tests *.md
 
 # Exclude unnecessary files
 global-exclude *.pyc

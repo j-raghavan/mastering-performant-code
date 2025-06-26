@@ -73,17 +73,19 @@ jobs:
         # Test that the wheel can be installed and imported
         pip install dist/*.whl
         python -c "
-        import src
-        import tests
-        print(f'Successfully imported src package: {src.__version__}')
-        print('Successfully imported tests package')
+        import mastering_performant_code
+        import mastering_performant_code.src
+        import mastering_performant_code.tests
+        print(f'Successfully imported mastering_performant_code package')
+        print(f'Successfully imported src package: {mastering_performant_code.src.__file__}')
+        print(f'Successfully imported tests package: {mastering_performant_code.tests.__file__}')
         "
     
     - name: Run tests from installed wheel
       run: |
         # Install pytest and run tests from the installed wheel
         pip install pytest pytest-cov
-        pytest tests/ -v --tb=short
+        python -m pytest mastering_performant_code.tests -v --tb=short
 
   build-sdist:
     runs-on: ubuntu-latest

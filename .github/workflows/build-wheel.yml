@@ -73,19 +73,42 @@ jobs:
         # Test that the wheel can be installed and imported
         pip install dist/*.whl
         python -c "
-        import mastering_performant_code
-        import mastering_performant_code.src
-        import mastering_performant_code.tests
-        print(f'Successfully imported mastering_performant_code package')
-        print(f'Successfully imported src package: {mastering_performant_code.src.__file__}')
-        print(f'Successfully imported tests package: {mastering_performant_code.tests.__file__}')
+        import src
+        import tests
+        print(f'Successfully imported src package')
+        print(f'Successfully imported tests package')
         "
     
     - name: Run tests from installed wheel
       run: |
         # Install pytest and run tests from the installed wheel
         pip install pytest pytest-cov
-        python -m pytest mastering_performant_code.tests -v --tb=short
+        # Run tests from the installed package location
+        python -c "
+        import site
+        import os
+        import subprocess
+        import sys
+        
+        # Find site-packages directory
+        site_packages = site.getsitepackages()[0]
+        tests_dir = os.path.join(site_packages, 'tests')
+        
+        print(f'Site-packages directory: {site_packages}')
+        print(f'Tests directory: {tests_dir}')
+        print(f'Tests directory exists: {os.path.exists(tests_dir)}')
+        
+        if os.path.exists(tests_dir):
+            result = subprocess.run([sys.executable, '-m', 'pytest', tests_dir, '-v', '--tb=short'], 
+                                  capture_output=True, text=True)
+            print('STDOUT:', result.stdout)
+            print('STDERR:', result.stderr)
+            print('Return code:', result.returncode)
+            exit(result.returncode)
+        else:
+            print('Tests directory not found in installed package')
+            exit(1)
+        "
 
   build-sdist:
     runs-on: ubuntu-latest

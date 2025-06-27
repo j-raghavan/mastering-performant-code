@@ -9,7 +9,7 @@ import { Logger } from '../utils/Logger.js';
 class ContentSyncService {
     constructor() {
         this.chapters = null;
-        this.chaptersPath = '/generated/chapters.json';
+        this.chaptersPath = './generated/chapters.json';
         this.contentBasePath = '/generated/content';
         this.cache = new Map();
     }

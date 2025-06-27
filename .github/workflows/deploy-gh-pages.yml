@@ -52,10 +52,15 @@ jobs:
           cd web-companion
           npm run build
 
+      - name: Copy built files to root
+        run: |
+          cp -r web-companion/dist/* ./
+          cp web-companion/dist/.nojekyll ./
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: web-companion/dist
+          path: .
 
   # Deployment job
   deploy:

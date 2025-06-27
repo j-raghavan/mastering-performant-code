@@ -4,7 +4,7 @@ import { resolve } from 'path';
 export default defineConfig({
     root: '.',
     publicDir: 'public',
-    base: '/mastering-performant-code/',
+    base: '/',
     build: {
         outDir: 'dist',
         assetsDir: 'assets',

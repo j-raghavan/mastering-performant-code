@@ -9,7 +9,7 @@ import { Logger } from '../utils/Logger.js';
 class PackageManager {
     constructor() {
         // Use wheel hosted directly on GitHub Pages to avoid CORS issues
-        this.packageUrl = '/mastering-performant-code/assets/mastering_performant_code-1.0.0-py3-none-any.whl';
+        this.packageUrl = '/assets/mastering_performant_code-1.0.0-py3-none-any.whl';
         this.packageName = 'mastering_performant_code';
         this.packageVersion = '1.0.0';
         this.isInstalled = false;

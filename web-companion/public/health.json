@@ -1,6 +1,7 @@
 {
   "status": "healthy",
-  "timestamp": "2025-06-27T18:57:24.199Z",
+  "timestamp": "2025-06-27T19:21:33.883Z",
   "version": "1.0.0",
-  "deployment": "github-pages"
+  "deployment": "github-pages",
+  "wheel_available": true
 }

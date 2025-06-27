@@ -5,7 +5,7 @@
  */
 
 // Test chapter data
-export const testChapters = [
+window.testChapters = [
     {
         id: 'chapter_01',
         title: 'Dynamic Arrays and Memory Management',
@@ -39,19 +39,19 @@ export const testChapters = [
 ];
 
 // Test utilities
-export const testUtils = {
+window.testUtils = {
     /**
      * Get chapter by ID
      */
     getChapter(id) {
-        return testChapters.find(chapter => chapter.id === id);
+        return window.testChapters.find(chapter => chapter.id === id);
     },
 
     /**
      * Get all chapter IDs
      */
     getChapterIds() {
-        return testChapters.map(chapter => chapter.id);
+        return window.testChapters.map(chapter => chapter.id);
     },
 
     /**
@@ -74,8 +74,8 @@ export const testUtils = {
     }
 };
 
-// Export default for compatibility
-export default {
-    testChapters,
-    testUtils
+// For backward compatibility
+window.testChaptersModule = {
+    testChapters: window.testChapters,
+    testUtils: window.testUtils
 }; 

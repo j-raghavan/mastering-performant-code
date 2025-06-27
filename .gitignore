@@ -290,3 +290,26 @@ devplan*.md
 review*
 pyodide-demo/
 temp/
+
+############  Runtime / build artefacts  ############
+# Node
+node_modules/
+web-companion/node_modules/
+
+# Vite & other build caches
+web-companion/node_modules/.vite/
+web-companion/node_modules/.bin/
+
+# Python
+**/__pycache__/
+*.py[cod]
+
+# Wheels / sdists
+dist/
+build/
+
+# Misc test scratch files
+web-companion/*-test*.js
+web-companion/TESTING.md
+
+#####################################################

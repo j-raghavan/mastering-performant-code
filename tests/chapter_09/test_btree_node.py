@@ -8,7 +8,7 @@ ensuring all methods work correctly and handle edge cases properly.
 import pytest
 from typing import List, Optional
 
-from chapter_09.btree_node import BTreeNode
+from mastering_performant_code.chapter_09.btree_node import BTreeNode
 
 
 class TestBTreeNode:

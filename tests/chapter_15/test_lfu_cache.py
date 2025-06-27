@@ -1,7 +1,7 @@
 import unittest
 import timeit
 import random
-from chapter_15.lfu_cache import LFUCache, LFUNode, DoublyLinkedList
+from mastering_performant_code.chapter_15.lfu_cache import LFUCache, LFUNode, DoublyLinkedList
 
 class TestLFUCache(unittest.TestCase):
     """Comprehensive test suite for LFU cache."""

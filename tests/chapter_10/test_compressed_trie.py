@@ -9,7 +9,7 @@ import unittest
 import timeit
 from typing import List
 
-from chapter_10.compressed_trie import CompressedTrie, CompressedTrieNode
+from mastering_performant_code.chapter_10.compressed_trie import CompressedTrie, CompressedTrieNode
 
 class TestCompressedTrieNode(unittest.TestCase):
     """Test cases for CompressedTrieNode implementation."""

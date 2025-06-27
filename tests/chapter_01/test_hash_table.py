@@ -17,7 +17,7 @@ import gc
 import os
 from typing import Dict
 
-from chapter_01.hash_table import HashTable, MemoryTrackedHashTable
+from mastering_performant_code.chapter_01.hash_table import HashTable, MemoryTrackedHashTable
 
 class TestHashTable(unittest.TestCase):
     """Test cases for HashTable implementation."""

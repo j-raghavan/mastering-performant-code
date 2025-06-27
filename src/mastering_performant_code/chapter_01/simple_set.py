@@ -7,7 +7,7 @@ hash table with open addressing, set operations, and memory efficiency.
 """
 
 from typing import TypeVar, Generic, Iterator, Set as PySet, Optional
-from chapter_01.hash_table import HashTable
+from .hash_table import HashTable
 
 T = TypeVar('T')
 

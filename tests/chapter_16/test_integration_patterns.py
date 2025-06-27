@@ -13,7 +13,7 @@ import threading
 import subprocess
 from pathlib import Path
 from unittest.mock import patch, MagicMock, mock_open
-from chapter_16.integration_patterns import (
+from mastering_performant_code.chapter_16.integration_patterns import (
     PluginManager, PluginInfo, SubprocessOptimizer, 
     ThreadSafeCache, PerformanceMonitor, demonstrate_integration_patterns
 )

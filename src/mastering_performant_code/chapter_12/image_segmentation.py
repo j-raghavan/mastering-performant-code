@@ -6,7 +6,7 @@ computer vision tasks like connected component labeling and image segmentation.
 """
 
 from typing import Dict, List, Optional, Tuple, Set
-from chapter_12.optimized_disjoint_set import OptimizedDisjointSet
+from .optimized_disjoint_set import OptimizedDisjointSet
 
 
 class ImageSegmentation:

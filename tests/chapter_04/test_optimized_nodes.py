@@ -8,7 +8,7 @@ and the node pool functionality for memory efficiency.
 import pytest
 from typing import List
 
-from chapter_04.nodes import (
+from mastering_performant_code.chapter_04.nodes import (
     OptimizedSinglyNode, 
     OptimizedDoublyNode, 
     NodePool,

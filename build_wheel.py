@@ -10,7 +10,7 @@ import glob
 import os
 from pathlib import Path
 
-PROJECT_ROOT = PATH(__file__).resolve().parent
+PROJECT_ROOT = Path(__file__).resolve().parent
 os.chdir(PROJECT_ROOT)
 
 
@@ -44,7 +44,7 @@ def build_wheel():
     print("Wheel built successfully!")
 
 def verify_wheel_contents():
-    """Verify that the wheel contains src and tests directories."""
+    """Verify that the wheel contains mastering_performant_code directory."""
     print("\nVerifying wheel contents...")
     
     wheels = glob.glob("dist/*.whl")
@@ -58,28 +58,21 @@ def verify_wheel_contents():
     with zipfile.ZipFile(wheel_path, 'r') as wheel:
         files = wheel.namelist()
         
-        # Count files in src and tests
-        src_files = [f for f in files if f.startswith('src/')]
-        test_files = [f for f in files if f.startswith('tests/')]
+        # Count files in mastering_performant_code
+        pkg_files = [f for f in files if f.startswith('mastering_performant_code/')]
         
-        print(f"Wheel contains {len(src_files)} src files and {len(test_files)} test files")
+        print(f"Wheel contains {len(pkg_files)} mastering_performant_code files")
         
-        if src_files:
-            print("Sample src files:")
-            for f in src_files[:5]:
-                print(f"  {f}")
-        
-        if test_files:
-            print("Sample test files:")
-            for f in test_files[:5]:
+        if pkg_files:
+            print("Sample package files:")
+            for f in pkg_files[:5]:
                 print(f"  {f}")
         
         # Check for key files
         key_files = [
-            'src/__init__.py',
-            'tests/__init__.py',
-            'src/chapter_01/__init__.py',
-            'tests/chapter_01/__init__.py'
+            'mastering_performant_code/__init__.py',
+            'mastering_performant_code/chapter_01/__init__.py',
+            'mastering_performant_code/chapter_02/__init__.py'
         ]
         
         missing_files = [f for f in key_files if f not in files]
@@ -107,15 +100,18 @@ def test_wheel_installation():
         
         # Test imports
         test_script = """
-import src
-import tests
-print(f"Successfully imported src package: {src.__version__}")
-print("Successfully imported tests package")
+import mastering_performant_code
+print(f"Successfully imported mastering_performant_code package: {mastering_performant_code.__version__}")
 
 # Test importing a specific chapter
-import src.chapter_01
-import tests.chapter_01
+import mastering_performant_code.chapter_01
+import mastering_performant_code.chapter_02
 print("Successfully imported chapter modules")
+
+# Test importing specific classes
+from mastering_performant_code.chapter_01 import DynamicArray, HashTable
+from mastering_performant_code.chapter_02 import AlgorithmProfiler
+print("Successfully imported specific classes")
 """
         
         result = subprocess.run([sys.executable, "-c", test_script], 

@@ -8,7 +8,7 @@ ensuring 100% code coverage and correct behavior.
 import pytest
 import time
 from typing import List, Optional
-from chapter_11.priority_queue import PriorityQueue, PriorityQueueItem
+from mastering_performant_code.chapter_11.priority_queue import PriorityQueue, PriorityQueueItem
 
 
 class TestPriorityQueueItem:

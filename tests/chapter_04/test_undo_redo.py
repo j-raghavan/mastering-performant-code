@@ -9,7 +9,7 @@ import pytest
 import time
 from typing import List
 
-from chapter_04.undo_redo import UndoRedoSystem, Action
+from mastering_performant_code.chapter_04.undo_redo import UndoRedoSystem, Action
 
 
 class TestUndoRedoSystem:

@@ -8,7 +8,7 @@ including dictionary lookup, suggestion generation, and text checking.
 import unittest
 from typing import List
 
-from chapter_10.spell_checker import SpellChecker
+from mastering_performant_code.chapter_10.spell_checker import SpellChecker
 
 class TestSpellChecker(unittest.TestCase):
     """Test cases for SpellChecker implementation."""

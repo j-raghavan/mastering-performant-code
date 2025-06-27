@@ -8,7 +8,7 @@ including Unicode normalization, case folding, and international text handling.
 import unittest
 import unicodedata
 
-from chapter_10.unicode_trie import UnicodeTrie
+from mastering_performant_code.chapter_10.unicode_trie import UnicodeTrie
 
 class TestUnicodeTrie(unittest.TestCase):
     """Test cases for UnicodeTrie implementation."""

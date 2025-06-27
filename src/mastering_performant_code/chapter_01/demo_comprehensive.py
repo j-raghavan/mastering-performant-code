@@ -22,11 +22,11 @@ import psutil
 from typing import Dict, List, Any
 
 # Import our implementations
-from chapter_01.dynamic_array import DynamicArray, MemoryTrackedDynamicArray
-from chapter_01.hash_table import HashTable, MemoryTrackedHashTable
-from chapter_01.simple_set import SimpleSet
-from chapter_01.config_manager import ConfigurationManager, LoggingConfigObserver, ValidationConfigObserver
-from chapter_01.analyzer import BuiltinAnalyzer, MemoryInfo, PerformanceInfo
+from .dynamic_array import DynamicArray, MemoryTrackedDynamicArray
+from .hash_table import HashTable, MemoryTrackedHashTable
+from .simple_set import SimpleSet
+from .config_manager import ConfigurationManager, LoggingConfigObserver, ValidationConfigObserver
+from .analyzer import BuiltinAnalyzer, MemoryInfo, PerformanceInfo
 
 def get_memory_usage():
     """Get current memory usage in MB."""

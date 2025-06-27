@@ -77,9 +77,9 @@ class MemoryLimitedDemo:
         
         try:
             # Import only what we need
-            from chapter_01.dynamic_array import DynamicArray
-            from chapter_01.hash_table import HashTable
-            from chapter_01.simple_set import SimpleSet
+            from .dynamic_array import DynamicArray
+            from .hash_table import HashTable
+            from .simple_set import SimpleSet
             
             print("Testing basic implementations with minimal data...")
             
@@ -154,7 +154,7 @@ Key Concepts (No Memory Allocation Required):
         print_section("PERFORMANCE COMPARISON")
         
         try:
-            from chapter_01.dynamic_array import DynamicArray
+            from .dynamic_array import DynamicArray
             
             print("Comparing implementations vs built-ins (tiny datasets)...")
             
@@ -211,7 +211,7 @@ Key Concepts (No Memory Allocation Required):
         print_section("UNICODE HANDLING")
         
         try:
-            from chapter_01.hash_table import HashTable
+            from .hash_table import HashTable
             
             # Test with minimal Unicode data
             table = HashTable[str, int]()

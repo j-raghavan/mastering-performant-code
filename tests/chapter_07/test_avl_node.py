@@ -7,7 +7,7 @@ ensuring all methods work correctly and edge cases are handled.
 
 import pytest
 
-from chapter_07.avl_node import AVLNode
+from mastering_performant_code.chapter_07.avl_node import AVLNode
 
 class TestAVLNode:
     """Test cases for AVLNode class."""

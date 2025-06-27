@@ -8,8 +8,8 @@ ensuring all benchmarking and analysis methods work correctly.
 import pytest
 import os
 
-from chapter_07.analyzer import AVLTreeAnalyzer
-from chapter_07.avl_tree import AVLTree
+from mastering_performant_code.chapter_07.analyzer import AVLTreeAnalyzer
+from mastering_performant_code.chapter_07.avl_tree import AVLTree
 
 class TestAVLTreeAnalyzer:
     """Test cases for AVLTreeAnalyzer class."""

@@ -8,7 +8,7 @@ without optimizations.
 import pytest
 from typing import List, Tuple
 
-from chapter_12.disjoint_set import DisjointSet, UnionFindNode
+from mastering_performant_code.chapter_12.disjoint_set import DisjointSet, UnionFindNode
 
 
 class TestUnionFindNode:

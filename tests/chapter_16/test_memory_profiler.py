@@ -9,7 +9,7 @@ import unittest
 import gc
 import time
 from unittest.mock import patch, MagicMock
-from chapter_16.memory_profiler import (
+from mastering_performant_code.chapter_16.memory_profiler import (
     MemoryProfiler, MemorySnapshot, MemoryComparison, 
     memory_context, demonstrate_memory_optimization
 )

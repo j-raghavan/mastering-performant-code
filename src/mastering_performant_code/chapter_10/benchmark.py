@@ -18,10 +18,10 @@ from typing import Dict, List, Tuple, Any, Optional
 from dataclasses import dataclass
 from collections import defaultdict
 
-from chapter_10.trie import Trie
-from chapter_10.compressed_trie import CompressedTrie
-from chapter_10.unicode_trie import UnicodeTrie
-from chapter_10.autocomplete import AutocompleteSystem
+from .trie import Trie
+from .compressed_trie import CompressedTrie
+from .unicode_trie import UnicodeTrie
+from .autocomplete import AutocompleteSystem
 
 @dataclass
 class BenchmarkResult:

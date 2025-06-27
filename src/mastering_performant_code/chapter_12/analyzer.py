@@ -7,7 +7,7 @@ of Union-Find implementations.
 
 import timeit
 from typing import Dict, List, Optional, Tuple, Type
-from chapter_12.optimized_disjoint_set import OptimizedDisjointSet
+from .optimized_disjoint_set import OptimizedDisjointSet
 
 
 class UnionFindAnalyzer:

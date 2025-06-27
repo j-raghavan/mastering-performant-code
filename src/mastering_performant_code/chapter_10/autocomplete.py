@@ -9,7 +9,7 @@ import re
 from typing import List, Dict, Tuple, Any, Optional, Set
 from collections import defaultdict, Counter
 from dataclasses import dataclass, field
-from chapter_10.trie import Trie
+from .trie import Trie
 
 @dataclass
 class Suggestion:

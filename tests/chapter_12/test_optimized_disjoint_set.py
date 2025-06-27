@@ -8,7 +8,7 @@ and union by rank optimizations.
 import pytest
 from typing import List, Tuple
 
-from chapter_12.optimized_disjoint_set import OptimizedDisjointSet
+from mastering_performant_code.chapter_12.optimized_disjoint_set import OptimizedDisjointSet
 
 
 class TestOptimizedDisjointSet:

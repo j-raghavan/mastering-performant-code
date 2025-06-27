@@ -8,8 +8,8 @@ ensuring 100% code coverage and testing all edge cases.
 import pytest
 from typing import List
 
-from chapter_04.doubly_linked_list import DoublyLinkedList
-from chapter_04.nodes import DoublyNode
+from mastering_performant_code.chapter_04.doubly_linked_list import DoublyLinkedList
+from mastering_performant_code.chapter_04.nodes import DoublyNode
 
 
 class TestDoublyLinkedList:

@@ -8,7 +8,7 @@ ensuring all operations work correctly and the tree maintains balance.
 import pytest
 import os
 
-from chapter_07.avl_tree import AVLTree
+from mastering_performant_code.chapter_07.avl_tree import AVLTree
 
 class TestAVLTree:
     """Test cases for AVLTree class."""

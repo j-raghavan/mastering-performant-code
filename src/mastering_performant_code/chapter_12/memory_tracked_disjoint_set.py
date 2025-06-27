@@ -8,7 +8,7 @@ for performance profiling and optimization analysis.
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass
 
-from chapter_12.optimized_disjoint_set import OptimizedDisjointSet
+from .optimized_disjoint_set import OptimizedDisjointSet
 
 
 @dataclass

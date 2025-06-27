@@ -16,7 +16,7 @@ Theoretical Analysis:
 """
 
 from typing import TypeVar, Generic, Optional, Tuple, Iterator
-from chapter_01.analyzer import MemoryInfo
+from .analyzer import MemoryInfo
 
 K = TypeVar('K')
 V = TypeVar('V')

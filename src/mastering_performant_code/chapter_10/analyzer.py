@@ -8,8 +8,8 @@ and characteristics of trie implementations.
 import timeit
 from typing import List, Dict, Any
 from dataclasses import dataclass
-from chapter_10.trie import Trie, TrieNode
-from chapter_10.compressed_trie import CompressedTrie, CompressedTrieNode
+from .trie import Trie, TrieNode
+from .compressed_trie import CompressedTrie, CompressedTrieNode
 
 @dataclass
 class TrieStats:

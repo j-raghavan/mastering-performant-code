@@ -3,8 +3,8 @@
 Simple test script for Chapter 3 functionality.
 """
 
-from chapter_03.dynamic_array import DynamicArray, ProductionDynamicArray, GrowthStrategy
-from chapter_03.applications import TextBuffer, SimpleDatabase
+from mastering_performant_code.chapter_03.dynamic_array import DynamicArray, ProductionDynamicArray, GrowthStrategy
+from mastering_performant_code.chapter_03.applications import TextBuffer, SimpleDatabase
 
 def test_basic_functionality():
     """Test basic dynamic array functionality."""

@@ -9,7 +9,7 @@ import unittest
 import timeit
 from typing import List
 
-from chapter_01.dynamic_array import DynamicArray, MemoryTrackedDynamicArray
+from mastering_performant_code.chapter_01.dynamic_array import DynamicArray, MemoryTrackedDynamicArray
 
 class TestDynamicArray(unittest.TestCase):
     """Test cases for DynamicArray implementation."""

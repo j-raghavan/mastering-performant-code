@@ -9,7 +9,7 @@ import unittest
 import timeit
 from typing import List, Dict, Set
 
-from chapter_01.analyzer import BuiltinAnalyzer, MemoryInfo
+from mastering_performant_code.chapter_01.analyzer import BuiltinAnalyzer, MemoryInfo
 
 class TestBuiltinAnalyzer(unittest.TestCase):
     """Test cases for BuiltinAnalyzer implementation."""

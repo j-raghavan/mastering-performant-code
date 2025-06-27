@@ -7,8 +7,8 @@ This module provides comprehensive tests for the RecursiveBST class with 100% co
 import pytest
 from typing import List, Optional
 
-from chapter_06.recursive_bst import RecursiveBST
-from chapter_06.bst_node import BSTNode
+from mastering_performant_code.chapter_06.recursive_bst import RecursiveBST
+from mastering_performant_code.chapter_06.bst_node import BSTNode
 
 
 class TestRecursiveBST:

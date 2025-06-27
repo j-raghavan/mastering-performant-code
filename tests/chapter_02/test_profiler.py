@@ -10,7 +10,7 @@ import time
 from unittest.mock import patch, MagicMock
 from typing import Dict, List, Any
 
-from chapter_02.profiler import (
+from mastering_performant_code.chapter_02.profiler import (
     PerformanceProfiler,
     MemoryProfiler,
     ComplexityAnalyzer,

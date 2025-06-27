@@ -11,7 +11,7 @@ import os
 import json
 from typing import Dict, Any
 
-from chapter_01.config_manager import ConfigurationManager, ConfigItem
+from mastering_performant_code.chapter_01.config_manager import ConfigurationManager, ConfigItem
 
 class TestConfigurationManager(unittest.TestCase):
     """Test cases for ConfigurationManager implementation."""
@@ -273,7 +273,7 @@ class TestConfigurationManagerEdgeCases(unittest.TestCase):
     """Edge case tests for ConfigurationManager."""
     
     def setUp(self):
-        from chapter_01.config_manager import ConfigurationManager
+        from mastering_performant_code.chapter_01.config_manager import ConfigurationManager
         self.config_mgr = ConfigurationManager()
     
     def test_empty_config_manager(self):

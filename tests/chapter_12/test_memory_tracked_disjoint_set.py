@@ -8,7 +8,7 @@ capabilities.
 import pytest
 from typing import List, Tuple
 
-from chapter_12.memory_tracked_disjoint_set import MemoryTrackedDisjointSet, MemoryInfo
+from mastering_performant_code.chapter_12.memory_tracked_disjoint_set import MemoryTrackedDisjointSet, MemoryInfo
 
 
 class TestMemoryInfo:

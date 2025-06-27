@@ -10,7 +10,7 @@ import time
 from typing import List, Set
 from unittest.mock import patch
 
-from chapter_10.autocomplete import ProductionAutocomplete, FuzzyMatcher, Suggestion
+from mastering_performant_code.chapter_10.autocomplete import ProductionAutocomplete, FuzzyMatcher, Suggestion
 
 class TestFuzzyMatcher(unittest.TestCase):
     """Test cases for the FuzzyMatcher class."""

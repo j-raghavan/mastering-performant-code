@@ -7,7 +7,7 @@ to ensure 100% code coverage and correct functionality.
 
 import pytest
 from typing import List
-from chapter_03.dynamic_array import (
+from mastering_performant_code.chapter_03.dynamic_array import (
     DynamicArray,
     AdvancedDynamicArray,
     ProductionDynamicArray,

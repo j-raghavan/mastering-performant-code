@@ -1,5 +1,5 @@
 import unittest
-from chapter_16.object_pool import ObjectPool, PooledObject
+from mastering_performant_code.chapter_16.object_pool import ObjectPool, PooledObject
 
 class TestObjectPool(unittest.TestCase):
     def setUp(self):

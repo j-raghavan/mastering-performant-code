@@ -8,7 +8,7 @@ including frequency tracking, ranking, and suggestion generation.
 import unittest
 from typing import List
 
-from chapter_10.autocomplete import AutocompleteSystem
+from mastering_performant_code.chapter_10.autocomplete import AutocompleteSystem
 
 class TestAutocompleteSystem(unittest.TestCase):
     """Test cases for AutocompleteSystem implementation."""

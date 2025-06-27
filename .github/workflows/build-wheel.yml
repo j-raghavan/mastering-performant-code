@@ -45,21 +45,7 @@ jobs:
     
     - name: Verify wheel contents
       run: |
-        # List wheel contents to verify src and tests are included
-        python -c "
-        import zipfile
-        import glob
-        
-        wheels = glob.glob('dist/*.whl')
-        if wheels:
-            with zipfile.ZipFile(wheels[0], 'r') as wheel:
-                files = wheel.namelist()
-                src_files = [f for f in files if f.startswith('src/')]
-                test_files = [f for f in files if f.startswith('tests/')]
-                print(f'Wheel contains {len(src_files)} src files and {len(test_files)} test files')
-                print('Sample src files:', src_files[:5])
-                print('Sample test files:', test_files[:5])
-        "
+        python check_wheel.py
     
     - name: Upload wheel artifacts
       uses: actions/upload-artifact@v4
@@ -73,11 +59,6 @@ jobs:
         pip install dist/*.whl
         python -c "import mastering_performant_code; print('Successfully imported mastering_performant_code package')"
     
-    - name: Run tests from installed wheel
-      run: |
-        pip install pytest pytest-cov
-        python -c "import site, os, subprocess, sys; site_packages = site.getsitepackages()[0]; tests_dir = os.path.join(site_packages, 'tests'); print(f'Tests directory: {tests_dir}'); result = subprocess.run([sys.executable, '-m', 'pytest', tests_dir, '-v', '--tb=short']) if os.path.exists(tests_dir) else print('Tests directory not found in installed package'); exit(result.returncode) if os.path.exists(tests_dir) else exit(1)"
-
   build-sdist:
     runs-on: ubuntu-latest
     

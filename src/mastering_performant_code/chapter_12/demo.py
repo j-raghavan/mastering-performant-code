@@ -8,12 +8,12 @@ for the Union-Find implementations.
 import timeit
 from typing import Dict, List, Optional, Tuple
 
-from chapter_12.disjoint_set import DisjointSet
-from chapter_12.optimized_disjoint_set import OptimizedDisjointSet
-from chapter_12.memory_tracked_disjoint_set import MemoryTrackedDisjointSet
-from chapter_12.network_connectivity import NetworkConnectivity
-from chapter_12.image_segmentation import ImageSegmentation
-from chapter_12.analyzer import UnionFindAnalyzer
+from .disjoint_set import DisjointSet
+from .optimized_disjoint_set import OptimizedDisjointSet
+from .memory_tracked_disjoint_set import MemoryTrackedDisjointSet
+from .network_connectivity import NetworkConnectivity
+from .image_segmentation import ImageSegmentation
+from .analyzer import UnionFindAnalyzer
 
 
 def benchmark_comparison():

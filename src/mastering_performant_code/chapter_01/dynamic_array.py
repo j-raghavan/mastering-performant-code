@@ -30,7 +30,7 @@ Memory Layout:
 """
 
 from typing import TypeVar, Generic, Optional, Iterator
-from chapter_01.analyzer import MemoryInfo
+from .analyzer import MemoryInfo
 
 T = TypeVar('T')
 

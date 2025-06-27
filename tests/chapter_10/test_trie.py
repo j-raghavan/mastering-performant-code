@@ -10,7 +10,7 @@ import timeit
 from typing import List
 
 # Add the project root to the path for imports
-from chapter_10.trie import Trie, TrieNode
+from mastering_performant_code.chapter_10.trie import Trie, TrieNode
 
 class TestTrieNode(unittest.TestCase):
     """Test cases for TrieNode implementation."""

@@ -9,7 +9,7 @@ import pytest
 import random
 from typing import List
 
-from chapter_02.algorithms import (
+from mastering_performant_code.chapter_02.algorithms import (
     sum_builtin, sum_loop, sum_comprehension, sum_generator, sum_formula,
     fibonacci_recursive, fibonacci_iterative, fibonacci_memoized, fibonacci_dynamic,
     slow_function, optimized_function,

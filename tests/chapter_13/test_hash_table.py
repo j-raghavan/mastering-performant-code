@@ -1,5 +1,5 @@
 import pytest
-from chapter_13.hash_table import (
+from mastering_performant_code.chapter_13.hash_table import (
     SeparateChainingHashTable,
     LinearProbingHashTable,
     QuadraticProbingHashTable,

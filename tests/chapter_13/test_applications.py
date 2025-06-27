@@ -4,14 +4,14 @@ Tests for real-world hash table applications.
 
 import pytest
 import time
-from chapter_13.applications import (
+from mastering_performant_code.chapter_13.applications import (
     LRUCache,
     SymbolTable,
     DatabaseIndex,
     WordFrequencyCounter,
     SpellChecker
 )
-from chapter_13.hash_table import (
+from mastering_performant_code.chapter_13.hash_table import (
     SeparateChainingHashTable,
     LinearProbingHashTable,
     QuadraticProbingHashTable,
@@ -417,7 +417,7 @@ class TestSpellChecker:
 
 def test_demonstrate_applications():
     """Test the demonstration function runs without errors."""
-    from chapter_13.applications import demonstrate_applications
+    from mastering_performant_code.chapter_13.applications import demonstrate_applications
     
     # This should run without raising exceptions
     try:

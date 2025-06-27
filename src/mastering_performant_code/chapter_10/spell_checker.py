@@ -6,7 +6,7 @@ with basic suggestion capabilities.
 """
 
 from typing import List, Optional, Tuple
-from chapter_10.trie import Trie
+from .trie import Trie
 
 class SpellChecker:
     """

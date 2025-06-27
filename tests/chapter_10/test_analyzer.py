@@ -10,9 +10,9 @@ import timeit
 from typing import List
 
 # Add the project root to the path for imports
-from chapter_10.analyzer import TrieAnalyzer, TrieStats
-from chapter_10.trie import Trie
-from chapter_10.compressed_trie import CompressedTrie
+from mastering_performant_code.chapter_10.analyzer import TrieAnalyzer, TrieStats
+from mastering_performant_code.chapter_10.trie import Trie
+from mastering_performant_code.chapter_10.compressed_trie import CompressedTrie
 
 class TestTrieStats(unittest.TestCase):
     """Test cases for TrieStats dataclass."""

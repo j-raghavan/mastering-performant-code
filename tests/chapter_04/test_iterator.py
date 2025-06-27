@@ -8,8 +8,8 @@ ensuring 100% code coverage and testing all edge cases.
 import pytest
 from typing import List
 
-from chapter_04.iterator import LinkedListIterator, IteratorState
-from chapter_04.doubly_linked_list import DoublyLinkedList
+from mastering_performant_code.chapter_04.iterator import LinkedListIterator, IteratorState
+from mastering_performant_code.chapter_04.doubly_linked_list import DoublyLinkedList
 
 
 class TestLinkedListIterator:
@@ -530,8 +530,8 @@ class TestChainableIterator:
     
     def setup_method(self):
         """Set up test data."""
-        from chapter_04.doubly_linked_list import DoublyLinkedList
-        from chapter_04.iterator import ChainableIterator
+        from mastering_performant_code.chapter_04.doubly_linked_list import DoublyLinkedList
+        from mastering_performant_code.chapter_04.iterator import ChainableIterator
         
         self.dll = DoublyLinkedList()
         for i in range(10):
@@ -540,7 +540,7 @@ class TestChainableIterator:
     
     def test_filter_chaining(self):
         """Test filter method chaining."""
-        from chapter_04.iterator import ChainableIterator
+        from mastering_performant_code.chapter_04.iterator import ChainableIterator
         
         # Create a new iterator with filter
         filtered_iter = ChainableIterator(self.dll).filter(lambda x: x % 2 == 0)
@@ -551,7 +551,7 @@ class TestChainableIterator:
     
     def test_map_chaining(self):
         """Test map method chaining."""
-        from chapter_04.iterator import ChainableIterator
+        from mastering_performant_code.chapter_04.iterator import ChainableIterator
         
         # Create a new iterator with map
         mapped_iter = ChainableIterator(self.dll).map(lambda x: x * 2)
@@ -562,7 +562,7 @@ class TestChainableIterator:
     
     def test_take_chaining(self):
         """Test take method chaining."""
-        from chapter_04.iterator import ChainableIterator
+        from mastering_performant_code.chapter_04.iterator import ChainableIterator
         
         # Create a new iterator with take
         taken_iter = ChainableIterator(self.dll).take(5)
@@ -573,7 +573,7 @@ class TestChainableIterator:
     
     def test_multiple_chaining(self):
         """Test multiple method chaining."""
-        from chapter_04.iterator import ChainableIterator
+        from mastering_performant_code.chapter_04.iterator import ChainableIterator
         
         # Chain multiple operations
         chained_iter = (ChainableIterator(self.dll)
@@ -586,7 +586,7 @@ class TestChainableIterator:
     
     def test_filter_with_predicate(self):
         """Test filter with custom predicate."""
-        from chapter_04.iterator import ChainableIterator
+        from mastering_performant_code.chapter_04.iterator import ChainableIterator
         
         # Filter numbers greater than 5
         filtered_iter = ChainableIterator(self.dll).filter(lambda x: x > 5)
@@ -596,7 +596,7 @@ class TestChainableIterator:
     
     def test_map_with_transform(self):
         """Test map with custom transformation."""
-        from chapter_04.iterator import ChainableIterator
+        from mastering_performant_code.chapter_04.iterator import ChainableIterator
         
         # Transform to strings
         mapped_iter = ChainableIterator(self.dll).map(lambda x: f"num_{x}")
@@ -607,7 +607,7 @@ class TestChainableIterator:
     
     def test_take_zero(self):
         """Test take with zero elements."""
-        from chapter_04.iterator import ChainableIterator
+        from mastering_performant_code.chapter_04.iterator import ChainableIterator
         
         taken_iter = ChainableIterator(self.dll).take(0)
         result = list(taken_iter)
@@ -615,7 +615,7 @@ class TestChainableIterator:
     
     def test_take_more_than_available(self):
         """Test take with more elements than available."""
-        from chapter_04.iterator import ChainableIterator
+        from mastering_performant_code.chapter_04.iterator import ChainableIterator
         
         taken_iter = ChainableIterator(self.dll).take(15)
         result = list(taken_iter)
@@ -623,8 +623,8 @@ class TestChainableIterator:
     
     def test_empty_list_chaining(self):
         """Test chaining on empty list."""
-        from chapter_04.doubly_linked_list import DoublyLinkedList
-        from chapter_04.iterator import ChainableIterator
+        from mastering_performant_code.chapter_04.doubly_linked_list import DoublyLinkedList
+        from mastering_performant_code.chapter_04.iterator import ChainableIterator
         
         empty_dll = DoublyLinkedList()
         chained_iter = (ChainableIterator(empty_dll)
@@ -637,7 +637,7 @@ class TestChainableIterator:
     
     def test_iterator_reuse(self):
         """Test that chained iterators are properly exhausted after use."""
-        from chapter_04.iterator import ChainableIterator
+        from mastering_performant_code.chapter_04.iterator import ChainableIterator
         
         # Create chained iterator
         chained_iter = ChainableIterator(self.dll).filter(lambda x: x % 2 == 0)

@@ -9,7 +9,7 @@ import unittest
 import timeit
 from typing import Set
 
-from chapter_01.simple_set import SimpleSet
+from mastering_performant_code.chapter_01.simple_set import SimpleSet
 
 class TestSimpleSet(unittest.TestCase):
     """Test cases for SimpleSet implementation."""

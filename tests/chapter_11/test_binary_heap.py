@@ -9,7 +9,7 @@ import pytest
 import random
 import timeit
 from typing import List, Optional
-from chapter_11.binary_heap import BinaryHeap, HeapNode
+from mastering_performant_code.chapter_11.binary_heap import BinaryHeap, HeapNode
 
 
 class TestHeapNode:

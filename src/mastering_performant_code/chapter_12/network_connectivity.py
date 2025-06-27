@@ -6,7 +6,7 @@ network connectivity analysis and social network analysis.
 """
 
 from typing import Dict, List, Optional, Tuple, Set
-from chapter_12.optimized_disjoint_set import OptimizedDisjointSet
+from .optimized_disjoint_set import OptimizedDisjointSet
 
 
 class NetworkConnectivity:

@@ -10,7 +10,7 @@ import os
 import tempfile
 import json
 
-from chapter_07.database_index import DatabaseIndex
+from mastering_performant_code.chapter_07.database_index import DatabaseIndex
 
 class TestDatabaseIndex:
     """Test cases for DatabaseIndex class."""

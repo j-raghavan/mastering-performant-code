@@ -8,8 +8,8 @@ ensuring 100% code coverage and testing all edge cases.
 import pytest
 from typing import List
 
-from chapter_04.singly_linked_list import SinglyLinkedList
-from chapter_04.nodes import SinglyNode
+from mastering_performant_code.chapter_04.singly_linked_list import SinglyLinkedList
+from mastering_performant_code.chapter_04.nodes import SinglyNode
 
 
 class TestSinglyLinkedList:

@@ -8,7 +8,7 @@ classes, ensuring 100% code coverage and correct behavior.
 import pytest
 import random
 from typing import List
-from chapter_05.skip_list import SkipList, SkipListWithStats, SkipListNode
+from mastering_performant_code.chapter_05.skip_list import SkipList, SkipListWithStats, SkipListNode
 
 
 class TestSkipListNode:

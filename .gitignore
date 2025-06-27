@@ -194,7 +194,7 @@ cython_debug/
 .cursorindexingignore
 
 # Node.js
-node_modules/
+web_companion/node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

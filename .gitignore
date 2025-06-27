@@ -193,6 +193,96 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.yarn-integrity
+.pnpm-debug.log*
+
+# Node.js build outputs
+dist/
+build/
+.next/
+.nuxt/
+.vuepress/dist
+.serverless/
+.fusebox/
+.dynamodb/
+
+# Node.js environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Node.js coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Node.js nyc test coverage
+.nyc_output
+
+# Node.js dependency directories
+jspm_packages/
+
+# Node.js optional npm cache directory
+.npm
+
+# Node.js optional eslint cache
+.eslintcache
+
+# Node.js microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Node.js optional REPL history
+.node_repl_history
+
+# Node.js output of 'npm pack'
+*.tgz
+
+# Node.js Yarn Integrity file
+.yarn-integrity
+
+# Node.js parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Node.js next.js build output
+.next
+
+# Node.js nuxt.js build output
+.nuxt
+
+# Node.js vuepress build output
+.vuepress/dist
+
+# Node.js serverless directories
+.serverless/
+
+# Node.js FuseBox cache
+.fusebox/
+
+# Node.js DynamoDB Local files
+.dynamodb/
+
+# Node.js TernJS port file
+.tern-port
+
+# Node.js stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# Node.js yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
 
 # DEVPLAN
 devplan.md

@@ -5,7 +5,6 @@ This module provides tools to analyze the performance characteristics
 of binary heaps and compare with Python's heapq module.
 """
 
-import sys
 import timeit
 import random
 from typing import TypeVar, Generic, Optional, List, Callable, Any, Dict, Tuple
@@ -328,3 +327,32 @@ heap.heapify_bottom_up(items)
         report.append("")
         
         return "\n".join(report) 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running analyzer demonstration...")
+    print("=" * 50)
+
+    # Create instance of PerformanceMetrics
+    try:
+        instance = PerformanceMetrics()
+        print(f"✓ Created PerformanceMetrics instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating PerformanceMetrics instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

@@ -5,11 +5,11 @@ This module provides tools for analyzing memory usage and identifying
 optimization opportunities using only built-in Python modules.
 """
 
-import sys
 import tracemalloc
 import gc
 import timeit
 import threading
+import sys
 from typing import Any, Dict, List, Tuple, Optional, Callable
 from dataclasses import dataclass
 from contextlib import contextmanager

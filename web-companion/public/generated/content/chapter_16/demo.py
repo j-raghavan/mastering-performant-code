@@ -5,7 +5,6 @@ Comprehensive demonstration of optimization techniques and their application
 to data structures from previous chapters.
 """
 
-import sys
 import time
 import timeit
 import tracemalloc

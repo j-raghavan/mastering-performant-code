@@ -14,25 +14,37 @@ AGGRESSIVELY OPTIMIZED VERSION: Reduced memory usage by ~60% for stability
 Memory limit: ~40% of original usage
 """
 
-import sys
 import time
 import json
 import os
 import gc
-import psutil
 from typing import Dict, List, Any
 
-# Import our implementations
-from src.chapter_01.dynamic_array import DynamicArray, MemoryTrackedDynamicArray
-from src.chapter_01.hash_table import HashTable, MemoryTrackedHashTable
-from src.chapter_01.simple_set import SimpleSet
-from src.chapter_01.config_manager import ConfigurationManager, LoggingConfigObserver, ValidationConfigObserver
-from src.chapter_01.analyzer import BuiltinAnalyzer, MemoryInfo, PerformanceInfo
+# Lazy imports to reduce initial memory footprint
+_imports_cache = {}
+
+def get_import(module_name: str):
+    """Lazy import with caching to reduce memory usage."""
+    if module_name not in _imports_cache:
+        if module_name == "psutil":
+            try:
+                import psutil
+                _imports_cache[module_name] = psutil
+            except ImportError:
+                _imports_cache[module_name] = None
+        # Add other imports as needed
+    return _imports_cache[module_name]
 
 def get_memory_usage():
-    """Get current memory usage in MB."""
-    process = psutil.Process()
-    return process.memory_info().rss / 1024 / 1024
+    """Get current memory usage in MB with fallback."""
+    psutil = get_import("psutil")
+    if psutil:
+        try:
+            process = psutil.Process()
+            return process.memory_info().rss / 1024 / 1024
+        except:
+            return 0.0
+    return 0.0
 
 def print_section(title: str):
     """Print a formatted section header."""

@@ -10,7 +10,7 @@ class Logger {
         ERROR: 3
     };
 
-    static currentLevel = Logger.LEVELS.INFO;
+    static currentLevel = Logger.LEVELS.WARN;
 
     static setLevel(level) {
         Logger.currentLevel = level;
@@ -20,7 +20,12 @@ class Logger {
         const timestamp = new Date().toISOString();
         const levelName = Object.keys(Logger.LEVELS).find(key => Logger.LEVELS[key] === level);
 
-        let formatted = `[${timestamp}] ${levelName}: ${message}`;
+        let formatted = '';
+        if (level >= Logger.LEVELS.WARN) {
+            formatted = `[${timestamp}] ${levelName}: ${message}`;
+        } else {
+            formatted = `${levelName}: ${message}`;
+        }
 
         if (data) {
             if (typeof data === 'object') {

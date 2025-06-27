@@ -149,7 +149,17 @@ class AppLayout {
         // Update chapter title in layout
         const titleElement = this.container.querySelector('.chapter-title');
         if (titleElement) {
-            titleElement.textContent = chapter.title;
+            // Create a more descriptive title for display
+            let displayTitle = chapter.title;
+            if (chapter.description) {
+                displayTitle = `Chapter ${chapter.number}: ${chapter.description}`;
+            } else if (chapter.title && chapter.title !== `Chapter ${chapter.number}`) {
+                displayTitle = chapter.title;
+            } else {
+                displayTitle = `Chapter ${chapter.number}`;
+            }
+
+            titleElement.textContent = displayTitle;
         }
 
         // Update progress if available

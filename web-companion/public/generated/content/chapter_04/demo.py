@@ -6,8 +6,8 @@ including performance benchmarks, memory analysis, and real-world usage examples
 """
 
 import timeit
-import sys
 from typing import List, Dict
+import sys
 
 from .singly_linked_list import SinglyLinkedList
 from .doubly_linked_list import DoublyLinkedList
@@ -357,14 +357,14 @@ def benchmark_linked_lists():
         # Singly linked list append
         singly_append = timeit.timeit(
             f"lst.append(i) for i in range({size})",
-            setup="from src.chapter_04 import SinglyLinkedList; lst = SinglyLinkedList()",
+            setup="from chapter_04 import SinglyLinkedList; lst = SinglyLinkedList()",
             number=1
         )
         
         # Doubly linked list append
         doubly_append = timeit.timeit(
             f"lst.append(i) for i in range({size})",
-            setup="from src.chapter_04 import DoublyLinkedList; lst = DoublyLinkedList()",
+            setup="from chapter_04 import DoublyLinkedList; lst = DoublyLinkedList()",
             number=1
         )
         
@@ -386,14 +386,14 @@ def benchmark_linked_lists():
         # Singly linked list prepend
         singly_prepend = timeit.timeit(
             f"lst.prepend(i) for i in range({size})",
-            setup="from src.chapter_04 import SinglyLinkedList; lst = SinglyLinkedList()",
+            setup="from chapter_04 import SinglyLinkedList; lst = SinglyLinkedList()",
             number=1
         )
         
         # Doubly linked list prepend
         doubly_prepend = timeit.timeit(
             f"lst.prepend(i) for i in range({size})",
-            setup="from src.chapter_04 import DoublyLinkedList; lst = DoublyLinkedList()",
+            setup="from chapter_04 import DoublyLinkedList; lst = DoublyLinkedList()",
             number=1
         )
         
@@ -415,14 +415,14 @@ def benchmark_linked_lists():
         # Singly linked list access
         singly_access = timeit.timeit(
             "lst.get_at_index(500)",
-            setup=f"from src.chapter_04 import SinglyLinkedList; lst = SinglyLinkedList(); [lst.append(i) for i in range({size})]",
+            setup=f"from chapter_04 import SinglyLinkedList; lst = SinglyLinkedList(); [lst.append(i) for i in range({size})]",
             number=10000
         )
         
         # Doubly linked list access
         doubly_access = timeit.timeit(
             "lst.get_at_index(500)",
-            setup=f"from src.chapter_04 import DoublyLinkedList; lst = DoublyLinkedList(); [lst.append(i) for i in range({size})]",
+            setup=f"from chapter_04 import DoublyLinkedList; lst = DoublyLinkedList(); [lst.append(i) for i in range({size})]",
             number=10000
         )
         

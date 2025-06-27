@@ -8,13 +8,13 @@ and shows performance comparisons.
 
 import timeit
 import sys
-from dynamic_array import (
+from .dynamic_array import (
     DynamicArray,
     AdvancedDynamicArray,
     ProductionDynamicArray,
     GrowthStrategy
 )
-from applications import TextBuffer, SimpleDatabase, CircularBuffer
+from .applications import TextBuffer, SimpleDatabase, CircularBuffer
 
 
 def demo_basic_dynamic_array():

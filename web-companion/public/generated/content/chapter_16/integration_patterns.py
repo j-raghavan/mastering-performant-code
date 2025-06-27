@@ -13,7 +13,6 @@ before using this in production systems.
 import importlib
 import importlib.util
 import subprocess
-import sys
 import time
 import threading
 import queue
@@ -21,6 +20,7 @@ import json
 import pickle
 import ast
 import warnings
+import sys
 from typing import Any, Dict, List, Optional, Callable, TypeVar, Generic
 from dataclasses import dataclass
 from pathlib import Path
@@ -329,33 +329,57 @@ class ThreadSafeCache:
         self._cache: Dict[str, Any] = {}
         self._lock = threading.RLock()
         self._access_count: Dict[str, int] = {}
+        self._last_access: Dict[str, float] = {}
     
     def get(self, key: str, default: Any = None) -> Any:
         """Get a value from the cache."""
         with self._lock:
             if key in self._cache:
                 self._access_count[key] = self._access_count.get(key, 0) + 1
+                self._last_access[key] = time.time()
                 return self._cache[key]
             return default
     
     def set(self, key: str, value: Any) -> None:
         """Set a value in the cache."""
         with self._lock:
+            # If key already exists, just update it
+            if key in self._cache:
+                self._cache[key] = value
+                self._access_count[key] = self._access_count.get(key, 0) + 1
+                self._last_access[key] = time.time()
+                return
+            
+            # If cache is full, evict least recently used item
             if len(self._cache) >= self.max_size:
-                # Remove least accessed item
-                least_accessed = min(self._access_count.items(), 
-                                   key=lambda x: x[1])[0]
-                del self._cache[least_accessed]
-                del self._access_count[least_accessed]
+                self._evict_lru_item()
             
             self._cache[key] = value
             self._access_count[key] = 0
+            self._last_access[key] = time.time()
+    
+    def _evict_lru_item(self) -> None:
+        """Evict the least recently used item from the cache."""
+        if not self._cache:
+            return
+        
+        # Find the least recently used item
+        lru_key = min(self._last_access.keys(), 
+                     key=lambda k: self._last_access.get(k, 0))
+        
+        # Remove the item
+        del self._cache[lru_key]
+        if lru_key in self._access_count:
+            del self._access_count[lru_key]
+        if lru_key in self._last_access:
+            del self._last_access[lru_key]
     
     def clear(self) -> None:
         """Clear the cache."""
         with self._lock:
             self._cache.clear()
             self._access_count.clear()
+            self._last_access.clear()
     
     def size(self) -> int:
         """Get the current size of the cache."""

@@ -53,8 +53,8 @@ async function initializeApp() {
 
     Logger.info('✅ Application initialized successfully');
 
-    // Load default chapter (Chapter 1)
-    await app.loadChapter('chapter_01');
+    // Don't automatically load a chapter - let users select from the dropdown
+    // await app.loadChapter('chapter_01');
 
   } catch (error) {
     Logger.error('❌ Failed to initialize application:', error);
@@ -146,11 +146,32 @@ window.addEventListener('beforeunload', () => {
 /**
  * Initialize the application when DOM is ready
  */
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeApp);
-} else {
-  initializeApp();
+function ensureDOMReady() {
+  return new Promise((resolve) => {
+    if (document.readyState === 'complete') {
+      resolve();
+    } else if (document.readyState === 'interactive') {
+      // DOM is parsed but subresources may still be loading
+      document.addEventListener('DOMContentLoaded', resolve, { once: true });
+    } else {
+      // DOM is still loading
+      document.addEventListener('DOMContentLoaded', resolve, { once: true });
+    }
+
+    // Fallback: also listen for load event
+    window.addEventListener('load', resolve, { once: true });
+  });
 }
+
+// Initialize the application when DOM is fully ready
+ensureDOMReady().then(() => {
+  // Add a small delay to ensure all elements are available
+  setTimeout(initializeApp, 100);
+}).catch((error) => {
+  Logger.error('Failed to wait for DOM ready:', error);
+  // Fallback: try to initialize anyway
+  initializeApp();
+});
 
 // Export for debugging
 window.initializeApp = initializeApp; 

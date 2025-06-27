@@ -9,7 +9,6 @@ This module provides comprehensive benchmarking capabilities including:
 - Real-time performance monitoring
 """
 
-import sys
 import timeit
 import tracemalloc
 import random
@@ -19,10 +18,10 @@ from typing import Dict, List, Tuple, Any, Optional
 from dataclasses import dataclass
 from collections import defaultdict
 
-from src.chapter_10.trie import Trie
-from src.chapter_10.compressed_trie import CompressedTrie
-from src.chapter_10.unicode_trie import UnicodeTrie
-from src.chapter_10.autocomplete import AutocompleteSystem
+from .trie import Trie
+from .compressed_trie import CompressedTrie
+from .unicode_trie import UnicodeTrie
+from .autocomplete import AutocompleteSystem
 
 @dataclass
 class BenchmarkResult:

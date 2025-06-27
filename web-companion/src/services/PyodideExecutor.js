@@ -5,6 +5,8 @@
  */
 
 import { Logger } from '../utils/Logger.js';
+import { PackageManager } from './PackageManager.js';
+import { ImportPathResolver } from './ImportPathResolver.js';
 
 // Import loadPyodide from the global scope (loaded via CDN)
 const { loadPyodide } = globalThis;
@@ -17,6 +19,11 @@ class PyodideExecutor {
         this.packages = new Set();
         this.executionQueue = [];
         this.maxExecutionTime = 30000; // 30 seconds
+
+        // Initialize new services
+        this.packageManager = new PackageManager();
+        this.importPathResolver = new ImportPathResolver();
+        this.packageInstalled = false;
     }
 
     /**
@@ -55,6 +62,9 @@ class PyodideExecutor {
 
             Logger.info('✅ Pyodide loaded successfully');
 
+            // Expose globally for retry button
+            window.pyodideExecutor = this;
+
             // Check Python version
             const pythonVersion = await this.pyodide.runPythonAsync(`
 import sys
@@ -65,6 +75,9 @@ sys.version
 
             // Setup Python environment
             await this.setupPythonEnvironment();
+
+            // Always install the mastering_performant_code package automatically
+            await this.installMasteringPerformantCode();
 
             this.isInitialized = true;
             Logger.info('✅ Pyodide initialization completed');
@@ -87,6 +100,34 @@ Original error: ${error.message}`);
             throw error;
         } finally {
             this.isInitializing = false;
+        }
+    }
+
+    /**
+     * Install the mastering_performant_code package
+     */
+    async installMasteringPerformantCode() {
+        try {
+            Logger.info('📦 Installing mastering_performant_code package...');
+
+            // Set up progress callback
+            this.packageManager.setProgressCallback((progress) => {
+                Logger.info(`Package installation progress: ${progress.status} - ${progress.percentage}%`);
+            });
+
+            // Install the package
+            const success = await this.packageManager.installPackage(this.pyodide);
+
+            if (success) {
+                this.packageInstalled = true;
+                Logger.info('✅ mastering_performant_code package installed successfully');
+            } else {
+                Logger.warn('⚠️ mastering_performant_code package installation failed, but continuing...');
+            }
+
+        } catch (error) {
+            Logger.error('❌ Failed to install mastering_performant_code package:', error);
+            // Don't throw error - allow execution to continue without the package
         }
     }
 
@@ -114,16 +155,32 @@ print("Python environment ready!")
     }
 
     /**
-     * Execute Python code
+     * Execute Python code with import transformation
      */
     async execute(code, options = {}) {
         if (!this.isInitialized) {
-            await this.initialize();
+            throw new Error('PyodideExecutor not initialized');
+        }
+
+        let transformedCode = code;
+        let transformationInfo = null;
+
+        // Apply import transformation if package is installed
+        if (this.packageInstalled) {
+            const transformation = this.importPathResolver.transformCode(code);
+            transformedCode = transformation.transformedCode;
+            transformationInfo = transformation;
+
+            // Check if there were any transformations
+            if (transformation.diagnostics && transformation.diagnostics.transformations.length > 0) {
+                const transformationCount = transformation.diagnostics.transformations.reduce((sum, t) => sum + t.count, 0);
+                Logger.info(`Applied ${transformationCount} import transformations`);
+            }
         }
 
         // Patch to define __file__ if not present
         const filePatch = `\ntry:\n    __file__\nexcept NameError:\n    __file__ = '<pyodide>'\n`;
-        const patchedCode = filePatch + '\n' + code;
+        const patchedCode = filePatch + '\n' + transformedCode;
 
         const executionOptions = {
             timeout: this.maxExecutionTime,
@@ -139,7 +196,8 @@ print("Python environment ready!")
             error: null,
             executionTime: 0,
             memoryUsage: null,
-            warnings: []
+            warnings: [],
+            transformationInfo: transformationInfo
         };
 
         try {
@@ -195,6 +253,80 @@ sys.stderr = sys.__stderr__
         }
 
         return executionResult;
+    }
+
+    /**
+     * Transform imports and execute code
+     */
+    async transformAndExecute(code, options = {}) {
+        try {
+            // Transform import statements
+            const transformationResult = this.importPathResolver.transformCode(code);
+            const { transformedCode, diagnostics } = transformationResult;
+
+            // Only log if there were actual transformations
+            if (diagnostics.transformations.length > 0) {
+                Logger.debug(`[PyodideExecutor] Applied ${diagnostics.transformations.length} import transformations`);
+            }
+
+            // Execute the transformed code
+            const result = await this.execute(transformedCode, options);
+
+            // Add import diagnostics to result
+            return {
+                ...result,
+                importDiagnostics: diagnostics
+            };
+
+        } catch (error) {
+            Logger.error('Transform and execute failed:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Get import diagnostics for code without executing
+     */
+    getImportDiagnostics(code) {
+        if (!this.packageInstalled) {
+            return {
+                transformations: [],
+                warnings: ['Package not installed - no transformations applied'],
+                errors: []
+            };
+        }
+
+        const transformation = this.importPathResolver.transformCode(code);
+        const validation = this.importPathResolver.validateTransformation(code, transformation.transformedCode);
+
+        return {
+            transformations: transformation.diagnostics.transformations || [],
+            warnings: [...(transformation.diagnostics.warnings || []), ...(validation.warnings || [])],
+            errors: [...(transformation.diagnostics.errors || []), ...(validation.errors || [])],
+            originalCode: code,
+            transformedCode: transformation.transformedCode
+        };
+    }
+
+    /**
+     * Verify package installation
+     */
+    async verifyPackageInstallation() {
+        if (!this.packageInstalled) {
+            return false;
+        }
+
+        try {
+            const result = await this.pyodide.runPythonAsync(`
+import mastering_performant_code
+print(f"Package version: {mastering_performant_code.__version__}")
+True
+            `);
+            return result === true;
+        } catch (error) {
+            Logger.error('Package verification failed:', error);
+            return false;
+        }
     }
 
     /**
@@ -306,6 +438,11 @@ gc.collect()
                 `);
             }
 
+            // Reset services
+            this.packageManager.reset();
+            this.importPathResolver.resetStats();
+            this.packageInstalled = false;
+
             Logger.info('✅ Pyodide environment reset completed');
         } catch (error) {
             Logger.error('❌ Failed to reset Pyodide environment:', error);
@@ -344,7 +481,25 @@ sys.version
      * Get installed packages
      */
     getInstalledPackages() {
-        return Array.from(this.packages);
+        const packages = Array.from(this.packages);
+        if (this.packageInstalled) {
+            packages.push('mastering_performant_code');
+        }
+        return packages;
+    }
+
+    /**
+     * Get package manager instance
+     */
+    getPackageManager() {
+        return this.packageManager;
+    }
+
+    /**
+     * Get import resolver instance
+     */
+    getImportResolver() {
+        return this.importPathResolver;
     }
 }
 

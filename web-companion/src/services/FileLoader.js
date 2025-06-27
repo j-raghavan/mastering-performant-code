@@ -154,8 +154,11 @@ class FileLoader {
 
     /**
      * Get files organized for display
+     * @param {Object} options - Options for display
+     * @param {boolean} options.includeTests - Whether to include test files (default: false)
      */
-    getFilesForDisplay() {
+    getFilesForDisplay(options = {}) {
+        const { includeTests = false } = options;
         const files = this.getAllFiles();
         const organized = {
             'src': [],
@@ -174,7 +177,10 @@ class FileLoader {
             if (file.category === 'demo') {
                 organized.demos.push(file);
             } else if (file.category === 'test') {
-                organized.tests.push(file);
+                if (includeTests) {
+                    organized.tests.push(file);
+                }
+                // Otherwise, skip test files
             } else {
                 // All other files (implementation, analyzer, benchmark, config, etc.) go to src
                 organized.src.push(file);
@@ -193,21 +199,21 @@ class FileLoader {
             });
         }
 
-        // Add TESTS section if it has files
-        if (organized.tests.length > 0) {
-            result.push({
-                category: 'tests',
-                displayName: 'Test Files',
-                files: organized.tests.sort((a, b) => a.name.localeCompare(b.name))
-            });
-        }
-
         // Add DEMOS section if it has files
         if (organized.demos.length > 0) {
             result.push({
                 category: 'demos',
                 displayName: 'Demo Files',
                 files: organized.demos.sort((a, b) => a.name.localeCompare(b.name))
+            });
+        }
+
+        // Optionally add TESTS section if requested
+        if (includeTests && organized.tests.length > 0) {
+            result.push({
+                category: 'tests',
+                displayName: 'Test Files',
+                files: organized.tests.sort((a, b) => a.name.localeCompare(b.name))
             });
         }
 

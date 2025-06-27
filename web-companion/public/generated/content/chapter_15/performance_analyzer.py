@@ -7,7 +7,6 @@ various workloads and configurations.
 """
 
 import timeit
-import sys
 import random
 import time
 from typing import List, Dict, Any, Callable, Tuple

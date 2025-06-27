@@ -176,8 +176,12 @@ class CountingBloomFilter:
         is_completely_removed = all(self.counter_array[pos] == 0 for pos in positions)
         
         # Only decrement element count if this completely removes the item
+        # However, due to hash collisions, we need to be more careful
+        # We'll use a heuristic: if the item is no longer detectable, we assume it's removed
         if is_completely_removed:
-            self.element_count = max(0, self.element_count - 1)
+            # Double-check that the item is actually not detectable anymore
+            if not self.contains(item):
+                self.element_count = max(0, self.element_count - 1)
         
         return True
     
@@ -302,3 +306,32 @@ class CountingBloomFilter:
                 f"(load factor: {stats['load_factor']:.2%}, "
                 f"FPR: {self.get_false_positive_rate():.4f}, "
                 f"overflow risk: {self.get_overflow_risk():.2%})") 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running counting_bloom_filter demonstration...")
+    print("=" * 50)
+
+    # Create instance of CountingBloomFilter
+    try:
+        instance = CountingBloomFilter()
+        print(f"✓ Created CountingBloomFilter instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating CountingBloomFilter instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

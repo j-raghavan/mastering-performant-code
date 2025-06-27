@@ -386,3 +386,32 @@ class UndoRedoSystem(Generic[T]):
             self._history._head_sentinel.next.prev = self._history._head_sentinel
             self._history._size -= 1
             self._current_position = max(-1, self._current_position - 1) 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running undo_redo demonstration...")
+    print("=" * 50)
+
+    # Create instance of Action
+    try:
+        instance = Action()
+        print(f"✓ Created Action instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating Action instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

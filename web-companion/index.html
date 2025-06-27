@@ -173,8 +173,23 @@
 
         .file-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .file-column {
+            display: flex;
+            flex-direction: column;
             gap: 10px;
+        }
+
+        .file-column:first-child {
+            /* Left column with all files */
+        }
+
+        .file-column:last-child {
+            /* Right column with single description */
+            justify-content: flex-start;
         }
 
         .file-item {
@@ -194,6 +209,11 @@
             border-color: #d1d5db;
         }
 
+        .file-item.active {
+            background: #dbeafe;
+            border-color: #3b82f6;
+        }
+
         .file-name {
             font-weight: 500;
             color: #374151;
@@ -202,6 +222,31 @@
         .file-size {
             font-size: 0.875rem;
             color: #6b7280;
+        }
+
+        .file-description {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 20px;
+            min-height: 200px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .file-description-content {
+            font-size: 0.875rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .file-description.empty {
+            color: #9ca3af;
+            font-style: italic;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         /* Editor Section */
@@ -429,6 +474,18 @@
                 grid-template-columns: 1fr;
             }
 
+            .file-column:first-child {
+                order: 1;
+            }
+
+            .file-column:last-child {
+                order: 2;
+            }
+
+            .file-description {
+                min-height: 150px;
+            }
+
             .editor-controls {
                 flex-direction: column;
             }
@@ -461,6 +518,28 @@
 
             .file-item:hover {
                 background: #4b5563;
+            }
+
+            .file-item.active {
+                background: #1e40af;
+                border-color: #3b82f6;
+            }
+
+            .file-description {
+                background: #374151;
+                border-color: #4b5563;
+            }
+
+            .file-description-content {
+                color: #d1d5db;
+            }
+
+            .file-description.empty {
+                color: #9ca3af;
+            }
+
+            .file-description-content strong {
+                color: #f9fafb;
             }
 
             #codeEditor,
@@ -514,6 +593,18 @@
         <section class="file-explorer-section">
             <h2>📁 Python Files <button onclick="window.app?.fileLoader?.refreshDiscovery()" class="refresh-icon"
                     title="Refresh file discovery">🔄</button></h2>
+
+            <!-- Chapter Selector -->
+            <div style="margin-bottom: 20px;">
+                <label for="chapterSelector"
+                    style="display: block; margin-bottom: 8px; font-weight: 500; color: #374151;">Select
+                    Chapter:</label>
+                <select id="chapterSelector"
+                    style="padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 0.875rem; min-width: 200px;">
+                    <option value="">Loading chapters...</option>
+                </select>
+            </div>
+
             <div id="fileExplorer" class="file-explorer">
                 <div class="loading-placeholder">Loading files...</div>
             </div>
@@ -558,6 +649,9 @@
 
     <!-- Application entry point -->
     <script type="module" src="/src/main.js"></script>
+
+    <!-- Test script for chapter loading -->
+    <script src="/test-chapters.js"></script>
 
     <!-- Service Worker for offline support -->
     <script>

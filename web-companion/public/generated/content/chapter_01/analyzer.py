@@ -18,12 +18,12 @@ The performance differences between built-ins and our implementations are expect
 - Key insight: Understanding the tradeoffs between readability and performance
 """
 
-import sys
 import timeit
 import cProfile
 import pstats
 from typing import List, Dict, Set, Any, Callable
 from dataclasses import dataclass
+import sys
 
 @dataclass
 class MemoryInfo:
@@ -261,3 +261,32 @@ class BuiltinAnalyzer:
                 "set": "Same as dict"
             }
         } 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running analyzer demonstration...")
+    print("=" * 50)
+
+    # Create instance of BuiltinAnalyzer
+    try:
+        instance = BuiltinAnalyzer()
+        print(f"✓ Created BuiltinAnalyzer instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating BuiltinAnalyzer instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

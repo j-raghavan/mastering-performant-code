@@ -7,13 +7,14 @@ and shows performance comparisons.
 """
 
 import timeit
-from dynamic_array import (
+import sys
+from .dynamic_array import (
     DynamicArray,
     AdvancedDynamicArray,
     ProductionDynamicArray,
     GrowthStrategy
 )
-from applications import TextBuffer, SimpleDatabase, CircularBuffer
+from .applications import TextBuffer, SimpleDatabase, CircularBuffer
 
 
 def demo_basic_dynamic_array():
@@ -186,8 +187,6 @@ def demo_performance_comparison():
     print(f"Custom is {custom_time/builtin_time:.2f}x slower")
     
     # Test memory usage
-    import sys
-    
     lst = list(range(1000))
     arr = ProductionDynamicArray[int]()
     for i in range(1000):

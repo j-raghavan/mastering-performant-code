@@ -5,12 +5,11 @@ This module provides tools to analyze the memory usage, performance,
 and characteristics of trie implementations.
 """
 
-import sys
 import timeit
 from typing import List, Dict, Any
 from dataclasses import dataclass
-from src.chapter_10.trie import Trie, TrieNode
-from src.chapter_10.compressed_trie import CompressedTrie, CompressedTrieNode
+from .trie import Trie, TrieNode
+from .compressed_trie import CompressedTrie, CompressedTrieNode
 
 @dataclass
 class TrieStats:
@@ -197,3 +196,32 @@ class TrieAnalyzer:
             'std_memory_bytes': std_trie_nodes * 100,  # Rough estimate
             'compressed_memory_bytes': compressed_trie_nodes * 30  # Rough estimate
         } 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running analyzer demonstration...")
+    print("=" * 50)
+
+    # Create instance of TrieStats
+    try:
+        instance = TrieStats()
+        print(f"✓ Created TrieStats instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating TrieStats instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

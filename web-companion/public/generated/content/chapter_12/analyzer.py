@@ -6,8 +6,9 @@ of Union-Find implementations.
 """
 
 import timeit
+import sys
 from typing import Dict, List, Optional, Tuple, Type
-from src.chapter_12.optimized_disjoint_set import OptimizedDisjointSet
+from .optimized_disjoint_set import OptimizedDisjointSet
 
 
 class UnionFindAnalyzer:
@@ -46,16 +47,16 @@ class UnionFindAnalyzer:
             
             for size in sizes:
                 if operation == "make_set":
-                    setup = f"from src.chapter_12 import {implementation_class.__name__}; ds = {implementation_class.__name__}()"
+                    setup = f"from chapter_12 import {implementation_class.__name__}; ds = {implementation_class.__name__}()"
                     stmt = f"ds.make_set(i) for i in range({size})"
                 elif operation == "find":
-                    setup = f"from src.chapter_12 import {implementation_class.__name__}; ds = {implementation_class.__name__}(); [ds.make_set(i) for i in range({size})]"
+                    setup = f"from chapter_12 import {implementation_class.__name__}; ds = {implementation_class.__name__}(); [ds.make_set(i) for i in range({size})]"
                     stmt = f"ds.find(i) for i in range({size})"
                 elif operation == "union":
-                    setup = f"from src.chapter_12 import {implementation_class.__name__}; ds = {implementation_class.__name__}(); [ds.make_set(i) for i in range({size})]"
+                    setup = f"from chapter_12 import {implementation_class.__name__}; ds = {implementation_class.__name__}(); [ds.make_set(i) for i in range({size})]"
                     stmt = f"ds.union(i, (i+1)%{size}) for i in range({size})"
                 elif operation == "connected":
-                    setup = f"from src.chapter_12 import {implementation_class.__name__}; ds = {implementation_class.__name__}(); [ds.make_set(i) for i in range({size})]; [ds.union(i, (i+1)%{size}) for i in range({size})]"
+                    setup = f"from chapter_12 import {implementation_class.__name__}; ds = {implementation_class.__name__}(); [ds.make_set(i) for i in range({size})]; [ds.union(i, (i+1)%{size}) for i in range({size})]"
                     stmt = f"ds.connected(i, (i+1)%{size}) for i in range({size})"
                 else:
                     continue
@@ -325,8 +326,6 @@ class UnionFindAnalyzer:
             
         Time Complexity: O(len(sizes) * max(sizes))
         """
-        import sys
-        
         memory_data = {
             'sizes': sizes,
             'memory_usage': []
@@ -351,4 +350,33 @@ class UnionFindAnalyzer:
                 # Fallback to basic memory measurement
                 memory_data['memory_usage'].append(sys.getsizeof(ds))
         
-        return memory_data 
+        return memory_data
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running analyzer demonstration...")
+    print("=" * 50)
+
+    # Create instance of UnionFindAnalyzer
+    try:
+        instance = UnionFindAnalyzer()
+        print(f"✓ Created UnionFindAnalyzer instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating UnionFindAnalyzer instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

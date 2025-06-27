@@ -6,8 +6,8 @@ including basic operations, performance analysis, and real-world applications.
 """
 
 import timeit
-import sys
 import random
+import sys
 from typing import List, Dict, Set
 from skip_list import SkipList, SkipListWithStats
 from priority_queue import SkipListPriorityQueue
@@ -201,21 +201,21 @@ def demonstrate_benchmarks():
         # Insert operations
         skip_insert = timeit.timeit(
             f"sl.insert(i) for i in test_data",
-            setup=f"from src.chapter_05 import SkipList; sl = SkipList(); test_data = {test_data}",
+            setup=f"from chapter_05 import SkipList; sl = SkipList(); test_data = {test_data}",
             number=1
         )
         
         # Search operations
         skip_search = timeit.timeit(
             "sl.search(i) for i in range(0, size, 10)",
-            setup=f"from src.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in {test_data}]",
+            setup=f"from chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in {test_data}]",
             number=100
         )
         
         # Delete operations
         skip_delete = timeit.timeit(
             "sl.delete(i) for i in range(0, size, 10)",
-            setup=f"from src.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in {test_data}]",
+            setup=f"from chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in {test_data}]",
             number=1
         )
         
@@ -367,7 +367,7 @@ def demonstrate_range_queries():
             
             range_time = timeit.timeit(
                 f"list(sl.range_query({start}, {end}))",
-                setup=f"from src.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in range({size})]",
+                setup=f"from chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in range({size})]",
                 number=100
             )
             

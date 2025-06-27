@@ -5,7 +5,6 @@ This module contains implementations of dynamic arrays with different growth str
 from basic to production-quality versions.
 """
 
-import sys
 import timeit
 from typing import TypeVar, Generic, Optional, Iterator, List, Any
 from enum import Enum
@@ -526,3 +525,32 @@ class ProductionDynamicArray(Generic[T]):
             'total_removed': self._total_elements_removed,
             'strategy': self._strategy.value
         } 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running dynamic_array demonstration...")
+    print("=" * 50)
+
+    # Create instance of GrowthStrategy
+    try:
+        instance = GrowthStrategy()
+        print(f"✓ Created GrowthStrategy instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating GrowthStrategy instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

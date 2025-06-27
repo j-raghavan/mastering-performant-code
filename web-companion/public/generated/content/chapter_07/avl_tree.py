@@ -318,3 +318,35 @@ class AVLTree(Generic[T]):
     
     def __repr__(self) -> str:
         return f"AVLTree({self.get_sorted_values()})" 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running avl_tree demonstration...")
+    print("=" * 50)
+
+    # Create instance of AVLTree
+    try:
+        instance = AVLTree()
+        print(f"✓ Created AVLTree instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic operations
+        print("Testing basic operations...")
+        instance.insert(5)
+        instance.insert(3)
+        instance.insert(7)
+        print(f"  After inserting elements: {instance}")
+    except Exception as e:
+        print(f"✗ Error creating AVLTree instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

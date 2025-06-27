@@ -5,16 +5,16 @@ This script demonstrates the B-Tree implementation with comprehensive
 examples, performance analysis, and real-world applications.
 """
 
-import sys
 import timeit
 import random
 import math
+import sys
 from typing import List, Dict, Any
 
 # Add the parent directory to the path to import the chapter modules
 sys.path.append('.')
 
-from src.chapter_09 import (
+from chapter_09 import (
     BTree, BTreeNode, BTreeAnalyzer, BTreeStats,
     DatabaseIndex, IndexEntry, MultiValueIndex, TimestampedIndex,
     b_tree_height_analysis

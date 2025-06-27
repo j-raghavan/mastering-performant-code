@@ -5,8 +5,8 @@ This module provides tools to analyze the performance and memory
 characteristics of BST implementations.
 """
 
-import sys
 import timeit
+import sys
 from typing import TypeVar, Generic, Optional, Iterator, List, Dict, Any
 from dataclasses import dataclass
 from collections import deque
@@ -176,19 +176,19 @@ class BSTAnalyzer:
             
             for size in data_sizes:
                 if operation == "insert":
-                    setup = f"from src.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}()"
+                    setup = f"from mastering_performant_code.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}()"
                     stmt = f"[bst.insert(i) for i in range({size})]"
                 elif operation == "search":
-                    setup = f"from src.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
+                    setup = f"from mastering_performant_code.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
                     stmt = f"[bst.search(i) for i in range({size})]"
                 elif operation == "delete":
-                    setup = f"from src.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
+                    setup = f"from mastering_performant_code.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
                     stmt = f"[bst.delete(i) for i in range({size})]"
                 elif operation == "traversal":
-                    setup = f"from src.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
+                    setup = f"from mastering_performant_code.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
                     stmt = "list(bst.inorder_traversal())"
                 elif operation == "range_search":
-                    setup = f"from src.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
+                    setup = f"from mastering_performant_code.chapter_06 import {bst_class.__name__}; bst = {bst_class.__name__}(); [bst.insert(i) for i in range({size})]"
                     stmt = f"bst.range_search({size//4}, {3*size//4})"
                 else:
                     continue
@@ -209,7 +209,7 @@ class BSTAnalyzer:
             
             for size in data_sizes:
                 # Benchmark recursive implementation
-                recursive_setup = f"from src.chapter_06 import {recursive_bst_class.__name__}; bst = {recursive_bst_class.__name__}()"
+                recursive_setup = f"from mastering_performant_code.chapter_06 import {recursive_bst_class.__name__}; bst = {recursive_bst_class.__name__}()"
                 if operation in ["search", "delete", "traversal", "range_search"]:
                     recursive_setup += f"; [bst.insert(i) for i in range({size})]"
                 
@@ -217,7 +217,7 @@ class BSTAnalyzer:
                 recursive_time = timeit.timeit(recursive_stmt, setup=recursive_setup, number=1)
                 
                 # Benchmark iterative implementation
-                iterative_setup = f"from src.chapter_06 import {iterative_bst_class.__name__}; bst = {iterative_bst_class.__name__}()"
+                iterative_setup = f"from mastering_performant_code.chapter_06 import {iterative_bst_class.__name__}; bst = {iterative_bst_class.__name__}()"
                 if operation in ["search", "delete", "traversal", "range_search"]:
                     iterative_setup += f"; [bst.insert(i) for i in range({size})]"
                 
@@ -374,3 +374,35 @@ class BSTAnalyzer:
         
         value_memory = sys.getsizeof(node.value)
         return value_memory + BSTAnalyzer._calculate_value_memory(node.left) + BSTAnalyzer._calculate_value_memory(node.right) 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running analyzer demonstration...")
+    print("=" * 50)
+
+    # Create instance of BSTAnalyzer
+    try:
+        instance = BSTAnalyzer()
+        print(f"✓ Created BSTAnalyzer instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic operations
+        print("Testing basic operations...")
+        instance.insert(5)
+        instance.insert(3)
+        instance.insert(7)
+        print(f"  After inserting elements: {instance}")
+    except Exception as e:
+        print(f"✗ Error creating BSTAnalyzer instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

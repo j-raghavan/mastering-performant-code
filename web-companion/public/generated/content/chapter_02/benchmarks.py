@@ -6,8 +6,8 @@ of different Python data structures and operations using timeit.
 """
 
 import timeit
-import sys
 import random
+import sys
 from typing import Dict, List, Any, Callable, Tuple
 from .algorithms import (
     sum_builtin, sum_loop, sum_comprehension, sum_generator, sum_formula,

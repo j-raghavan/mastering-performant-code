@@ -7,7 +7,7 @@ hash table with open addressing, set operations, and memory efficiency.
 """
 
 from typing import TypeVar, Generic, Iterator, Set as PySet, Optional
-from src.chapter_01.hash_table import HashTable
+from .hash_table import HashTable
 
 T = TypeVar('T')
 
@@ -77,3 +77,32 @@ class SimpleSet(Generic[T]):
             if item not in other:
                 result.add(item)
         return result 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running simple_set demonstration...")
+    print("=" * 50)
+
+    # Create instance of SimpleSet
+    try:
+        instance = SimpleSet()
+        print(f"✓ Created SimpleSet instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating SimpleSet instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

@@ -7,6 +7,7 @@
 import { Logger } from '../utils/Logger.js';
 import { FileLoader } from './FileLoader.js';
 import { UIManager } from './UIManager.js';
+import { PackageStatusPanel } from '../components/package/PackageStatusPanel.js';
 
 class AppController {
     constructor(services) {
@@ -22,6 +23,9 @@ class AppController {
         // Initialize FileLoader and UIManager
         this.fileLoader = new FileLoader(this.contentSyncService);
         this.uiManager = new UIManager();
+
+        // Initialize package management components
+        this.packageStatusPanel = new PackageStatusPanel();
 
         this.currentChapter = null;
         this.currentFile = null;
@@ -40,11 +44,49 @@ class AppController {
             // Initialize FileLoader and UIManager
             await this.initializeInteractiveServices();
 
+            // Initialize package management UI
+            await this.initializePackageManagement();
+
             // Set up event handling
             this.setupEventHandling();
 
             // Set up UI event handlers
             this.setupUIEventHandlers();
+
+            // Load all chapters and set up chapter selector
+            Logger.info('📚 About to load chapters from content service...');
+            const chapters = this.contentSyncService.getAllChapters();
+            Logger.info(`📚 Loaded ${chapters.length} chapters from content service`);
+
+            // Debug: Log first few chapters
+            if (chapters && chapters.length > 0) {
+                Logger.info('First 3 chapters from AppController:');
+                chapters.slice(0, 3).forEach((chapter, index) => {
+                    let displayTitle = chapter.title;
+                    if (chapter.description) {
+                        displayTitle = `Chapter ${chapter.number}: ${chapter.description}`;
+                    } else if (chapter.title && chapter.title !== `Chapter ${chapter.number}`) {
+                        displayTitle = chapter.title;
+                    } else {
+                        displayTitle = `Chapter ${chapter.number}`;
+                    }
+                    Logger.info(`  Chapter ${index + 1}: id="${chapter.id}", title="${displayTitle}", order=${chapter.order}`);
+                });
+            } else {
+                Logger.warn('⚠️ No chapters returned from content service');
+            }
+
+            // Populate the chapter selector in the HTML
+            this.setupChapterSelector(chapters);
+
+            // Try to set up navigation if available
+            const navigation = this.uiComponents.get('navigation');
+            if (navigation) {
+                navigation.setChapters(chapters);
+                Logger.info(`✅ Navigation component updated with ${chapters.length} chapters`);
+            } else {
+                Logger.warn('⚠️ Navigation component not found - using HTML chapter selector');
+            }
 
             this.isInitialized = true;
             Logger.info('✅ AppController initialized successfully');
@@ -57,31 +99,55 @@ class AppController {
     }
 
     async initializeServices() {
-        // Initialize content sync service first
-        await this.contentSyncService.initialize();
+        try {
+            Logger.info('🚀 Starting service initialization...');
 
-        // Initialize Pyodide executor
-        await this.pyodideExecutor.initialize();
+            // Initialize content sync service first
+            Logger.info('📚 Initializing ContentSyncService...');
+            await this.contentSyncService.initialize();
+            Logger.info('✅ ContentSyncService initialized successfully');
 
-        // Log Python version
-        const pythonVersion = await this.pyodideExecutor.getPythonVersion();
-        Logger.info(`🐍 Using Python: ${pythonVersion}`);
+            // Initialize Pyodide executor (this will also install the package)
+            Logger.info('🐍 Initializing PyodideExecutor...');
+            await this.pyodideExecutor.initialize();
+            Logger.info('✅ PyodideExecutor initialized successfully');
 
-        // Initialize test runner
-        this.testRunner = new (await import('./TestRunner.js')).TestRunner(this.pyodideExecutor);
-        await this.testRunner.initialize();
+            // Log Python version
+            const pythonVersion = await this.pyodideExecutor.getPythonVersion();
+            Logger.info(`🐍 Using Python: ${pythonVersion}`);
 
-        // Initialize chapter manager
-        await this.chapterManager.initialize();
+            // Log package installation status
+            const packageManager = this.pyodideExecutor.getPackageManager();
+            const packageInfo = packageManager.getPackageInfo();
+            Logger.info(`📦 Package status: ${packageInfo.isInstalled ? 'Installed' : 'Not installed'}`);
 
-        // Initialize performance analyzer
-        this.performanceAnalyzer = new (await import('./PerformanceAnalyzer.js')).PerformanceAnalyzer();
-        await this.performanceAnalyzer.initialize();
+            // Initialize test runner
+            Logger.info('🧪 Initializing TestRunner...');
+            this.testRunner = new (await import('./TestRunner.js')).TestRunner(this.pyodideExecutor);
+            await this.testRunner.initialize();
+            Logger.info('✅ TestRunner initialized successfully');
 
-        // Initialize state manager
-        await this.stateManager.initialize();
+            // Initialize chapter manager
+            Logger.info('📖 Initializing ChapterManager...');
+            await this.chapterManager.initialize();
+            Logger.info('✅ ChapterManager initialized successfully');
 
-        Logger.info('✅ All services initialized');
+            // Initialize performance analyzer
+            Logger.info('⚡ Initializing PerformanceAnalyzer...');
+            this.performanceAnalyzer = new (await import('./PerformanceAnalyzer.js')).PerformanceAnalyzer();
+            await this.performanceAnalyzer.initialize();
+            Logger.info('✅ PerformanceAnalyzer initialized successfully');
+
+            // Initialize state manager
+            Logger.info('💾 Initializing StateManager...');
+            await this.stateManager.initialize();
+            Logger.info('✅ StateManager initialized successfully');
+
+            Logger.info('✅ All services initialized successfully');
+        } catch (error) {
+            Logger.error('❌ Failed to initialize services:', error);
+            throw error;
+        }
     }
 
     async initializeInteractiveServices() {
@@ -116,6 +182,30 @@ class AppController {
         }
     }
 
+    async initializePackageManagement() {
+        try {
+            Logger.info('Initializing package management...');
+
+            // Get package manager from PyodideExecutor
+            const packageManager = this.pyodideExecutor.getPackageManager();
+
+            // Initialize package status panel (but don't show it - installation is automatic)
+            this.packageStatusPanel.init(packageManager);
+
+            // Don't show the panel - package installation is automatic
+            // this.packageStatusPanel.show();
+
+            // Register the panel as a UI component
+            this.registerUIComponent('packageStatusPanel', this.packageStatusPanel);
+
+            Logger.info('✅ Package management initialized');
+
+        } catch (error) {
+            Logger.error('Failed to initialize package management:', error);
+            // Don't throw error - package management is optional
+        }
+    }
+
     setupEventHandling() {
         // Set up global error handling
         window.addEventListener('error', (event) => {
@@ -139,8 +229,6 @@ class AppController {
 
     async loadChapter(chapterId) {
         try {
-            Logger.info(`📖 Loading chapter: ${chapterId}`);
-
             // Load chapter data
             const chapter = await this.chapterManager.getChapter(chapterId);
             if (!chapter) {
@@ -173,8 +261,6 @@ class AppController {
             // Emit chapter loaded event
             this.emit('chapter:loaded', this.currentChapter);
 
-            Logger.info(`✅ Chapter loaded successfully: ${chapter.title}`);
-
             return this.currentChapter;
 
         } catch (error) {
@@ -186,8 +272,8 @@ class AppController {
 
     updateUIWithFiles() {
         try {
-            // Get files organized for display
-            const files = this.fileLoader.getFilesForDisplay();
+            // Get files organized for display, hiding test files by default
+            const files = this.fileLoader.getFilesForDisplay({ includeTests: false });
 
             // Update UI manager with files
             this.uiManager.displayFileExplorer(files);
@@ -216,8 +302,6 @@ class AppController {
                 }
             }
 
-            Logger.info(`UI updated with ${stats.totalFiles} files`);
-
         } catch (error) {
             Logger.error('Failed to update UI with files:', error);
         }
@@ -225,8 +309,6 @@ class AppController {
 
     async handleFileSelection(path) {
         try {
-            Logger.info(`📁 File selected: ${path}`);
-
             const content = this.fileLoader.getFileContent(path);
             if (!content) {
                 throw new Error(`File content not found: ${path}`);
@@ -242,8 +324,6 @@ class AppController {
             this.stateManager.setState({
                 currentFile: path
             });
-
-            Logger.info(`✅ File loaded: ${path}`);
 
         } catch (error) {
             Logger.error(`Failed to handle file selection: ${path}`, error);
@@ -272,8 +352,8 @@ class AppController {
                 throw new Error(`File content not found: ${currentFile}`);
             }
 
-            // Execute the code
-            const result = await this.pyodideExecutor.execute(content, {
+            // Execute the code with import transformation
+            const result = await this.pyodideExecutor.transformAndExecute(content, {
                 timeout: 30000,
                 captureOutput: true,
                 measurePerformance: true
@@ -329,7 +409,8 @@ class AppController {
                 try {
                     this.uiManager.log(`Running: ${file.name}`, 'info');
 
-                    const result = await this.pyodideExecutor.execute(file.content, {
+                    // Execute with import transformation
+                    const result = await this.pyodideExecutor.transformAndExecute(file.content, {
                         timeout: 30000,
                         captureOutput: true,
                         measurePerformance: true
@@ -445,10 +526,11 @@ class AppController {
 
     async handleCodeExecution(fileId, code) {
         try {
-            Logger.info(`🐍 Executing code for file: ${fileId}`);
+            // Get import diagnostics before execution
+            const importDiagnostics = this.pyodideExecutor.getImportDiagnostics(code);
 
-            // Execute code
-            const result = await this.pyodideExecutor.execute(code, {
+            // Execute code with transformation
+            const result = await this.pyodideExecutor.transformAndExecute(code, {
                 timeout: 30000,
                 captureOutput: true,
                 measurePerformance: true
@@ -457,11 +539,12 @@ class AppController {
             // Update current file
             this.currentFile = fileId;
 
-            // Store result
+            // Store result with import diagnostics
             const executionResult = {
                 fileId,
                 code,
                 ...result,
+                importDiagnostics,
                 timestamp: Date.now()
             };
 
@@ -472,6 +555,23 @@ class AppController {
 
             // Emit execution result
             this.emit('code:executed', executionResult);
+
+            // Show import transformation notification if transformations were applied
+            if (importDiagnostics.transformations.length > 0) {
+                const transformationCount = importDiagnostics.transformations.reduce((sum, t) => sum + t.count, 0);
+                this.uiManager.showNotification(
+                    `Applied ${transformationCount} import transformation(s) automatically`,
+                    'info'
+                );
+            }
+
+            // Show warnings if any
+            if (importDiagnostics.warnings.length > 0) {
+                this.uiManager.showNotification(
+                    `Import warnings: ${importDiagnostics.warnings.join(', ')}`,
+                    'warning'
+                );
+            }
 
             // Analyze performance if execution was successful
             if (result.success && this.performanceAnalyzer) {
@@ -485,8 +585,6 @@ class AppController {
                     Logger.warn('Failed to analyze performance:', error);
                 }
             }
-
-            Logger.info(`✅ Code execution completed for ${fileId}`);
 
             return executionResult;
 
@@ -681,6 +779,208 @@ class AppController {
 
         Logger.info('✅ AppController cleanup completed');
     }
+
+    /**
+     * Set up the chapter selector in the HTML using MutationObserver for robustness
+     */
+    setupChapterSelector(chapters) {
+        Logger.info(`Setting up chapter selector with ${chapters.length} chapters...`);
+
+        // Try multiple ways to find the chapter selector
+        let chapterSelector = document.getElementById('chapterSelector');
+
+        if (!chapterSelector) {
+            // Try alternative selectors
+            chapterSelector = document.querySelector('select[id*="chapter"]');
+        }
+
+        if (!chapterSelector) {
+            // Try finding any select element in the file explorer section
+            const fileExplorerSection = document.querySelector('.file-explorer-section');
+            if (fileExplorerSection) {
+                chapterSelector = fileExplorerSection.querySelector('select');
+            }
+        }
+
+        if (chapterSelector) {
+            Logger.info('✅ Chapter selector found, setting up...');
+            this.populateChapterSelector(chapterSelector, chapters);
+            return;
+        }
+
+        // Element doesn't exist yet, use MutationObserver to wait for it
+        Logger.info('⏳ Chapter selector not found, waiting for DOM with MutationObserver...');
+
+        const observer = new MutationObserver((mutations, obs) => {
+            // Try to find the element again after mutations
+            let chapterSelector = document.getElementById('chapterSelector');
+
+            if (!chapterSelector) {
+                chapterSelector = document.querySelector('select[id*="chapter"]');
+            }
+
+            if (!chapterSelector) {
+                const fileExplorerSection = document.querySelector('.file-explorer-section');
+                if (fileExplorerSection) {
+                    chapterSelector = fileExplorerSection.querySelector('select');
+                }
+            }
+
+            if (chapterSelector) {
+                Logger.info('✅ Chapter selector found via MutationObserver, setting up...');
+                this.populateChapterSelector(chapterSelector, chapters);
+                obs.disconnect(); // Stop observing once found
+            }
+        });
+
+        // Start observing the document body for added nodes
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+
+        // Set a timeout to prevent infinite waiting
+        setTimeout(() => {
+            observer.disconnect();
+
+            // Final attempt to find the element
+            let chapterSelector = document.getElementById('chapterSelector');
+            if (!chapterSelector) {
+                chapterSelector = document.querySelector('select[id*="chapter"]');
+            }
+            if (!chapterSelector) {
+                const fileExplorerSection = document.querySelector('.file-explorer-section');
+                if (fileExplorerSection) {
+                    chapterSelector = fileExplorerSection.querySelector('select');
+                }
+            }
+
+            if (!chapterSelector) {
+                Logger.warn('⚠️ Chapter selector not found, creating it dynamically...');
+
+                // Create the chapter selector dynamically as a fallback
+                const fileExplorerSection = document.querySelector('.file-explorer-section');
+                if (fileExplorerSection) {
+                    Logger.info('Creating chapter selector dynamically...');
+
+                    // Create the chapter selector container
+                    const chapterSelectorContainer = document.createElement('div');
+                    chapterSelectorContainer.style.marginBottom = '20px';
+
+                    // Create the label
+                    const label = document.createElement('label');
+                    label.setAttribute('for', 'chapterSelector');
+                    label.style.display = 'block';
+                    label.style.marginBottom = '8px';
+                    label.style.fontWeight = '500';
+                    label.style.color = '#374151';
+                    label.textContent = 'Select Chapter:';
+
+                    // Create the select element
+                    chapterSelector = document.createElement('select');
+                    chapterSelector.id = 'chapterSelector';
+                    chapterSelector.style.padding = '8px 12px';
+                    chapterSelector.style.border = '1px solid #d1d5db';
+                    chapterSelector.style.borderRadius = '6px';
+                    chapterSelector.style.fontSize = '0.875rem';
+                    chapterSelector.style.minWidth = '200px';
+
+                    // Insert before the file explorer
+                    const fileExplorer = fileExplorerSection.querySelector('#fileExplorer');
+                    if (fileExplorer) {
+                        fileExplorerSection.insertBefore(chapterSelectorContainer, fileExplorer);
+                        chapterSelectorContainer.appendChild(label);
+                        chapterSelectorContainer.appendChild(chapterSelector);
+
+                        Logger.info('✅ Chapter selector created dynamically');
+                        this.populateChapterSelector(chapterSelector, chapters);
+                    } else {
+                        Logger.error('❌ Could not find fileExplorer element to insert chapter selector');
+                    }
+                } else {
+                    Logger.error('❌ Could not find file-explorer-section to create chapter selector');
+                }
+            } else {
+                Logger.info('✅ Chapter selector found after timeout, setting up...');
+                this.populateChapterSelector(chapterSelector, chapters);
+            }
+        }, 5000); // 5 second timeout
+    }
+
+    /**
+     * Populate the chapter selector with options
+     */
+    populateChapterSelector(chapterSelector, chapters) {
+        Logger.info(`Populating chapter selector with ${chapters.length} chapters...`);
+
+        // Debug: Log chapters being populated
+        if (chapters && chapters.length > 0) {
+            Logger.info('Chapters to populate:');
+            chapters.slice(0, 5).forEach((chapter, index) => {
+                let displayTitle = chapter.title;
+                if (chapter.description) {
+                    displayTitle = `Chapter ${chapter.number}: ${chapter.description}`;
+                } else if (chapter.title && chapter.title !== `Chapter ${chapter.number}`) {
+                    displayTitle = chapter.title;
+                } else {
+                    displayTitle = `Chapter ${chapter.number}`;
+                }
+                Logger.info(`  ${index + 1}. ${chapter.order}. ${displayTitle} (${chapter.id})`);
+            });
+            if (chapters.length > 5) {
+                Logger.info(`  ... and ${chapters.length - 5} more chapters`);
+            }
+        } else {
+            Logger.warn('⚠️ No chapters provided to populateChapterSelector');
+        }
+
+        // Clear existing options
+        chapterSelector.innerHTML = '<option value="">Select a chapter...</option>';
+
+        // Add chapter options with descriptive titles
+        chapters.forEach(chapter => {
+            const option = document.createElement('option');
+            option.value = chapter.id;
+
+            // Create a more descriptive title by combining chapter number with description
+            let displayTitle = chapter.title;
+            if (chapter.description) {
+                // Use description if available, otherwise fall back to title
+                displayTitle = `Chapter ${chapter.number}: ${chapter.description}`;
+            } else if (chapter.title && chapter.title !== `Chapter ${chapter.number}`) {
+                // Use title if it's not just "Chapter X"
+                displayTitle = chapter.title;
+            } else {
+                // Fallback to generic title
+                displayTitle = `Chapter ${chapter.number}`;
+            }
+
+            option.textContent = displayTitle;
+            chapterSelector.appendChild(option);
+        });
+
+        // Set up event listener (only once)
+        if (!chapterSelector._listenerAdded) {
+            chapterSelector.addEventListener('change', async (e) => {
+                const selectedChapterId = e.target.value;
+                if (selectedChapterId) {
+                    try {
+                        Logger.info(`Loading chapter: ${selectedChapterId}`);
+                        await this.loadChapter(selectedChapterId);
+                        Logger.info(`✅ Loaded chapter: ${selectedChapterId}`);
+                    } catch (error) {
+                        Logger.error(`❌ Failed to load chapter ${selectedChapterId}:`, error);
+                    }
+                }
+            });
+            chapterSelector._listenerAdded = true;
+            Logger.info('✅ Chapter selector event listener added');
+        } else {
+            Logger.info('ℹ️ Chapter selector event listener already exists');
+        }
+
+        Logger.info(`✅ Chapter selector populated with ${chapters.length} chapters`);
+    }
 }
 
-export { AppController }; 
+export { AppController };

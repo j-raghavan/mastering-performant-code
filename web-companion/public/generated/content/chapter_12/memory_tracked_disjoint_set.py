@@ -6,10 +6,10 @@ for performance profiling and optimization analysis.
 """
 
 from typing import Dict, List, Optional, Tuple
-import sys
 from dataclasses import dataclass
+import sys
 
-from src.chapter_12.optimized_disjoint_set import OptimizedDisjointSet
+from .optimized_disjoint_set import OptimizedDisjointSet
 
 
 @dataclass
@@ -254,3 +254,32 @@ Tree structure analysis:
         sets = self.get_sets()
         sets_str = ", ".join(f"{{{', '.join(map(str, elements))}}}" for elements in sets.values())
         return f"MemoryTrackedDisjointSet({sets_str}) [Memory: {info.total_size} bytes]" 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running memory_tracked_disjoint_set demonstration...")
+    print("=" * 50)
+
+    # Create instance of MemoryInfo
+    try:
+        instance = MemoryInfo()
+        print(f"✓ Created MemoryInfo instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating MemoryInfo instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

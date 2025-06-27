@@ -34,22 +34,116 @@ class ContentSyncService {
     async loadChaptersMetadata() {
         try {
             Logger.info('Loading chapters metadata...');
+            Logger.info(`Fetching from: ${this.chaptersPath}`);
 
-            const response = await fetch(this.chaptersPath);
+            // Create a controller for timeout
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+
+            const response = await fetch(this.chaptersPath, {
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+            Logger.info(`Response status: ${response.status} ${response.statusText}`);
+
             if (!response.ok) {
                 throw new Error(`Failed to load chapters metadata: ${response.status} ${response.statusText}`);
             }
 
+            Logger.info('Parsing JSON response...');
             this.chapters = await response.json();
             Logger.info(`Loaded ${this.chapters.length} chapters`);
+
+            // Log first few chapters for debugging
+            if (this.chapters && this.chapters.length > 0) {
+                Logger.info('First 3 chapters:');
+                this.chapters.slice(0, 3).forEach((chapter, index) => {
+                    let displayTitle = chapter.title;
+                    if (chapter.description) {
+                        displayTitle = `Chapter ${chapter.number}: ${chapter.description}`;
+                    } else if (chapter.title && chapter.title !== `Chapter ${chapter.number}`) {
+                        displayTitle = chapter.title;
+                    } else {
+                        displayTitle = `Chapter ${chapter.number}`;
+                    }
+                    Logger.info(`  Chapter ${index + 1}: id="${chapter.id}", title="${displayTitle}", order=${chapter.order}`);
+                });
+            } else {
+                Logger.warn('⚠️ No chapters found in the JSON file');
+            }
 
             // Pre-cache chapter data
             await this.preloadChapters();
 
         } catch (error) {
+            if (error.name === 'AbortError') {
+                Logger.error('❌ Timeout while loading chapters metadata (30 seconds)');
+                Logger.warn('⚠️ Using fallback chapter data...');
+                this.loadFallbackChapters();
+                return;
+            }
             Logger.error('Error loading chapters metadata', error);
-            throw new Error(`ContentError: ${error.message}`);
+            Logger.warn('⚠️ Using fallback chapter data...');
+            this.loadFallbackChapters();
         }
+    }
+
+    /**
+     * Load fallback chapter data if the main file fails to load
+     */
+    loadFallbackChapters() {
+        Logger.info('Loading fallback chapter data...');
+
+        this.chapters = [
+            {
+                id: 'chapter_01',
+                number: 1,
+                order: 1,
+                title: 'Chapter 1: Data Structures Fundamentals',
+                description: 'Dynamic Arrays, Hash Tables, and Sets',
+                sourceFiles: [],
+                testFiles: []
+            },
+            {
+                id: 'chapter_02',
+                number: 2,
+                order: 2,
+                title: 'Chapter 2: Algorithm Analysis',
+                description: 'Time and Space Complexity Analysis',
+                sourceFiles: [],
+                testFiles: []
+            },
+            {
+                id: 'chapter_03',
+                number: 3,
+                order: 3,
+                title: 'Chapter 3: Linked Lists',
+                description: 'Singly and Doubly Linked Lists',
+                sourceFiles: [],
+                testFiles: []
+            },
+            {
+                id: 'chapter_04',
+                number: 4,
+                order: 4,
+                title: 'Chapter 4: Stacks and Queues',
+                description: 'Stack and Queue Implementations',
+                sourceFiles: [],
+                testFiles: []
+            },
+            {
+                id: 'chapter_05',
+                number: 5,
+                order: 5,
+                title: 'Chapter 5: Trees',
+                description: 'Binary Trees and Tree Traversal',
+                sourceFiles: [],
+                testFiles: []
+            }
+        ];
+
+        Logger.info(`✅ Loaded ${this.chapters.length} fallback chapters`);
     }
 
     /**
@@ -74,8 +168,11 @@ class ContentSyncService {
      */
     getAllChapters() {
         if (!this.chapters) {
+            Logger.error('❌ Chapters not loaded. Call initialize() first.');
             throw new Error('Chapters not loaded. Call initialize() first.');
         }
+
+        Logger.info(`getAllChapters() called, returning ${this.chapters.length} chapters`);
         return [...this.chapters];
     }
 

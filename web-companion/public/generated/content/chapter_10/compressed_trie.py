@@ -583,3 +583,32 @@ class CompressedTrie(Generic[T]):
     def get_all_strings(self) -> List[Tuple[str, T]]:
         """Get all strings stored in the trie."""
         return self.get_all_with_prefix("") 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running compressed_trie demonstration...")
+    print("=" * 50)
+
+    # Create instance of CompressedTrie
+    try:
+        instance = CompressedTrie()
+        print(f"✓ Created CompressedTrie instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating CompressedTrie instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

@@ -15,9 +15,9 @@ Theoretical Analysis:
   * Double hashing: best theoretical performance but more complex
 """
 
-import sys
 from typing import TypeVar, Generic, Optional, Tuple, Iterator
-from src.chapter_01.analyzer import MemoryInfo
+from .analyzer import MemoryInfo
+import sys
 
 K = TypeVar('K')
 V = TypeVar('V')
@@ -245,3 +245,35 @@ class MemoryTrackedHashTable(HashTable[K, V]):
             'collision_rate': (self._collision_count / self._operation_count 
                               if self._operation_count > 0 else 0)
         } 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running hash_table demonstration...")
+    print("=" * 50)
+
+    # Create instance of HashTable
+    try:
+        instance = HashTable()
+        print(f"✓ Created HashTable instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic operations
+        print("Testing basic operations...")
+        instance["key1"] = "value1"
+        instance["key2"] = "value2"
+        print(f"  After adding elements: {instance}")
+        print(f"  Size: {len(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating HashTable instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

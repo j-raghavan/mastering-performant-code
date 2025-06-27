@@ -5,7 +5,6 @@ Demo for Chapter 1: Built-ins Under the Hood - MEMORY OPTIMIZED VERSION
 This demo showcases features with aggressive memory management to prevent crashes.
 """
 
-import sys
 import time
 import gc
 import weakref
@@ -78,9 +77,9 @@ class MemoryLimitedDemo:
         
         try:
             # Import only what we need
-            from src.chapter_01.dynamic_array import DynamicArray
-            from src.chapter_01.hash_table import HashTable
-            from src.chapter_01.simple_set import SimpleSet
+            from .dynamic_array import DynamicArray
+            from .hash_table import HashTable
+            from .simple_set import SimpleSet
             
             print("Testing basic implementations with minimal data...")
             
@@ -155,7 +154,7 @@ Key Concepts (No Memory Allocation Required):
         print_section("PERFORMANCE COMPARISON")
         
         try:
-            from src.chapter_01.dynamic_array import DynamicArray
+            from .dynamic_array import DynamicArray
             
             print("Comparing implementations vs built-ins (tiny datasets)...")
             
@@ -212,7 +211,7 @@ Key Concepts (No Memory Allocation Required):
         print_section("UNICODE HANDLING")
         
         try:
-            from src.chapter_01.hash_table import HashTable
+            from .hash_table import HashTable
             
             # Test with minimal Unicode data
             table = HashTable[str, int]()

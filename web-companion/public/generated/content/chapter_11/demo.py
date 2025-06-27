@@ -7,7 +7,6 @@ including performance analysis and real-world applications.
 
 import timeit
 import random
-import sys
 from typing import List, Dict, Any
 
 from .binary_heap import BinaryHeap, HeapNode

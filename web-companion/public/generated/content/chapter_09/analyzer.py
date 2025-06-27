@@ -5,10 +5,10 @@ This module provides tools for analyzing B-Tree performance, memory usage,
 and comparing with other data structures.
 """
 
-import sys
 import timeit
 import math
 import random
+import sys
 from typing import TypeVar, Generic, List, Dict, Any
 from dataclasses import dataclass
 from .btree import BTree
@@ -319,3 +319,35 @@ def b_tree_height_analysis(n: int, t: int) -> Dict[str, float]:
         'min_nodes_at_height_1': min_nodes_at_level(1),
         'height_ratio_vs_binary': min_height / max_height if max_height > 0 else 0
     } 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running analyzer demonstration...")
+    print("=" * 50)
+
+    # Create instance of BTreeStats
+    try:
+        instance = BTreeStats()
+        print(f"✓ Created BTreeStats instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic operations
+        print("Testing basic operations...")
+        instance.insert(5)
+        instance.insert(3)
+        instance.insert(7)
+        print(f"  After inserting elements: {instance}")
+    except Exception as e:
+        print(f"✗ Error creating BTreeStats instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

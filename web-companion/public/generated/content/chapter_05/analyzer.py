@@ -5,9 +5,9 @@ This module provides tools to analyze the memory usage, performance,
 and structural characteristics of skip lists.
 """
 
-import sys
 import timeit
 import random
+import sys
 from typing import TypeVar, Generic, Optional, List, Iterator, Dict, Any
 from dataclasses import dataclass
 from collections import defaultdict
@@ -76,16 +76,16 @@ class SkipListAnalyzer:
         
         for operation in operations:
             if operation == "insert":
-                setup = f"from src.chapter_05 import SkipList; sl = SkipList()"
+                setup = f"from mastering_performant_code.chapter_05 import SkipList; sl = SkipList()"
                 stmt = "[sl.insert(i) for i in range(100)]"
             elif operation == "search":
-                setup = f"from src.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in range(1000)]"
+                setup = f"from mastering_performant_code.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in range(1000)]"
                 stmt = "[sl.search(i) for i in range(100)]"
             elif operation == "delete":
-                setup = f"from src.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in range(1000)]"
+                setup = f"from mastering_performant_code.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in range(1000)]"
                 stmt = "[sl.delete(i) for i in range(100)]"
             elif operation == "range_query":
-                setup = f"from src.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in range(1000)]"
+                setup = f"from mastering_performant_code.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in range(1000)]"
                 stmt = "list(sl.range_query(100, 200))"
             else:
                 continue
@@ -127,19 +127,19 @@ class SkipListAnalyzer:
         # Skip list operations
         skip_insert = timeit.timeit(
             "[sl.insert(i) for i in test_data]",
-            setup=f"from src.chapter_05 import SkipList; sl = SkipList(); test_data = {test_data}",
+            setup=f"from mastering_performant_code.chapter_05 import SkipList; sl = SkipList(); test_data = {test_data}",
             number=1
         )
         
         skip_search = timeit.timeit(
             "[sl.search(i) for i in search_data]",
-            setup=f"from src.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in {test_data}]; search_data = {search_data}",
+            setup=f"from mastering_performant_code.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in {test_data}]; search_data = {search_data}",
             number=100
         )
         
         skip_delete = timeit.timeit(
             "[sl.delete(i) for i in search_data]",
-            setup=f"from src.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in {test_data}]; search_data = {search_data}",
+            setup=f"from mastering_performant_code.chapter_05 import SkipList; sl = SkipList(); [sl.insert(i) for i in {test_data}]; search_data = {search_data}",
             number=1
         )
         
@@ -289,3 +289,36 @@ class SkipListAnalyzer:
             report.append("")
         
         return "\n".join(report) 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running analyzer demonstration...")
+    print("=" * 50)
+
+    # Create instance of SkipListAnalyzer
+    try:
+        instance = SkipListAnalyzer()
+        print(f"✓ Created SkipListAnalyzer instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic operations
+        print("Testing basic operations...")
+        instance.append(1)
+        instance.append(2)
+        instance.append(3)
+        print(f"  After adding elements: {instance}")
+        print(f"  Length: {len(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating SkipListAnalyzer instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

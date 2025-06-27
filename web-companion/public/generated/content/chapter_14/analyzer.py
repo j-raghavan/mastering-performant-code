@@ -5,8 +5,8 @@ This module provides tools for analyzing the performance characteristics
 and accuracy of Bloom filter implementations.
 """
 
-import sys
 import timeit
+import sys
 from typing import Any, List, Optional, Tuple, Dict
 from dataclasses import dataclass
 
@@ -389,3 +389,32 @@ class BloomFilterAnalyzer:
         report.append("=" * 60)
         
         return "\n".join(report) 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running analyzer demonstration...")
+    print("=" * 50)
+
+    # Create instance of BloomFilterStats
+    try:
+        instance = BloomFilterStats()
+        print(f"✓ Created BloomFilterStats instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating BloomFilterStats instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

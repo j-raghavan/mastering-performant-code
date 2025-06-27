@@ -164,3 +164,33 @@ class SkipListPriorityQueue(Generic[K, V]):
     def __repr__(self) -> str:
         items = [f"({k}, {repr(v)})" for k, v in self]
         return f"SkipListPriorityQueue([{', '.join(items)}])" 
+
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running priority_queue demonstration...")
+    print("=" * 50)
+
+    # Create instance of PriorityItem
+    try:
+        instance = PriorityItem()
+        print(f"✓ Created PriorityItem instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating PriorityItem instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

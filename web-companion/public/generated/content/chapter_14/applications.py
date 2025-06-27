@@ -465,3 +465,32 @@ class URLShortener:
             'short_urls_generated': len(self.url_mappings),
             'bloom_filter_stats': BloomFilterAnalyzer.analyze_bloom_filter(self.bloom_filter)
         } 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running applications demonstration...")
+    print("=" * 50)
+
+    # Create instance of SpellChecker
+    try:
+        instance = SpellChecker()
+        print(f"✓ Created SpellChecker instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating SpellChecker instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

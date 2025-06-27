@@ -308,3 +308,32 @@ class LRUCacheDLL:
     
     def __repr__(self) -> str:
         return f"LRUCacheDLL(capacity={self.capacity}, size={len(self.cache)}, hit_ratio={self.get_hit_ratio():.2f})" 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running lru_cache demonstration...")
+    print("=" * 50)
+
+    # Create instance of LRUCacheOrderedDict
+    try:
+        instance = LRUCacheOrderedDict()
+        print(f"✓ Created LRUCacheOrderedDict instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating LRUCacheOrderedDict instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

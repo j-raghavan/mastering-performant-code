@@ -6,7 +6,7 @@ with basic suggestion capabilities.
 """
 
 from typing import List, Optional, Tuple
-from src.chapter_10.trie import Trie
+from .trie import Trie
 
 class SpellChecker:
     """
@@ -110,3 +110,32 @@ class SpellChecker:
     def __contains__(self, word: str) -> bool:
         """Check if a word is in the dictionary."""
         return self.is_correct(word) 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running spell_checker demonstration...")
+    print("=" * 50)
+
+    # Create instance of SpellChecker
+    try:
+        instance = SpellChecker()
+        print(f"✓ Created SpellChecker instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating SpellChecker instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

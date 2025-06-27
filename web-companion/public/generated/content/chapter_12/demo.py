@@ -9,12 +9,12 @@ import timeit
 import sys
 from typing import Dict, List, Optional, Tuple
 
-from src.chapter_12.disjoint_set import DisjointSet
-from src.chapter_12.optimized_disjoint_set import OptimizedDisjointSet
-from src.chapter_12.memory_tracked_disjoint_set import MemoryTrackedDisjointSet
-from src.chapter_12.network_connectivity import NetworkConnectivity
-from src.chapter_12.image_segmentation import ImageSegmentation
-from src.chapter_12.analyzer import UnionFindAnalyzer
+from .disjoint_set import DisjointSet
+from .optimized_disjoint_set import OptimizedDisjointSet
+from .memory_tracked_disjoint_set import MemoryTrackedDisjointSet
+from .network_connectivity import NetworkConnectivity
+from .image_segmentation import ImageSegmentation
+from .analyzer import UnionFindAnalyzer
 
 
 def benchmark_comparison():
@@ -31,38 +31,38 @@ def benchmark_comparison():
         # Basic DisjointSet
         basic_make = timeit.timeit(
             f"ds.make_set(i) for i in range({size})",
-            setup="from src.chapter_12 import DisjointSet; ds = DisjointSet()",
+            setup="from chapter_12 import DisjointSet; ds = DisjointSet()",
             number=1
         )
         
         basic_find = timeit.timeit(
             f"ds.find(i) for i in range({size})",
-            setup=f"from src.chapter_12 import DisjointSet; ds = DisjointSet(); [ds.make_set(i) for i in range({size})]",
+            setup=f"from chapter_12 import DisjointSet; ds = DisjointSet(); [ds.make_set(i) for i in range({size})]",
             number=1
         )
         
         basic_union = timeit.timeit(
             f"ds.union(i, (i+1)%{size}) for i in range({size})",
-            setup=f"from src.chapter_12 import DisjointSet; ds = DisjointSet(); [ds.make_set(i) for i in range({size})]",
+            setup=f"from chapter_12 import DisjointSet; ds = DisjointSet(); [ds.make_set(i) for i in range({size})]",
             number=1
         )
         
         # Optimized DisjointSet
         opt_make = timeit.timeit(
             f"ds.make_set(i) for i in range({size})",
-            setup="from src.chapter_12 import OptimizedDisjointSet; ds = OptimizedDisjointSet()",
+            setup="from chapter_12 import OptimizedDisjointSet; ds = OptimizedDisjointSet()",
             number=1
         )
         
         opt_find = timeit.timeit(
             f"ds.find(i) for i in range({size})",
-            setup=f"from src.chapter_12 import OptimizedDisjointSet; ds = OptimizedDisjointSet(); [ds.make_set(i) for i in range({size})]",
+            setup=f"from chapter_12 import OptimizedDisjointSet; ds = OptimizedDisjointSet(); [ds.make_set(i) for i in range({size})]",
             number=1
         )
         
         opt_union = timeit.timeit(
             f"ds.union(i, (i+1)%{size}) for i in range({size})",
-            setup=f"from src.chapter_12 import OptimizedDisjointSet; ds = OptimizedDisjointSet(); [ds.make_set(i) for i in range({size})]",
+            setup=f"from chapter_12 import OptimizedDisjointSet; ds = OptimizedDisjointSet(); [ds.make_set(i) for i in range({size})]",
             number=1
         )
         

@@ -290,3 +290,32 @@ class PriorityQueue(Generic[T]):
             True if queue is empty, False otherwise
         """
         return self.is_empty() 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running priority_queue demonstration...")
+    print("=" * 50)
+
+    # Create instance of PriorityQueueItem
+    try:
+        instance = PriorityQueueItem()
+        print(f"✓ Created PriorityQueueItem instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating PriorityQueueItem instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

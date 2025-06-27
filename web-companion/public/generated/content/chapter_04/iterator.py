@@ -476,3 +476,32 @@ class ChainableIterator(LinkedListIterator[T]):
                 self._taken += 1
             
             return result 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running iterator demonstration...")
+    print("=" * 50)
+
+    # Create instance of IteratorState
+    try:
+        instance = IteratorState()
+        print(f"✓ Created IteratorState instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating IteratorState instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

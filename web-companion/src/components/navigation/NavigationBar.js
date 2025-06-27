@@ -145,7 +145,21 @@ class NavigationBar {
         this.chapters.forEach(chapter => {
             const option = document.createElement('option');
             option.value = chapter.id;
-            option.textContent = `${chapter.order}. ${chapter.title}`;
+
+            // Create a more descriptive title by combining chapter number with description
+            let displayTitle = chapter.title;
+            if (chapter.description) {
+                // Use description if available, otherwise fall back to title
+                displayTitle = `Chapter ${chapter.number}: ${chapter.description}`;
+            } else if (chapter.title && chapter.title !== `Chapter ${chapter.number}`) {
+                // Use title if it's not just "Chapter X"
+                displayTitle = chapter.title;
+            } else {
+                // Fallback to generic title
+                displayTitle = `Chapter ${chapter.number}`;
+            }
+
+            option.textContent = displayTitle;
             this.chapterSelect.appendChild(option);
         });
     }
@@ -173,7 +187,17 @@ class NavigationBar {
             return;
         }
 
-        this.chapterTitle.textContent = this.currentChapter.title;
+        // Create a more descriptive title for display
+        let displayTitle = this.currentChapter.title;
+        if (this.currentChapter.description) {
+            displayTitle = `Chapter ${this.currentChapter.number}: ${this.currentChapter.description}`;
+        } else if (this.currentChapter.title && this.currentChapter.title !== `Chapter ${this.currentChapter.number}`) {
+            displayTitle = this.currentChapter.title;
+        } else {
+            displayTitle = `Chapter ${this.currentChapter.number}`;
+        }
+
+        this.chapterTitle.textContent = displayTitle;
 
         // Update progress
         const progress = this.progress.get(this.currentChapter.id) || 0;

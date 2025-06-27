@@ -5,7 +5,6 @@ This module provides a production-quality trie implementation for string storage
 and retrieval with comprehensive functionality and error handling.
 """
 
-import sys
 from typing import TypeVar, Generic, Optional, Iterator, List, Dict, Set, Tuple
 from dataclasses import dataclass, field
 from collections import defaultdict
@@ -276,3 +275,32 @@ class Trie(Generic[T]):
         """String representation of the trie."""
         strings = [f"'{s}'" for s, _ in self.get_all_strings()]
         return f"Trie({', '.join(strings)})" 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running trie demonstration...")
+    print("=" * 50)
+
+    # Create instance of Trie
+    try:
+        instance = Trie()
+        print(f"✓ Created Trie instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating Trie instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

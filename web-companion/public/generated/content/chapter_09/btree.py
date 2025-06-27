@@ -6,8 +6,8 @@ including search, insert, delete, and range queries. B-Trees are designed for
 efficient external storage with guaranteed O(log n) performance.
 """
 
-from typing import TypeVar, Generic, Optional, List, Iterator, Callable
 import sys
+from typing import TypeVar, Generic, Optional, List, Iterator, Callable
 from .btree_node import BTreeNode
 
 T = TypeVar('T')
@@ -497,3 +497,35 @@ class BTree(Generic[T]):
     
     def __iter__(self) -> Iterator[T]:
         return self.inorder_traversal() 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running btree demonstration...")
+    print("=" * 50)
+
+    # Create instance of BTree
+    try:
+        instance = BTree()
+        print(f"✓ Created BTree instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic operations
+        print("Testing basic operations...")
+        instance.insert(5)
+        instance.insert(3)
+        instance.insert(7)
+        print(f"  After inserting elements: {instance}")
+    except Exception as e:
+        print(f"✗ Error creating BTree instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

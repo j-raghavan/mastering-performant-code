@@ -269,13 +269,16 @@ class UIManager {
             return;
         }
 
-        let html = '';
+        let html = `
+            <div class="file-list">
+                <div class="file-column">
+        `;
 
+        // Left column: All files from all categories
         for (const category of files) {
             html += `
                 <div class="file-category">
                     <h4>${category.displayName}</h4>
-                    <div class="file-list">
             `;
 
             for (const file of category.files) {
@@ -287,11 +290,20 @@ class UIManager {
                 `;
             }
 
-            html += `
+            html += `</div>`;
+        }
+
+        html += `
+                </div>
+                <div class="file-column">
+                    <div class="file-description empty" id="file-description">
+                        <div class="file-description-content">
+                            Select a file to view its description
+                        </div>
                     </div>
                 </div>
-            `;
-        }
+            </div>
+        `;
 
         this.elements.fileExplorer.innerHTML = html;
 
@@ -300,9 +312,126 @@ class UIManager {
         fileItems.forEach(item => {
             item.addEventListener('click', () => {
                 const path = item.dataset.path;
+                this.selectFile(path);
+                this.updateFileDescription(path);
                 this.onFileSelected(path);
             });
         });
+
+        // Select the first file by default if available
+        if (fileItems.length > 0) {
+            const firstFile = fileItems[0];
+            const firstPath = firstFile.dataset.path;
+            this.selectFile(firstPath);
+            this.updateFileDescription(firstPath);
+        }
+    }
+
+    /**
+     * Update file description in the second column
+     */
+    updateFileDescription(path) {
+        const descriptionElement = this.elements.fileExplorer.querySelector('#file-description');
+        if (!descriptionElement) return;
+
+        // Find the file data
+        const fileData = this.getFileData(path);
+        if (!fileData) {
+            descriptionElement.className = 'file-description empty';
+            descriptionElement.innerHTML = '<div class="file-description-content">File not found</div>';
+            return;
+        }
+
+        const description = this.getFileDescription(fileData);
+        const category = this.getCategoryDisplayName(fileData.category);
+
+        descriptionElement.className = 'file-description';
+        descriptionElement.innerHTML = `
+            <div class="file-description-content">
+                <strong>${fileData.name}</strong><br>
+                <small style="color: #6b7280; font-size: 0.8rem;">${category} • ${this.formatFileSize(fileData.size)}</small><br><br>
+                ${description}
+            </div>
+        `;
+    }
+
+    /**
+     * Get display name for file category
+     */
+    getCategoryDisplayName(category) {
+        const categoryNames = {
+            'demo': 'Demo File',
+            'analyzer': 'Analyzer',
+            'benchmark': 'Benchmark',
+            'implementation': 'Implementation',
+            'test': 'Test File',
+            'config': 'Configuration'
+        };
+        return categoryNames[category] || 'File';
+    }
+
+    /**
+     * Get file data by path (this would need to be implemented or passed from the file loader)
+     */
+    getFileData(path) {
+        // This method should get file data from the file loader
+        // For now, we'll need to store the files data or get it from the app controller
+        if (window.app && window.app.fileLoader) {
+            return window.app.fileLoader.getFileInfo(path);
+        }
+        return null;
+    }
+
+    /**
+     * Get file description from docstring or generate one
+     */
+    getFileDescription(file) {
+        if (file.docstring) {
+            // Clean up the docstring - take first paragraph and limit length
+            const cleanDocstring = file.docstring
+                .replace(/\n+/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+
+            // Limit to 300 characters and add ellipsis if needed
+            if (cleanDocstring.length > 300) {
+                return cleanDocstring.substring(0, 300) + '...';
+            }
+            return cleanDocstring;
+        }
+
+        // Generate description based on file type and name
+        const fileName = file.name.toLowerCase();
+        const category = file.category;
+
+        if (category === 'demo') {
+            return `Demonstration script showing ${fileName.replace('.py', '')} functionality and usage examples. This file contains practical examples and benchmarks to help understand how the data structure or algorithm works in real-world scenarios.`;
+        } else if (category === 'analyzer') {
+            return `Analysis tools and utilities for ${fileName.replace('.py', '')} performance and characteristics. This module provides comprehensive analysis capabilities including memory usage, performance metrics, and optimization insights.`;
+        } else if (category === 'benchmark') {
+            return `Benchmarking and performance testing for ${fileName.replace('.py', '')} implementations. This file contains performance tests and comparisons to evaluate the efficiency of different approaches.`;
+        } else if (fileName.includes('config')) {
+            return `Configuration and setup for ${fileName.replace('.py', '')} module. This file contains settings, constants, and initialization parameters for the module.`;
+        } else if (fileName.includes('node') || fileName.includes('tree')) {
+            return `Implementation of ${fileName.replace('.py', '')} data structure. This file contains the core implementation with methods for insertion, deletion, traversal, and other fundamental operations.`;
+        } else {
+            return `Implementation of ${fileName.replace('.py', '')} data structure or algorithm. This file contains the core logic and implementation details for the specified functionality.`;
+        }
+    }
+
+    /**
+     * Select a file and update UI
+     */
+    selectFile(path) {
+        // Remove active class from all file items
+        const allFileItems = this.elements.fileExplorer.querySelectorAll('.file-item');
+        allFileItems.forEach(item => item.classList.remove('active'));
+
+        // Add active class to selected file
+        const selectedItem = this.elements.fileExplorer.querySelector(`[data-path="${path}"]`);
+        if (selectedItem) {
+            selectedItem.classList.add('active');
+        }
     }
 
     /**

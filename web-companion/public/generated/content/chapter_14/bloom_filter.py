@@ -234,3 +234,32 @@ class BloomFilter:
         return (f"BloomFilter with {self.element_count} elements "
                 f"(load factor: {stats['load_factor']:.2%}, "
                 f"FPR: {self.get_false_positive_rate():.4f})") 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running bloom_filter demonstration...")
+    print("=" * 50)
+
+    # Create instance of BloomFilter
+    try:
+        instance = BloomFilter()
+        print(f"✓ Created BloomFilter instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating BloomFilter instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

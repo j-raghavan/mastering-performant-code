@@ -7,7 +7,7 @@ Unicode normalization, case folding, and proper character comparison.
 
 import unicodedata
 from typing import TypeVar, Generic, Optional, List, Tuple
-from src.chapter_10.trie import Trie, TrieNode
+from .trie import Trie, TrieNode
 
 T = TypeVar('T')
 
@@ -88,3 +88,32 @@ class UnicodeTrie(Trie[T]):
         """Remove a Unicode key from the trie."""
         normalized_key = self._normalize_string(key)
         super().__delitem__(normalized_key) 
+
+
+
+def main():
+    """Main function to demonstrate the module functionality."""
+    print(f"Running unicode_trie demonstration...")
+    print("=" * 50)
+
+    # Create instance of UnicodeTrie
+    try:
+        instance = UnicodeTrie()
+        print(f"✓ Created UnicodeTrie instance successfully")
+        print(f"  Instance: {instance}")
+
+        # Demonstrate basic functionality
+        print("Testing basic functionality...")
+        print(f"  Instance type: {type(instance)}")
+    except Exception as e:
+        print(f"✗ Error creating UnicodeTrie instance: {e}")
+        return False
+
+    # Module status
+    print("✓ Module loaded successfully!")
+    print("✓ Ready for interactive use in Pyodide.")
+
+    return True
+
+if __name__ == "__main__":
+    main()

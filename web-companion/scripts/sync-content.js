@@ -15,7 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Paths relative to the web-companion directory
-const SOURCE_DIR = path.resolve(__dirname, '../../src');
+const SOURCE_DIR = path.resolve(__dirname, '../../src/mastering_performant_code');
 const TESTS_DIR = path.resolve(__dirname, '../../tests');
 const OUTPUT_DIR = path.resolve(__dirname, '../public/generated');
 
@@ -462,7 +462,11 @@ async function syncContent() {
             for (const file of chapter.sourceFiles) {
                 const sourcePath = path.join(SOURCE_DIR, file.path);
                 const destPath = path.join(chapterDir, path.basename(file.path));
-                await fs.copyFile(sourcePath, destPath);
+                try {
+                    await fs.copyFile(sourcePath, destPath);
+                } catch (error) {
+                    console.warn(`⚠️ Could not copy ${sourcePath}: ${error.message}`);
+                }
             }
 
             // Copy test files
@@ -472,7 +476,11 @@ async function syncContent() {
             for (const file of chapter.testFiles) {
                 const sourcePath = path.join(TESTS_DIR, file.path);
                 const destPath = path.join(testDir, path.basename(file.path));
-                await fs.copyFile(sourcePath, destPath);
+                try {
+                    await fs.copyFile(sourcePath, destPath);
+                } catch (error) {
+                    console.warn(`⚠️ Could not copy test file ${sourcePath}: ${error.message}`);
+                }
             }
         }
 

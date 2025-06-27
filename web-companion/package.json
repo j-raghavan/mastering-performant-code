@@ -17,7 +17,8 @@
         "type-check": "tsc --noEmit"
     },
     "dependencies": {
-        "plotly.js": "^2.27.1"
+        "plotly.js": "^2.27.1",
+        "puppeteer": "^24.11.0"
     },
     "devDependencies": {
         "@types/node": "^20.10.5",

@@ -6,6 +6,7 @@ characteristics of linked list implementations.
 """
 
 import timeit
+import sys
 from typing import TypeVar, Generic, Optional, Iterator, List, Dict, Any
 from dataclasses import dataclass
 

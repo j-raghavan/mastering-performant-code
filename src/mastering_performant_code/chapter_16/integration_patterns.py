@@ -20,6 +20,7 @@ import json
 import pickle
 import ast
 import warnings
+import sys
 from typing import Any, Dict, List, Optional, Callable, TypeVar, Generic
 from dataclasses import dataclass
 from pathlib import Path
@@ -271,6 +272,7 @@ class SubprocessOptimizer:
         """Run a task in a separate subprocess."""
         # Create a temporary script
         script = f"""
+import sys
 import json
 import pickle
 

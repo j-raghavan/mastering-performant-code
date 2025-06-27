@@ -9,6 +9,7 @@ import pytest
 import random
 from typing import List
 from mastering_performant_code.chapter_05.skip_list import SkipList, SkipListWithStats, SkipListNode
+import sys
 
 
 class TestSkipListNode:

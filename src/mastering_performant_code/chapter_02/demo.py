@@ -10,6 +10,7 @@ import cProfile
 import pstats
 import io
 import dis
+import sys
 from typing import Dict, List, Any
 
 from .profiler import (

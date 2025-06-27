@@ -6,6 +6,7 @@ and implementations of dynamic arrays.
 """
 
 import timeit
+import sys
 from typing import Dict, Any, List
 from .dynamic_array import (
     DynamicArray, 

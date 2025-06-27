@@ -9,6 +9,7 @@ import pytest
 import math
 from typing import List, Any
 from mastering_performant_code.chapter_14.bloom_filter import BloomFilter
+import sys
 
 
 class TestBloomFilter:

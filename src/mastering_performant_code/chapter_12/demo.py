@@ -6,6 +6,7 @@ for the Union-Find implementations.
 """
 
 import timeit
+import sys
 from typing import Dict, List, Optional, Tuple
 
 from .disjoint_set import DisjointSet

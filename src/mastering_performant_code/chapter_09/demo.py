@@ -8,6 +8,7 @@ examples, performance analysis, and real-world applications.
 import timeit
 import random
 import math
+import sys
 from typing import List, Dict, Any
 
 # Add the parent directory to the path to import the chapter modules

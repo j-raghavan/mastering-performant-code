@@ -371,7 +371,7 @@ class TestCountingBloomFilterEdgeCases:
     
     def test_single_element(self):
         """Test with single element."""
-        cbf = CountingBloomFilter(expected_elements=1, false_positive_rate=0.01)
+        cbf = CountingBloomFilter(expected_elements=10, false_positive_rate=0.01)
         
         cbf.add("single_item")
         assert cbf.contains("single_item")

@@ -6,6 +6,7 @@ including search, insert, delete, and range queries. B-Trees are designed for
 efficient external storage with guaranteed O(log n) performance.
 """
 
+import sys
 from typing import TypeVar, Generic, Optional, List, Iterator, Callable
 from .btree_node import BTreeNode
 

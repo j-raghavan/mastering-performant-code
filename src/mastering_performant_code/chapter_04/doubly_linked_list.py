@@ -7,6 +7,7 @@ with sentinel nodes and bidirectional traversal capabilities.
 
 from typing import TypeVar, Generic, Optional, Iterator, List
 from .nodes import DoublyNode
+import sys
 
 T = TypeVar('T')
 

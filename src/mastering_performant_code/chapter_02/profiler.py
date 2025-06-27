@@ -15,6 +15,7 @@ from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 from dataclasses import dataclass
 from contextlib import contextmanager
 import statistics
+import sys
 
 # Try to import psutil, but don't fail if it's not available
 try:

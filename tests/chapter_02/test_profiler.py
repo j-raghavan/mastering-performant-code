@@ -168,7 +168,7 @@ class TestMemoryProfiler:
         profiler = MemoryProfiler()
         assert hasattr(profiler, 'baseline_memory')
     
-    @patch('src.chapter_02.profiler.psutil')
+    @patch('mastering_performant_code.chapter_02.profiler.psutil')
     def test_get_memory_usage_with_psutil(self, mock_psutil):
         """Test _get_memory_usage method with psutil available."""
         mock_process = MagicMock()
@@ -184,7 +184,7 @@ class TestMemoryProfiler:
     def test_get_memory_usage_without_psutil(self):
         """Test _get_memory_usage method without psutil."""
         # Mock psutil to be None
-        with patch('src.chapter_02.profiler.psutil', None):
+        with patch('mastering_performant_code.chapter_02.profiler.psutil', None):
             profiler = MemoryProfiler()
             memory = profiler._get_memory_usage()
             

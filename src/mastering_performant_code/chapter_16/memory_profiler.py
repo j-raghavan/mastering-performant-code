@@ -9,6 +9,7 @@ import tracemalloc
 import gc
 import timeit
 import threading
+import sys
 from typing import Any, Dict, List, Tuple, Optional, Callable
 from dataclasses import dataclass
 from contextlib import contextmanager

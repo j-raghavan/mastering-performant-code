@@ -7,6 +7,7 @@ including performance benchmarks, memory analysis, and real-world usage examples
 
 import timeit
 from typing import List, Dict
+import sys
 
 from .singly_linked_list import SinglyLinkedList
 from .doubly_linked_list import DoublyLinkedList

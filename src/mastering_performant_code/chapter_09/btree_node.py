@@ -6,6 +6,7 @@ in a B-Tree data structure. Each node contains keys, child pointers, and
 metadata about its structure.
 """
 
+import sys
 from typing import TypeVar, Generic, Optional, List
 from dataclasses import dataclass
 T = TypeVar('T')

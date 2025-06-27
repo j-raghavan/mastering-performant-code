@@ -18,6 +18,7 @@ Functions:
 from typing import TypeVar, Generic, Optional, Iterator, Dict
 from enum import Enum
 import timeit
+import sys
 T = TypeVar('T')
 
 class Color(Enum):

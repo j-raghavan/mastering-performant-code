@@ -6,6 +6,7 @@ and accuracy of Bloom filter implementations.
 """
 
 import timeit
+import sys
 from typing import Any, List, Optional, Tuple, Dict
 from dataclasses import dataclass
 

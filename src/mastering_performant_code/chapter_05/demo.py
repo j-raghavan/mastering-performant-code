@@ -7,6 +7,7 @@ including basic operations, performance analysis, and real-world applications.
 
 import timeit
 import random
+import sys
 from typing import List, Dict, Set
 from skip_list import SkipList, SkipListWithStats
 from priority_queue import SkipListPriorityQueue

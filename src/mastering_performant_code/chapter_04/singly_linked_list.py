@@ -7,6 +7,7 @@ with sentinel nodes to simplify edge cases and improve code clarity.
 
 from typing import TypeVar, Generic, Optional, Iterator, List
 from .nodes import SinglyNode
+import sys
 
 T = TypeVar('T')
 

@@ -6,6 +6,7 @@ This module provides comprehensive tests for the BSTNode class with 100% code co
 
 import pytest
 from typing import Optional
+import sys
 
 from mastering_performant_code.chapter_06.bst_node import BSTNode
 

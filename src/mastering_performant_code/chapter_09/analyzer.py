@@ -8,6 +8,7 @@ and comparing with other data structures.
 import timeit
 import math
 import random
+import sys
 from typing import TypeVar, Generic, List, Dict, Any
 from dataclasses import dataclass
 from .btree import BTree

@@ -6,6 +6,7 @@ BST implementations with performance comparisons and real-world examples.
 """
 
 import timeit
+import sys
 from typing import List, Dict, Any
 
 from .recursive_bst import RecursiveBST

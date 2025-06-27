@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -33,12 +33,16 @@ Repository = "https://github.com/yourusername/mastering-performant-code"
 Documentation = "https://github.com/yourusername/mastering-performant-code#readme"
 "Bug Tracker" = "https://github.com/yourusername/mastering-performant-code/issues"
 
+[tool.setuptools]
+package-dir = { "" = "src" }
+include-package-data = true 
+
 [tool.setuptools.packages.find]
-where = ["."]
+where = ["src"]
 include = ["mastering_performant_code*"]
 
 [tool.setuptools.package-data]
-"*" = ["*.py", "*.md", "*.txt", "*.ini"]
+"mastering_performant_code" = ["*.json", "*.ini"]
 
 [tool.setuptools.data-files]
 "mastering_performant_code" = [
@@ -48,10 +52,11 @@ include = ["mastering_performant_code*"]
 ]
 
 [tool.setuptools.dynamic]
-version = {attr = "mastering_performant_code.__version__"}
+version = {attr = "src.mastering_performant_code.__version__"}
 
 [tool.setuptools.exclude-package-data]
 "*" = ["*.pyc", "__pycache__", "*.pyo", "*.pyd", ".git*", ".pytest_cache*", "temp*", "web-companion*", "pyodide-demo*"]
 
-[tool.setuptools]
-include-package-data = true 
+[tools.pytest.ini_options]
+testpaths = ["tests"]
+adopts = "-ra"

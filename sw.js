@@ -10,14 +10,14 @@ const DYNAMIC_CACHE_NAME = 'dynamic-v1.0.0';
 
 // Files to cache immediately
 const STATIC_FILES = [
-  '/',
-  '/index.html',
-  '/assets/main-DHkQ8d1N.js',
-  '/assets/main-boWEBNqj.css',
-  '/assets/mastering_performant_code-1.0.0-py3-none-any.whl',
-  '/package-metadata.json',
-  '/health.json',
-  '/test-chapters.js'
+  '/mastering-performant-code/',
+  '/mastering-performant-code/index.html',
+  '/mastering-performant-code/assets/main-DHkQ8d1N.js',
+  '/mastering-performant-code/assets/main-boWEBNqj.css',
+  '/mastering-performant-code/assets/mastering_performant_code-1.0.0-py3-none-any.whl',
+  '/mastering-performant-code/package-metadata.json',
+  '/mastering-performant-code/health.json',
+  '/mastering-performant-code/test-chapters.js'
 ];
 
 // Install event - cache static files
@@ -79,7 +79,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   // Handle different types of requests
-  if (url.pathname.startsWith('/') && !url.pathname.startsWith('/web-companion/')) {
+  if (url.pathname.startsWith('/mastering-performant-code/')) {
     // App-specific requests
     event.respondWith(handleAppRequest(request));
   } else if (url.pathname.includes('pyodide') || url.pathname.includes('micropip')) {
@@ -114,7 +114,7 @@ async function handleAppRequest(request) {
     console.error('[SW] Error handling app request:', error);
 
     // Return offline page if available
-    const offlineResponse = await caches.match('/');
+    const offlineResponse = await caches.match('/mastering-performant-code/');
     if (offlineResponse) {
       return offlineResponse;
     }

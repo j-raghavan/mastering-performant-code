@@ -37,7 +37,7 @@ const packageMetadata = {
         name: "mastering_performant_code",
         version: "1.0.0",
         release_version: "v0.1.2",
-        wheel_url: "/assets/mastering_performant_code-1.0.0-py3-none-any.whl"
+        wheel_url: "/mastering-performant-code/assets/mastering_performant_code-1.0.0-py3-none-any.whl"
     },
     github: {
         repository: "j-raghavan/mastering-performant-code",

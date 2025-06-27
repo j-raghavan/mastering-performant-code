@@ -8,8 +8,8 @@ import { Logger } from '../utils/Logger.js';
 
 class PackageManager {
     constructor() {
-        // Use local file for development to avoid CORS issues
-        this.packageUrl = '/mastering_performant_code-1.0.0-py3-none-any.whl';
+        // Use GitHub releases URL for the wheel package
+        this.packageUrl = 'https://github.com/j-raghavan/mastering-performant-code/releases/download/v0.1.2/mastering_performant_code-1.0.0-py3-none-any.whl';
         this.packageName = 'mastering_performant_code';
         this.packageVersion = '1.0.0';
         this.isInstalled = false;

@@ -264,14 +264,15 @@ class UIManager {
     displayFileExplorer(files) {
         if (!this.elements.fileExplorer) return;
 
+        this.elements.fileExplorer.className = '';
+
         if (!files || files.length === 0) {
             this.elements.fileExplorer.innerHTML = '<div class="no-files">No files found</div>';
             return;
         }
 
-        let html = `
-            <div class="file-list">
-                <div class="file-column">
+        let html = `<div class="python-files-container">
+            <div class="python-files-list">
         `;
 
         // Left column: All files from all categories
@@ -294,16 +295,15 @@ class UIManager {
         }
 
         html += `
-                </div>
-                <div class="file-column">
-                    <div class="file-description empty" id="file-description">
-                        <div class="file-description-content">
-                            Select a file to view its description
-                        </div>
+            </div>
+            <div class="python-files-description">
+                <div class="file-description empty" id="file-description">
+                    <div class="file-description-content">
+                        Select a file to view its description
                     </div>
                 </div>
             </div>
-        `;
+        </div>`;
 
         this.elements.fileExplorer.innerHTML = html;
 
@@ -347,10 +347,20 @@ class UIManager {
 
         descriptionElement.className = 'file-description';
         descriptionElement.innerHTML = `
-            <div class="file-description-content">
-                <strong>${fileData.name}</strong><br>
-                <small style="color: #6b7280; font-size: 0.8rem;">${category} • ${this.formatFileSize(fileData.size)}</small><br><br>
-                ${description}
+            <div class="file-description-header">
+                <div class="file-description-title">${fileData.name}</div>
+                <div class="file-description-meta">
+                    <span>${category}</span>
+                    <span>•</span>
+                    <span>${this.formatFileSize(fileData.size)}</span>
+                    <span>•</span>
+                    <span>${fileData.content.split('\n').length} lines</span>
+                </div>
+            </div>
+            <div class="file-description-body">
+                <div class="file-description-content">
+                    ${description}
+                </div>
             </div>
         `;
     }

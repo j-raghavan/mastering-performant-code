@@ -1,0 +1,16 @@
+{
+  "package": {
+    "name": "mastering_performant_code",
+    "version": "1.0.0",
+    "release_version": "v0.1.2",
+    "wheel_url": "https://github.com/j-raghavan/mastering-performant-code/releases/download/v0.1.2/mastering_performant_code-1.0.0-py3-none-any.whl"
+  },
+  "github": {
+    "repository": "j-raghavan/mastering-performant-code",
+    "release_tag": "v0.1.2"
+  },
+  "deployment": {
+    "url": "https://j-raghavan.github.io/mastering-performant-code/",
+    "last_updated": "2025-06-27T18:57:24.198Z"
+  }
+}

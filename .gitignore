@@ -196,6 +196,7 @@ cython_debug/
 
 # DEVPLAN
 devplan.md
+devplan*.md
 review*
 pyodide-demo/
 temp/

@@ -10,6 +10,10 @@ import glob
 import os
 from pathlib import Path
 
+PROJECT_ROOT = PATH(__file__).resolve().parent
+os.chdir(PROJECT_ROOT)
+
+
 def run_command(cmd, check=True):
     """Run a command and return the result."""
     print(f"Running: {cmd}")

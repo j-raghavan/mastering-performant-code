@@ -55,7 +55,7 @@ jobs:
       - name: Copy built files to root
         run: |
           cp -r web-companion/dist/* ./
-          cp web-companion/dist/.nojekyll ./
+          touch .nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

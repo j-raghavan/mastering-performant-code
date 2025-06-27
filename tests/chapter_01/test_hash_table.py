@@ -16,6 +16,7 @@ import timeit
 import gc
 import os
 from typing import Dict
+import sys
 
 from mastering_performant_code.chapter_01.hash_table import HashTable, MemoryTrackedHashTable
 

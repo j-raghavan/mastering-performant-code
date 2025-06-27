@@ -23,6 +23,7 @@ import cProfile
 import pstats
 from typing import List, Dict, Set, Any, Callable
 from dataclasses import dataclass
+import sys
 
 @dataclass
 class MemoryInfo:

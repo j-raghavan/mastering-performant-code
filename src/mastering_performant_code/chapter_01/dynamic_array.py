@@ -29,6 +29,7 @@ Memory Layout:
 └─────────────────────────────────────────┘
 """
 
+import sys
 from typing import TypeVar, Generic, Optional, Iterator
 from .analyzer import MemoryInfo
 

@@ -50,8 +50,11 @@ def demo_timeit_basics():
     n = 10000
     print(f"Timing sum(range({n})):")
     
-    time_taken = timeit.timeit(f"sum(range({n}))", number=1000)
-    print(f"  Average time: {time_taken/1000:.8f} seconds")
+    try:
+        time_taken = timeit.timeit(f"sum(range({n}))", number=1000)
+        print(f"  Average time: {time_taken/1000:.8f} seconds")
+    except Exception as e:
+        print(f"  Error: {e}")
     print()
     
     # Comparing different approaches
@@ -82,23 +85,26 @@ def demo_cprofile():
     # Profile a function
     print("Profiling slow_function():")
     
-    profiler = cProfile.Profile()
-    profiler.enable()
-    
     try:
-        result = slow_function()
-    finally:
-        profiler.disable()
-    
-    print(f"Result: {result}")
-    
-    # Get profiling stats
-    s = io.StringIO()
-    stats = pstats.Stats(profiler, stream=s).sort_stats('cumulative')
-    stats.print_stats(5)  # Top 5 functions
-    
-    print("Top 5 functions by cumulative time:")
-    print(s.getvalue())
+        profiler = cProfile.Profile()
+        profiler.enable()
+        
+        try:
+            result = slow_function()
+        finally:
+            profiler.disable()
+        
+        print(f"Result: {result}")
+        
+        # Get profiling stats
+        s = io.StringIO()
+        stats = pstats.Stats(profiler, stream=s).sort_stats('cumulative')
+        stats.print_stats(5)  # Top 5 functions
+        
+        print("Top 5 functions by cumulative time:")
+        print(s.getvalue())
+    except Exception as e:
+        print(f"Error: {e}")
     print()
 
 
@@ -118,8 +124,11 @@ def demo_memory_analysis():
     
     print(f"Memory usage for {size} elements:")
     for name, data_structure in data_structures.items():
-        memory = sys.getsizeof(data_structure)
-        print(f"  {name:10s}: {memory:,} bytes")
+        try:
+            memory = sys.getsizeof(data_structure)
+            print(f"  {name:10s}: {memory:,} bytes")
+        except Exception as e:
+            print(f"  {name:10s}: Error - {e}")
     
     print()
     

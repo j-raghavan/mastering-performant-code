@@ -271,50 +271,38 @@ class TestRunComprehensiveDemo:
 class TestDemoErrorHandling:
     """Test cases for error handling in demo functions."""
     
-    @patch('src.chapter_02.demo.timeit.timeit')
-    def test_demo_timeit_basics_with_error(self, mock_timeit, capsys):
-        """Test demo_timeit_basics handles errors gracefully."""
-        mock_timeit.side_effect = Exception("Test error")
+    @patch('mastering_performant_code.chapter_02.demo.timeit.timeit')
+    def test_demo_timeit_basics_with_error(self, mock_timeit):
+        """Test demo_timeit_basics with timeit error."""
+        mock_timeit.side_effect = Exception("timeit error")
         
-        # The function should handle the error gracefully
-        try:
-            demo_timeit_basics()
-        except Exception:
-            # If an exception is raised, that's also acceptable for this test
-            pass
+        # Should not raise an exception
+        demo_timeit_basics()
         
-        captured = capsys.readouterr()
-        assert 'Basic timeit Examples' in captured.out
+        # Verify the mock was called
+        mock_timeit.assert_called()
     
-    @patch('src.chapter_02.demo.cProfile.Profile')
-    def test_demo_cprofile_with_error(self, mock_profile, capsys):
-        """Test demo_cprofile handles errors gracefully."""
-        mock_profile.side_effect = Exception("Test error")
+    @patch('mastering_performant_code.chapter_02.demo.cProfile.Profile')
+    def test_demo_cprofile_with_error(self, mock_profile):
+        """Test demo_cprofile with cProfile error."""
+        mock_profile.side_effect = Exception("cProfile error")
         
-        # The function should handle the error gracefully
-        try:
-            demo_cprofile()
-        except Exception:
-            # If an exception is raised, that's also acceptable for this test
-            pass
+        # Should not raise an exception
+        demo_cprofile()
         
-        captured = capsys.readouterr()
-        assert 'cProfile Examples' in captured.out
+        # Verify the mock was called
+        mock_profile.assert_called()
     
-    @patch('src.chapter_02.demo.sys.getsizeof')
-    def test_demo_memory_analysis_with_error(self, mock_getsizeof, capsys):
-        """Test demo_memory_analysis handles errors gracefully."""
-        mock_getsizeof.side_effect = Exception("Test error")
+    @patch('mastering_performant_code.chapter_02.demo.sys.getsizeof')
+    def test_demo_memory_analysis_with_error(self, mock_getsizeof):
+        """Test demo_memory_analysis with sys.getsizeof error."""
+        mock_getsizeof.side_effect = Exception("getsizeof error")
         
-        # The function should handle the error gracefully
-        try:
-            demo_memory_analysis()
-        except Exception:
-            # If an exception is raised, that's also acceptable for this test
-            pass
+        # Should not raise an exception
+        demo_memory_analysis()
         
-        captured = capsys.readouterr()
-        assert 'Memory Usage Analysis' in captured.out
+        # Verify the mock was called
+        mock_getsizeof.assert_called()
 
 
 class TestDemoIntegration:
